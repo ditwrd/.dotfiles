@@ -1,0 +1,37 @@
+- name: Install dependencies 
+  apt:
+    name: 
+      - xclip
+      - ripgrep
+    state: present
+    
+- name: Install nvim via snap
+  community.general.snap:
+    name: nvim
+    classic: true
+    channel: stable
+
+- name: Install Astronvim
+  git:
+    repo: https://github.com/AstroNvim/AstroNvim 
+    dest:  ~/.config/nvim
+
+- name: Add personal Astronvim
+  file:
+    src: "{{ dotfiles_home }}/roles/nvim/files/astronvim-dotsfile"
+    dest:  ~/.config/nvim/lua/user
+    state: link
+
+- name: Check if lazygit is installed
+  stat:
+    path: /usr/local/bin/lazygit
+  register: lg_installed
+
+- name: Install lazygit
+  unarchive:
+    src: "https://github.com/jesseduffield/lazygit/releases/download/v{{LAZYGIT_VERSION}}/lazygit_{{LAZYGIT_VERSION}}_Linux_x86_64.tar.gz"
+    dest: "/usr/local/bin"
+    remote_src: true
+  become: true
+  become_method: sudo
+  when: lg_installed.stat.exists is false
