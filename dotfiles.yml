@@ -1,0 +1,54 @@
+- name: Set Up
+  hosts: local
+  vars:
+    - NODE_VERSION: "16"
+    - FLUTTER_VERSION: "3.3.4"
+    - NVIM_VERSION: "0.9.1"
+    - LAZYGIT_VERSION: "0.40.2"
+  roles:
+    - role: zsh
+      tags:
+        - zsh
+    - {
+        role: diodonfrost.p10k,
+        p10k_prompt_style: "rainbow",
+        zsh_plugin: ohmyzsh,
+        p10k_transient_prompt: "yes",
+        tags: p10k,
+      }
+    - role: volta
+      tags:
+        - volta
+    - role: rust
+      tags:
+        - rust
+    - role: tmux
+      tags:
+        - tmux
+    - role: nvim
+      tags:
+        - nvim
+    - {
+        role: geerlingguy.docker,
+        docker_users: ["{{ user }}"],
+        tags: docker,
+        become: true,
+        become_method: sudo,
+      }
+    - role: terraform
+      tags:
+        - terraform
+    - role: christiangda.awscli
+      tags:
+        - aws
+      become: true
+      become_method: sudo
+    - role: speedtest
+      tags:
+        - speedtest
+    - role: flutter
+      tags:
+        - flutter
+    - role: npm
+      tags:
+        - npm
