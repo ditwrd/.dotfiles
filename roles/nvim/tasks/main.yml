@@ -4,7 +4,17 @@
       - xclip
       - ripgrep
     state: present
-    
+
+- name: Download git credential manager
+  ansible.builtin.get_url:
+    url: "https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.3.0/gcm-linux_amd64.{{GCM_VERSION}}.deb"
+    dest: /tmp/gcm.deb
+
+- name: Install git credential manager
+  apt: 
+    deb: /tmp/gcm.deb
+  become: true
+      
 - name: Install nvim via snap
   community.general.snap:
     name: nvim

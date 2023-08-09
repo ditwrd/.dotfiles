@@ -3,8 +3,8 @@
   vars:
     - NODE_VERSION: "16"
     - FLUTTER_VERSION: "3.3.4"
-    - NVIM_VERSION: "0.9.1"
     - LAZYGIT_VERSION: "0.40.2"
+    - GCM_VERSION: "2.3.0"
   roles:
     - role: zsh
       tags:
@@ -16,15 +16,6 @@
         p10k_transient_prompt: "yes",
         tags: p10k,
       }
-    - role: volta
-      tags:
-        - volta
-    - role: rust
-      tags:
-        - rust
-    - role: tmux
-      tags:
-        - tmux
     - role: nvim
       tags:
         - nvim
@@ -35,20 +26,8 @@
         become: true,
         become_method: sudo,
       }
-    - role: terraform
-      tags:
-        - terraform
     - role: christiangda.awscli
       tags:
         - aws
       become: true
       become_method: sudo
-    - role: speedtest
-      tags:
-        - speedtest
-    - role: flutter
-      tags:
-        - flutter
-    - role: npm
-      tags:
-        - npm
