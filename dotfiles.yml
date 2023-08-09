@@ -22,6 +22,9 @@
     - role: node
       tags:
         - node
+    - role: rust
+      tags:
+        - rust
     - {
         role: geerlingguy.docker,
         docker_users: ["{{ user }}"],
