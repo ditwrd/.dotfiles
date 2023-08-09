@@ -26,8 +26,3 @@
         become: true,
         become_method: sudo,
       }
-    - role: christiangda.awscli
-      tags:
-        - aws
-      become: true
-      become_method: sudo
