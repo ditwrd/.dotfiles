@@ -51,7 +51,6 @@ alias tf='terraform'
 
 
 # Custom export
-export GOROOT=/usr/local/go-1.18.3
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$HOME/.gem:$PATH
@@ -67,7 +66,7 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Auto gitlab ssh-add
 eval `ssh-agent -s` &>/dev/null
-ssh-add ~/.ssh/id_ed25519_gitlab &>/dev/null
+ssh-add ~/.ssh/gitlab &>/dev/null
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -101,6 +100,6 @@ export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+fpath=(~/.zsh.d/ $fpath)
 
 [[ -s "/home/ditw11/.gvm/scripts/gvm" ]] && source "/home/ditw11/.gvm/scripts/gvm"
-fpath=(~/.zsh.d/ $fpath)
