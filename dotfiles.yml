@@ -32,3 +32,6 @@
         become: true,
         become_method: sudo,
       }
+    - role: terraform
+      tags:
+        - terraform
