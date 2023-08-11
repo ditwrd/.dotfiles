@@ -1,0 +1,19 @@
+- name: Install tmux with apt
+  apt: name=tmux state=present
+  become_user: root
+  become: true
+  become_method: sudo
+- name: clone .tmux from git
+  git:
+    repo: "https://github.com/gpakosz/.tmux.git"
+    dest: "{{dotfiles_user_home}}/.tmux"
+- name: symlink .tmux/.tmux.conf to home
+  file:
+    src: "{{dotfiles_user_home}}/.tmux/.tmux.conf"
+    dest: "{{dotfiles_user_home}}/.tmux.conf"
+    state: link
+- name: symlink .tmux.conf.local to home
+  file:
+    src: "{{dotfiles_home}}/roles/tmux/files/.tmux.conf.local"
+    dest: "{{dotfiles_user_home}}/.tmux.conf.local"
+    state: link

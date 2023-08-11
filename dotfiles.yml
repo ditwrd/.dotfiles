@@ -35,3 +35,6 @@
     - role: terraform
       tags:
         - terraform
+    - role: tmux
+      tags:
+        - tmux
