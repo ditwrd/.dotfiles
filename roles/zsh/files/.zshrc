@@ -39,6 +39,7 @@ alias cda="conda activate"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias x="exit"
+alias sau="sudo apt-fast update && sudo apt-fast upgrade --y"
 
 alias dsp="docker system prune"
 alias pnx="pnpm nx"
@@ -48,6 +49,12 @@ alias dacmd='docker run --rm -it -v $(pwd):/ansible --workdir=/ansible willhallo
 
 alias awsd="source _awsd"
 alias tf='terraform'
+alias tfa='terraform apply'
+alias tfp='terraform plan'
+alias tfo='terraform output'
+alias tfos='terraform output -json > outputs.json'
+alias tfws='terraform workspace select'
+alias tfwls='terraform workspace list'
 
 
 # Custom export
@@ -56,17 +63,12 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$HOME/.gem:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin/flutter/bin:$PATH"
-export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
-export PATH="$PATH:/home/adit/cloud-sql-proxy"
-export PATH="$PATH:/usr/local/texlive/2023/bin/x86_64-linux"
-export PATH="$PATH:/mnt/c/Users/adity/Downloads/SumatraPDF.exe"
 export CONDA_AUTO_ACTIVATE_BASE=false
-export FLYCTL_INSTALL="/home/adit/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Auto gitlab ssh-add
 eval `ssh-agent -s` &>/dev/null
 ssh-add ~/.ssh/gitlab &>/dev/null
+ssh-add ~/.ssh/github &>/dev/null
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -103,3 +105,5 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 fpath=(~/.zsh.d/ $fpath)
 
 [[ -s "/home/ditw11/.gvm/scripts/gvm" ]] && source "/home/ditw11/.gvm/scripts/gvm"
+export FLYCTL_INSTALL="/home/ditw11/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
