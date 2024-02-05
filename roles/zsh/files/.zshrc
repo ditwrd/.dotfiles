@@ -1,3 +1,4 @@
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 zmodload zsh/zprof
 
 
@@ -11,16 +12,15 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 zstyle ':omz:update' mode auto      # update automatically without asking
-plugins=(zsh-autoswitch-conda zshfl auto-color-ls z zsh-autosuggestions fzf)
+plugins=(zsh-autoswitch-conda zshfl z zsh-autosuggestions fzf)
 
 source $ZSH/oh-my-zsh.sh
-source $(dirname $(gem which colorls))/tab_complete.sh
 
 # User configuration
 # Custom Aliases
 alias vz="nvim ~/.zshrc"
 alias voz="nvim ~/.oh-my-zsh"
-alias vd="nvim ~/dotfiles"
+alias vd="z dot && nvim"
 alias vc="nvim ~/.ssh/config"
 alias v="nvim"
 
@@ -39,7 +39,7 @@ alias cda="conda activate"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias x="exit"
-alias sau="sudo apt-fast update && sudo apt-fast upgrade --y"
+alias sau="sudo nala update && sudo nala upgrade -y"
 
 alias dsp="docker system prune"
 alias pnx="pnpm nx"
@@ -50,16 +50,33 @@ alias dacmd='docker run --rm -it -v $(pwd):/ansible --workdir=/ansible willhallo
 alias awsd="source _awsd"
 alias tf='terraform'
 alias tfa='terraform apply'
+alias tfyolo='terraform apply --auto-approve'
 alias tfp='terraform plan'
 alias tfo='terraform output'
-alias tfos='terraform output -json > outputs.json'
+alias tfoj='terraform output -json > outputs.json'
+alias tfw='terraform workspace'
 alias tfws='terraform workspace select'
 alias tfwls='terraform workspace list'
+alias mp='multipass'
+alias mpsh='multipass shell'
 
 
+_direnv_hook() {
+  trap -- '' SIGINT;
+  eval "$("/usr/bin/direnv" export zsh)";
+  trap - SIGINT;
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+fi
+typeset -ag chpwd_functions;
+if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
+  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+fi
 # Custom export
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+# export GOPATH=$HOME/go
+# export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$HOME/.gem:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin/flutter/bin:$PATH"
@@ -104,6 +121,6 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 fpath=(~/.zsh.d/ $fpath)
 
-[[ -s "/home/ditw11/.gvm/scripts/gvm" ]] && source "/home/ditw11/.gvm/scripts/gvm"
 export FLYCTL_INSTALL="/home/ditw11/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+eval "$(devbox global shellenv)"
