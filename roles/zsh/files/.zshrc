@@ -28,7 +28,6 @@ alias lsc='colorls -lA --sd'
 alias ls='colorls -a --sd'
 
 alias cdh='cd ~'
-alias code="code-insiders ."
 alias cdd="cd .."
 alias cl="clear"
 
