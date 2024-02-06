@@ -17,9 +17,8 @@ return {
     diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
     icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
     ui_notifications_enabled = true, -- disable notifications when toggling UI elements
-    vimtex_view_general_viewer = "SumatraPDF.exe",
-    vimtex_view_general_options = "-reuse-instance @pdf",
-    vimtex_compiler_method = "latexmk",
+    move_key_modifier = "C",
+    move_key_modifier_visualmode = "C",
   },
 }
 -- If you need more control, you can use the function()...end notation

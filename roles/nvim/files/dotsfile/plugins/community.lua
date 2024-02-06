@@ -11,14 +11,50 @@ return {
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.docker" },
+  { import = "astrocommunity.pack.html-css" },
+  { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.syntax.hlargs-nvim" },
   { import = "astrocommunity.syntax.vim-sandwich" },
-  -- { import = "astrocommunity.scrolling.mini-animate" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
-  -- editing support
-  { import = "astrocommunity.editing-support.dial-nvim" },
+  --          ╭─────────────────────────────────────────────────────────╮
+  --          │                     EDITING SUPPORT                     │
+  --          ╰─────────────────────────────────────────────────────────╯
+  { import = "astrocommunity.editing-support.mini-splitjoin" },
+  { import = "astrocommunity.editing-support.nvim-devdocs" },
+  {
+    "luckasRanarison/nvim-devdocs",
+    opts = {
+      ensure_installed = {
+        "terraform",
+        "ansible",
+        "go",
+        "bash",
+      },
+    },
+  },
   { import = "astrocommunity.editing-support.neogen" },
+  { import = "astrocommunity.editing-support.vim-move" },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
   { import = "astrocommunity.editing-support.refactoring-nvim" },
   { import = "astrocommunity.editing-support.comment-box-nvim" },
+  { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
+  { import = "astrocommunity.editing-support.vim-move" },
+  --          ╭─────────────────────────────────────────────────────────╮
+  --          │                           GIT                           │
+  --          ╰─────────────────────────────────────────────────────────╯
+  { import = "astrocommunity.git.git-blame-nvim" },
+  --          ╭─────────────────────────────────────────────────────────╮
+  --          │                           LSP                           │
+  --          ╰─────────────────────────────────────────────────────────╯
+  { import = "astrocommunity.lsp.garbage-day-nvim" },
+  --          ╭─────────────────────────────────────────────────────────╮
+  --          │                        WORKFLOW                         │
+  --          ╰─────────────────────────────────────────────────────────╯
+  { import = "astrocommunity.workflow.bad-practices-nvim" },
+  { import = "astrocommunity.workflow.hardtime-nvim" },
+  --          ╭─────────────────────────────────────────────────────────╮
+  --          │                         MOTION                          │
+  --          ╰─────────────────────────────────────────────────────────╯
+  { import = "astrocommunity.motion.harpoon" },
 }

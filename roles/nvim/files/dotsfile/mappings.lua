@@ -35,6 +35,15 @@ return {
       "<Cmd>CBllline<CR>",
       desc = "Title line",
     },
+    ["<leader>Bt"] = {
+      "<Cmd>CBline<CR>",
+      desc = "Comment line",
+    },
+    ["<leader>p"] = { name = "Packages" },
+    ["<leader>P"] = {
+      function() require("telescope").extensions.yank_history.yank_history {} end,
+      desc = "Open Yank History",
+    },
   },
   t = {
     -- setting a mapping to false will disable it
@@ -54,6 +63,15 @@ return {
     ["<leader>Bt"] = {
       "<Cmd>CBllline<CR>",
       desc = "Title line",
+    },
+    ["<leader>Bl"] = {
+      "<Cmd>CBline<CR>",
+      desc = "Comment line",
+    },
+    ["<leader>p"] = { name = "Packages" },
+    ["<leader>P"] = {
+      function() require("telescope").extensions.yank_history.yank_history {} end,
+      desc = "Open Yank History",
     },
   },
 }

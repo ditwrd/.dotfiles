@@ -13,7 +13,6 @@ return {
     "danymat/neogen",
     opts = { languages = { python = { template = { annotation_convention = "google_docstrings" } } } },
   },
-  { "lervag/vimtex", lazy = false },
   { "andweeb/presence.nvim", lazy = false },
   {
     "geg2102/nvim-python-repl",
