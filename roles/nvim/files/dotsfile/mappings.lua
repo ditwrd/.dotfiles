@@ -35,14 +35,9 @@ return {
       "<Cmd>CBllline<CR>",
       desc = "Title line",
     },
-    ["<leader>Bt"] = {
+    ["<leader>Bl"] = {
       "<Cmd>CBline<CR>",
       desc = "Comment line",
-    },
-    ["<leader>p"] = { name = "Packages" },
-    ["<leader>P"] = {
-      function() require("telescope").extensions.yank_history.yank_history {} end,
-      desc = "Open Yank History",
     },
   },
   t = {
@@ -67,11 +62,6 @@ return {
     ["<leader>Bl"] = {
       "<Cmd>CBline<CR>",
       desc = "Comment line",
-    },
-    ["<leader>p"] = { name = "Packages" },
-    ["<leader>P"] = {
-      function() require("telescope").extensions.yank_history.yank_history {} end,
-      desc = "Open Yank History",
     },
   },
 }
