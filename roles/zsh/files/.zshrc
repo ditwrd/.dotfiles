@@ -24,8 +24,9 @@ alias vd="z dot && nvim"
 alias vc="nvim ~/.ssh/config"
 alias v="nvim"
 
-alias lsc='colorls -lA --sd'
-alias ls='colorls -a --sd'
+alias rls='ls'
+# alias lsc='colorls -lA --sd'
+# alias ls='colorls -a --sd'
 
 alias cdh='cd ~'
 alias cdd="cd .."
@@ -121,4 +122,4 @@ fpath=(~/.zsh.d/ $fpath)
 
 export FLYCTL_INSTALL="/home/ditw11/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
-eval "$(devbox global shellenv)"
+export PATH=$PATH:/usr/local/go/bin
