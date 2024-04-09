@@ -110,3 +110,4 @@ fpath=(~/.zsh.d/ $fpath)
 export FLYCTL_INSTALL="/home/ditw11/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/snap/bin/
