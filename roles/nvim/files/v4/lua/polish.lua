@@ -9,12 +9,12 @@ end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 -- Set up custom filetypes
 vim.filetype.add({
 	extension = {
-		foo = "fooscript",
+		templ = "templ",
 	},
-	filename = {
-		["Foofile"] = "fooscript",
-	},
-	pattern = {
-		["~/%.config/foo/.*"] = "fooscript",
-	},
+	-- filename = {
+	-- 	["Foofile"] = "fooscript",
+	-- },
+	-- pattern = {
+	-- 	["~/%.config/foo/.*"] = "fooscript",
+	-- },
 })

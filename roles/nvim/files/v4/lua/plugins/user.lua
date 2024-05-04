@@ -60,25 +60,25 @@ return {
 			npairs.add_rules(
 				{
 					Rule("$", "$", { "tex", "latex" })
-						-- don't add a pair if the next character is %
-						:with_pair(cond.not_after_regex("%%"))
-						-- don't add a pair if  the previous character is xxx
-						:with_pair(
-							cond.not_before_regex("xxx", 3)
-						)
-						-- don't move right when repeat character
-						:with_move(cond.none())
-						-- don't delete if the next character is xx
-						:with_del(cond.not_after_regex("xx"))
-						-- disable adding a newline when you press <cr>
-						:with_cr(cond.none()),
+					-- don't add a pair if the next character is %
+							:with_pair(cond.not_after_regex("%%"))
+					-- don't add a pair if  the previous character is xxx
+							:with_pair(
+								cond.not_before_regex("xxx", 3)
+							)
+					-- don't move right when repeat character
+							:with_move(cond.none())
+					-- don't delete if the next character is xx
+							:with_del(cond.not_after_regex("xx"))
+					-- disable adding a newline when you press <cr>
+							:with_cr(cond.none()),
 				},
 				-- disable for .vim files, but it work for another filetypes
 				Rule("a", "a", "-vim")
 			)
 		end,
 	},
-	{ "wakatime/vim-wakatime", lazy = false },
+	{ "wakatime/vim-wakatime",   lazy = false },
 	{ "pearofducks/ansible-vim", event = "User Astrofile" },
 	{
 		"phaazon/hop.nvim",
@@ -104,4 +104,5 @@ return {
 			})
 		end,
 	},
+	{ "joerdav/templ.vim" },
 }

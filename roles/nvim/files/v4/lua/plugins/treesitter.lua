@@ -15,6 +15,7 @@ return {
 			"rust",
 			"dockerfile",
 			"go",
+			"templ",
 		})
 	end,
 }
