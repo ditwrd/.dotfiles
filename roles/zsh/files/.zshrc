@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 alias vz="nvim ~/.zshrc"
 alias voz="nvim ~/.oh-my-zsh"
 alias vd="z dot && nvim"
-alias vc="nvim ~/.ssh/config"
+alias vs="nvim ~/.ssh"
 alias v="nvim"
 
 alias rls='ls'
@@ -51,6 +51,8 @@ alias dacli='docker run --rm -it -v $(pwd):/ansible --workdir=/ansible willhallo
 alias dacmd='docker run --rm -it -v $(pwd):/ansible --workdir=/ansible willhallonline/ansible:latest '
 
 alias awsd="source _awsd"
+source _awsd_autocomplete
+export AWS_PROFILE=$(cat ~/.awsd)
 alias tf='terraform'
 alias tfa='terraform apply'
 alias tfyolo='terraform apply --auto-approve'
@@ -110,7 +112,8 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 fpath=(~/.zsh.d/ $fpath)
 
-export FLYCTL_INSTALL="/home/ditw11/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/snap/bin/
+
+export FLYCTL_INSTALL="/home/dit/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
