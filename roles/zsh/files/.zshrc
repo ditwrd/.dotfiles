@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 alias vz="nvim ~/.zshrc"
 alias voz="nvim ~/.oh-my-zsh"
 alias vd="z dot && nvim"
-alias vs="nvim ~/.ssh"
+alias vs="z ssh && nvim ~/.ssh"
 alias v="nvim"
 
 alias rls='ls'
@@ -80,14 +80,14 @@ ssh-add ~/.ssh/github &>/dev/null
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ditw11/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/dit/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/ditw11/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ditw11/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/dit/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/dit/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/ditw11/miniconda3/bin:$PATH"
+        export PATH="/home/dit/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -105,7 +105,7 @@ complete -o nospace -C /usr/bin/terraform terraform
 # END P10K CONFIG FILE ANSIBLE MANAGED BLOCK
 
 # pnpm
-export PNPM_HOME="/home/ditw11/.local/share/pnpm"
+export PNPM_HOME="/home/dit/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 export VOLTA_HOME="$HOME/.volta"
@@ -117,3 +117,23 @@ export PATH=$PATH:/snap/bin/
 
 export FLYCTL_INSTALL="/home/dit/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# Load pyenv automatically by appending
+# the following to
+# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Restart your shell for the changes to take effect.
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
