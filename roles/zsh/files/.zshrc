@@ -69,9 +69,9 @@ alias mpsh='multipass shell'
 # Custom export
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.gem:$PATH
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin/flutter/bin:$PATH"
 export CONDA_AUTO_ACTIVATE_BASE=false
+export PATH="$HOME/.local/bin:$PATH"
 
 # Auto gitlab ssh-add
 eval `ssh-agent -s` &>/dev/null

@@ -62,4 +62,5 @@ return {
 	--          │                         MOTION                          │
 	--          ╰─────────────────────────────────────────────────────────╯
 	{ import = "astrocommunity.motion.harpoon" },
+	{ import = "astrocommunity.docker.lazydocker" },
 }
