@@ -56,9 +56,11 @@
     pkgs.arkade
 
     # ── Software Tools ────────────────────────────────────────────────────
+    pkgs.git
     pkgs.volta
     pkgs.go
     pkgs.uv
+    pkgs.rustup
 
     pkgs.jq
     pkgs.yq
@@ -122,4 +124,15 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    userName = "Aditya W";
+    userEmail = "hi@ditwrd.dev";
+    extraConfig = {
+      pull = {
+        rebase = true;
+      };
+    };
+  };
 }
