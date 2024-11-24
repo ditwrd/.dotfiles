@@ -39,15 +39,18 @@
 
     # ── Cloud CLI ─────────────────────────────────────────────────────────
     pkgs.awscli2
+    pkgs.google-cloud-sdk
 
     # ── IaC ───────────────────────────────────────────────────────────────
     pkgs.ansible
     pkgs.terraform
+    pkgs.terraform-docs
     pkgs.terragrunt
 
     # ── Container ─────────────────────────────────────────────────────────
     pkgs.lazydocker
     pkgs.docker
+    pkgs.rootlesskit
 
     # ── k8s ───────────────────────────────────────────────────────────────
     pkgs.k9s
@@ -120,6 +123,7 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
   # Let Home Manager install and manage itself.

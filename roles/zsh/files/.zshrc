@@ -356,3 +356,4 @@ if [ "$funcstack[1]" = "_terraform-docs" ]; then
     _terraform-docs
 fi
 
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
