@@ -40,6 +40,9 @@
   home.file = {
     # AstroNvim
     ".config/nvim".source = ./nvim;
+    ".tmux.conf".source = ./tmux/.tmux/.tmux.conf;
+    ".tmux.local.conf".source = ./tmux/.tmux.conf.local;
+    # Tmux
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
