@@ -18,6 +18,33 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+#          ╭──────────────────────────────────────────────────────────╮
+#          │                    Nvim Dependencies                     │
+#          ╰──────────────────────────────────────────────────────────╯
+    pkgs.ripgrep
+    pkgs.lazygit
+
+#          ╭──────────────────────────────────────────────────────────╮
+#          │                       DevOps Tools                       │
+#          ╰──────────────────────────────────────────────────────────╯
+
+# ── Cloud CLI ─────────────────────────────────────────────────────────
+    pkgs.awscli2
+
+# ── IaC ───────────────────────────────────────────────────────────────
+    pkgs.ansible
+    pkgs.terraform
+    pkgs.terragrunt
+    
+# ── Container ─────────────────────────────────────────────────────────
+    pkgs.lazydocker
+    
+# ── k8s ───────────────────────────────────────────────────────────────
+    pkgs.k9s
+    pkgs.kubectl
+    pkgs.kubernetes-helm
+    pkgs.arkade
+    
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
 
