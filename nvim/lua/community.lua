@@ -20,6 +20,7 @@ return {
 	{ import = "astrocommunity.pack.lua" },
 	{ import = "astrocommunity.pack.docker" },
 	{ import = "astrocommunity.pack.html-css" },
+	{ import = "astrocommunity.pack.nix" },
 	{ import = "astrocommunity.pack.tailwindcss" },
 	{ import = "astrocommunity.syntax.hlargs-nvim" },
 	{ import = "astrocommunity.syntax.vim-sandwich" },
