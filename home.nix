@@ -47,12 +47,21 @@
 
     # ── Container ─────────────────────────────────────────────────────────
     pkgs.lazydocker
+    pkgs.docker
 
     # ── k8s ───────────────────────────────────────────────────────────────
     pkgs.k9s
     pkgs.kubectl
     pkgs.kubernetes-helm
     pkgs.arkade
+
+    # ── Software Tools ────────────────────────────────────────────────────
+    pkgs.volta
+    pkgs.go
+    pkgs.uv
+
+    pkgs.jq
+    pkgs.yq
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.

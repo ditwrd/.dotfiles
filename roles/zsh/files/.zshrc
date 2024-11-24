@@ -25,8 +25,6 @@ alias vs="z ssh && nvim ~/.ssh"
 alias v="nvim"
 
 alias rls='ls'
-# alias lsc='colorls -lA --sd'
-# alias ls='colorls -a --sd'
 
 alias cdh='cd ~'
 alias cdd="cd .."
@@ -64,6 +62,9 @@ alias tfws='terraform workspace select'
 alias tfwls='terraform workspace list'
 alias mp='multipass'
 alias mpsh='multipass shell'
+
+alias hm='home-manager'
+alias hms='home-manager switch'
 
 
 # Custom export
