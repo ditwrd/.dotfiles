@@ -25,12 +25,27 @@ return {
 		opts = function(_, opts)
 			-- customize the dashboard header
 			opts.section.header.val = {
-				" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-				" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-				" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-				" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-				" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-				" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+				"                                                                        ",
+				"                                       ,,                               ",
+				"                                     `7MM                               ",
+				"                                       MM                               ",
+				"`7M'   `MF',6\"Yb.  `7MMpMMMb.pMMMb.    MM                               ",
+				"  VA   ,V 8)   MM    MM    MM    MM    MM                               ",
+				"   VA ,V   ,pm9MM    MM    MM    MM    MM                               ",
+				"    VVV   8M   MM    MM    MM    MM    MM                               ",
+				"    ,V    `Moo9^Yo..JMML  JMML  JMML..JMML.                             ",
+				"   ,V                                                                   ",
+				'OOb"                                                                    ',
+				"                               ,,                                       ",
+				"                               db                                       ",
+				"                                                                        ",
+				' .gP"Ya `7MMpMMMb.  .P"Ybmmm `7MM  `7MMpMMMb.  .gP"Ya   .gP"Ya `7Mb,od8',
+				",M'   Yb  MM    MM :MI  I8     MM    MM    MM ,M'   Yb ,M'   Yb  MM' \"' ",
+				'8M""""""  MM    MM  WmmmP"     MM    MM    MM 8M"""""" 8M""""""  MM     ',
+				"YM.    ,  MM    MM 8M          MM    MM    MM YM.    , YM.    ,  MM     ",
+				" `Mbmmd'.JMML  JMML.YMMMMMb  .JMML..JMML  JMML.`Mbmmd'  `Mbmmd'.JMML.   ",
+				"                   6'     dP                                            ",
+				"                   Ybmmmd'                                              ",
 			}
 			return opts
 		end,
@@ -60,25 +75,25 @@ return {
 			npairs.add_rules(
 				{
 					Rule("$", "$", { "tex", "latex" })
-					-- don't add a pair if the next character is %
-							:with_pair(cond.not_after_regex("%%"))
-					-- don't add a pair if  the previous character is xxx
-							:with_pair(
-								cond.not_before_regex("xxx", 3)
-							)
-					-- don't move right when repeat character
-							:with_move(cond.none())
-					-- don't delete if the next character is xx
-							:with_del(cond.not_after_regex("xx"))
-					-- disable adding a newline when you press <cr>
-							:with_cr(cond.none()),
+						-- don't add a pair if the next character is %
+						:with_pair(cond.not_after_regex("%%"))
+						-- don't add a pair if  the previous character is xxx
+						:with_pair(
+							cond.not_before_regex("xxx", 3)
+						)
+						-- don't move right when repeat character
+						:with_move(cond.none())
+						-- don't delete if the next character is xx
+						:with_del(cond.not_after_regex("xx"))
+						-- disable adding a newline when you press <cr>
+						:with_cr(cond.none()),
 				},
 				-- disable for .vim files, but it work for another filetypes
 				Rule("a", "a", "-vim")
 			)
 		end,
 	},
-	{ "wakatime/vim-wakatime",   lazy = false },
+	{ "wakatime/vim-wakatime", lazy = false },
 	{ "pearofducks/ansible-vim", event = "User Astrofile" },
 	{
 		"phaazon/hop.nvim",
