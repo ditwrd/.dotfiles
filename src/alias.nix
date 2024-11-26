@@ -43,6 +43,6 @@
     tgoj = "terragrunt output -json > out.json";
 
     hm = "home-manager";
-    hms = "home-manager switch";
+    hms = "home-manager switch -b backup";
   };
 }
