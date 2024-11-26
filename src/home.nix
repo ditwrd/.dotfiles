@@ -15,11 +15,11 @@
 
 
   home.file = {
-    ".config/nvim".source = .././nvim;
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/nvim";
     ".tmux.conf".source = .././tmux/.tmux/.tmux.conf;
     ".tmux.local.conf".source = .././tmux/.tmux.conf.local;
     ".zsh_custom".source = .././zsh/custom;
-    ".p10k.zsh".source = .././zsh/.p10k.zsh;
+    ".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/zsh/.p10k.zsh";
   };
 
   home.sessionVariables = {
