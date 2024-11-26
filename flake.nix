@@ -2,34 +2,53 @@
   description = "Home Manager configuration of dit";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs-master.url = "github:NixOs/nixpkgs/master";
+    nixpkgs-stable.url = "github:NixOs/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixpkgs-unstable";
+
+
+
+    home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-stable, nixpkgs-master, home-manager, ... }:
     let
       system = "x86_64-linux";
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
+
       pkgs = import nixpkgs {
-        system = system; # whatever your system name is
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
+        inherit system;
+        inherit config;
+      };
+      pkgs-stable = import nixpkgs-stable {
+        inherit system;
+        inherit config;
+      };
+      pkgs-master = import nixpkgs-master {
+        inherit system;
+        inherit config;
       };
     in
     {
       homeConfigurations."dit" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
+        extraSpecialArgs = {
+          inherit pkgs-stable pkgs-master;
+        };
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = [
+          ./src/alias.nix
+          ./src/home.nix
+          ./src/package.nix
+          ./src/programs.nix
+          ./src/services.nix
+        ];
+
       };
     };
 }
