@@ -20,7 +20,7 @@
     github = {
       hostname = "github.com";
       user = "git";
-      identityFile = "${config.home.homeDirectory}/.ssh/github";
+      identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
     contabo_main = {
       hostname = "62.146.236.13";

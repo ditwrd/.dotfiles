@@ -32,6 +32,10 @@
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      
+      eval `ssh-agent -s` &>/dev/null
+      ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
+      ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
     '';
   };
 
