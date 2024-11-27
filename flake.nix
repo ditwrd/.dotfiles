@@ -6,31 +6,36 @@
     nixpkgs-stable.url = "github:NixOs/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-unstable";
-
-
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, nixpkgs-master, home-manager, ... }:
+  outputs = { nixpkgs, sops-nix, nixpkgs-stable, nixpkgs-master, home-manager, ... }:
     let
       system = "x86_64-linux";
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = _: true;
-      };
 
       pkgs = import nixpkgs {
         inherit system;
-        inherit config;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
       };
       pkgs-stable = import nixpkgs-stable {
         inherit system;
-        inherit config;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
       };
       pkgs-master = import nixpkgs-master {
         inherit system;
-        inherit config;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
       };
     in
     {
@@ -38,15 +43,16 @@
         inherit pkgs;
 
         extraSpecialArgs = {
-          inherit pkgs-stable pkgs-master;
+          inherit pkgs-stable pkgs-master sops-nix;
         };
 
         modules = [
-          ./src/alias.nix
-          ./src/home.nix
-          ./src/package.nix
-          ./src/programs.nix
-          ./src/services.nix
+          ./config/alias.nix
+          ./config/home.nix
+          ./config/package.nix
+          ./config/programs.nix
+          ./config/services.nix
+          ./config/ssh.nix
         ];
 
       };

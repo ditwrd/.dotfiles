@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, pkgs-master, ... }:
+{ config, pkgs, ... }:
 {
   programs.home-manager.enable = true;
 
@@ -18,6 +18,11 @@
     defaultEditor = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    compression = true;
+  };
 
   programs.zsh = {
     enable = true;

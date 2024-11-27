@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, pkgs-master, ... }:
+{ config, ... }:
 {
   home.shellAliases = {
     vd = "z dot && nvim";

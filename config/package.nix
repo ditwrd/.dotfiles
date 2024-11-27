@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, pkgs-master, ... }:
+{ pkgs, pkgs-stable, pkgs-master, ... }:
 
 {
   home.packages = [
@@ -55,6 +55,12 @@
 
     pkgs.jq
     pkgs.yq
+
+    #          ╭──────────────────────────────────────────────────────────╮
+    #          │                           Misc                           │
+    #          ╰──────────────────────────────────────────────────────────╯
+    pkgs.sops
+    pkgs.age
 
   ];
 }

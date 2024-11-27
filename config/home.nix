@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, pkgs-master, ... }:
+{ config, sops-nix, ... }:
 
 {
   home.username = "dit";
@@ -28,4 +28,16 @@
     AWS_PROFILE = "$(cat ${config.home.homeDirectory}/.awsd)";
   };
 
+
+  imports = [
+    sops-nix.homeManagerModules.sops
+  ];
+
+  sops = {
+    defaultSopsFile = ./.secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age = {
+      keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    };
+  };
 }
