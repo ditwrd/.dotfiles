@@ -11,6 +11,7 @@
     "ssh/work/cube/e2".mode = "0600";
     "ssh/work/cube/cf".mode = "0600";
     "ssh/work/cube/unv_i".mode = "0600";
+    "ssh/work/cube/gl".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
@@ -32,6 +33,12 @@
       user = "root";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/root".path}";
     };
+    contabo_sec = {
+      hostname = "62.146.233.85";
+      user = "root";
+      # identityFile = "${config.sops.secrets."ssh/personal/contabo/root".path}";
+    };
+
 
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                           Work                           │
@@ -62,6 +69,11 @@
       hostname = "10.1.28.230";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/cf".path}";
+    };
+    cube-gl = {
+      hostname = "10.1.26.66";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
     };
   };
 

@@ -42,6 +42,9 @@
     tgo = "terragrunt output";
     tgoj = "terragrunt output -json > out.json";
 
+    tfd = "terraform-docs md table . > README.md";
+    acp = "aws configure --profile";
+
     hm = "home-manager";
     hms = "home-manager switch -b backup";
   };
