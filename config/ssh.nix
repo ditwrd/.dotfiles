@@ -12,6 +12,7 @@
     "ssh/work/cube/cf".mode = "0600";
     "ssh/work/cube/unv_i".mode = "0600";
     "ssh/work/cube/gl".mode = "0600";
+    "ssh/work/cube/gitlab".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
@@ -49,6 +50,11 @@
       user = "git";
       identityFile = "${config.sops.secrets."ssh/work/cube/gh".path}";
     };
+    gitlab-cube = {
+      hostname = "git.internal-app.cube.asia";
+      user = "git";
+      identityFile = "${config.sops.secrets."ssh/work/cube/gitlab".path}";
+    };
     cube-run = {
       hostname = "10.1.29.120";
       user = "ubuntu";
@@ -71,7 +77,7 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/cf".path}";
     };
     cube-gl = {
-      hostname = "10.1.26.66";
+      hostname = "10.1.16.148";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
     };

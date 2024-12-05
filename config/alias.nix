@@ -30,7 +30,7 @@
     tfyolo = "terraform apply --auto-approve";
     tfp = "terraform plan";
     tfo = "terraform output";
-    tfoj = "terraform output -json > outputs.json";
+    tfoj = "terraform output -json > out.json";
     tfw = "terraform workspace";
     tfws = "terraform workspace select";
     tfwls = "terraform workspace list";
@@ -41,6 +41,12 @@
     tgp = "terragrunt plan";
     tgo = "terragrunt output";
     tgoj = "terragrunt output -json > out.json";
+    tgf = "terragrunt hclfmt";
+
+    ils = "export HTTP_PROXY=http://127.0.0.1:10080; export HTTPS_PROXY=http://127.0.0.1:10080; export AWS_CA_BUNDLE=~/.iamlive/ca.pem";
+    il = "iamlive --set-ini --mode proxy --sort-alphabetical";
+    ilo = "iamlive --set-ini --mode proxy --output-file policy.json --sort-alphabetical";
+
 
     tfd = "terraform-docs md table . > README.md";
     acp = "aws configure --profile";
