@@ -11,8 +11,9 @@
     "ssh/work/cube/e2".mode = "0600";
     "ssh/work/cube/cf".mode = "0600";
     "ssh/work/cube/unv_i".mode = "0600";
-    "ssh/work/cube/gl".mode = "0600";
     "ssh/work/cube/gitlab".mode = "0600";
+    "ssh/work/cube/gl".mode = "0600";
+    "ssh/work/cube/atl".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
@@ -80,6 +81,11 @@
       hostname = "10.1.16.148";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
+    };
+    cube-atl-2 = {
+      hostname = "0.0.0.0";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/atl".path}";
     };
   };
 

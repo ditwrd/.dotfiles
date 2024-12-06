@@ -36,6 +36,9 @@
       eval `ssh-agent -s` &>/dev/null
       ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
+
+      export PATH="$PATH:${config.home.homeDirectory}/go/bin"
+
     '';
   };
 
