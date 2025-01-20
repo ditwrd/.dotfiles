@@ -78,10 +78,21 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
     };
     cube-atl = {
-      hostname = "10.1.26.14";
+      hostname = "10.1.16.239";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/atl".path}";
     };
+    cube-afbw = {
+      hostname = "10.1.27.253";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-pk = {
+      hostname = "10.1.26.227";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
   };
 
 }
