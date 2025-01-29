@@ -14,6 +14,8 @@
     "ssh/work/cube/gitlab".mode = "0600";
     "ssh/work/cube/gl".mode = "0600";
     "ssh/work/cube/atl".mode = "0600";
+    "aws/config".mode = "0600";
+    "aws/credentials".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
