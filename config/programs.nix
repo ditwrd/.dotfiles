@@ -38,6 +38,7 @@
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
 
       export PATH="$PATH:${config.home.homeDirectory}/go/bin"
+      export PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin"
 
     '';
   };
