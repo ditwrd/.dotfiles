@@ -39,6 +39,8 @@
 
       export PATH="$PATH:${config.home.homeDirectory}/go/bin"
       export PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin"
+      export VOLTA_HOME="$HOME/.volta"
+      export PATH="$PATH:$VOLTA_HOME/bin"
 
     '';
   };
