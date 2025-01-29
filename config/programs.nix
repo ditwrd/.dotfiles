@@ -65,7 +65,6 @@
       "sudo"
       "systemd"
       "terraform"
-      "tmux"
       "volta"
       "z"
       "zsh-interactive-cd"
