@@ -16,6 +16,7 @@
     "ssh/work/cube/atl".mode = "0600";
     "aws/config".mode = "0600";
     "aws/credentials".mode = "0600";
+    "k8s/config".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
