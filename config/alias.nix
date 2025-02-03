@@ -56,5 +56,8 @@
 
     hm = "home-manager";
     hms = "home-manager switch -b backup";
+
+    wcc = "warp-cli connect";
+    wcd = "warp-cli disconnect";
   };
 }
