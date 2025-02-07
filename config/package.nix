@@ -38,11 +38,12 @@
     # ── Container ─────────────────────────────────────────────────────────
     pkgs.lazydocker
     pkgs.docker
-    pkgs.rootlesskit
+    pkgs.colima
 
     # ── k8s ───────────────────────────────────────────────────────────────
     pkgs.k9s
     pkgs.kubectl
+    pkgs.kubeseal
     pkgs.kubernetes-helm
     pkgs.arkade
 
