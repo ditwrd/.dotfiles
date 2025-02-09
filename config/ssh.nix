@@ -5,6 +5,8 @@
     "ssh/personal/gh".mode = "0600";
     "ssh/personal/contabo/dit".mode = "0600";
     "ssh/personal/contabo/root".mode = "0600";
+    "ssh/personal/contabo/dit_sec".mode = "0600";
+    "ssh/personal/contabo/root_sec".mode = "0600";
 
     "ssh/work/cube/gh".mode = "0600";
     "ssh/work/cube/au".mode = "0600";
@@ -38,10 +40,15 @@
       user = "root";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/root".path}";
     };
-    contabo_sec = {
+    contabo_sec_root = {
       hostname = "62.146.233.85";
       user = "root";
-      # identityFile = "${config.sops.secrets."ssh/personal/contabo/root".path}";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/root_sec".path}";
+    };
+    contabo_sec = {
+      hostname = "62.146.233.85";
+      user = "dit";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/dit_sec".path}";
     };
 
 
