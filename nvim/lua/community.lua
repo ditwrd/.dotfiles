@@ -68,5 +68,5 @@ return {
 		import = "astrocommunity.completion.avante-nvim",
 	},
 	{ import = "astrocommunity.game.leetcode-nvim" },
-	{ import = "astrocommunity.search.sad-nvim" },
+	{ import = "astrocommunity.search.nvim-spectre" },
 }
