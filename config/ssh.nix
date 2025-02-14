@@ -102,6 +102,12 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-dj = {
+      hostname = "10.1.17.157";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
 
   };
 
