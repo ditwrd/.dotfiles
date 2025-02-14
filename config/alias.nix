@@ -62,5 +62,7 @@
     cpo = "sudo cpupower frequency-set -g powersave";
     cpe = "sudo cpupower frequency-set -g performance";
 
+
+
   };
 }

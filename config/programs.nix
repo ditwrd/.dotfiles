@@ -41,6 +41,20 @@
       export PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin"
       export VOLTA_HOME="$HOME/.volta"
       export PATH="$PATH:$VOLTA_HOME/bin"
+      export PNPM_HOME="${config.home.homeDirectory}/.local/share/pnpm"
+      case ":$PATH:" in
+        *":$PNPM_HOME:"*) ;;
+        *) export PATH="$PNPM_HOME:$PATH" ;;
+      esac
+
+      kp() {
+      PID=$(lsof -t -i tcp:$1)
+      [ -z $PID ] && \
+        echo "No process is using this port: $1" && \
+        return 0
+      kill -9 $PID
+      }
+      
 
     '';
   };
