@@ -46,16 +46,18 @@
         *":$PNPM_HOME:"*) ;;
         *) export PATH="$PNPM_HOME:$PATH" ;;
       esac
-
-      kp() {
-      PID=$(lsof -t -i tcp:$1)
-      [ -z $PID ] && \
-        echo "No process is using this port: $1" && \
-        return 0
-      kill -9 $PID
-      }
       
+      kp() {
+        local PID=$(lsof -t -i tcp:$1) || return $?
+        [ -z "$PID" ] && echo "No process is using this port: $1" && return 0
+        local exit_code_kill; kill -9 "$PID" || exit_code_kill="$?"
 
+        if [[ -z $exit_code_kill ]]; then
+          echo "Killed process: $PID"
+        else
+          echo "Failed to kill process: $PID"
+        fi
+      }
     '';
   };
 
