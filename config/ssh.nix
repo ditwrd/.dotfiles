@@ -103,10 +103,16 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-dj = {
-      hostname = "10.1.17.157";
+      hostname = "10.1.22.171";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-mo = {
+      hostname = "10.1.16.50";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
 
 
   };
