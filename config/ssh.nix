@@ -112,6 +112,11 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-dwaw = {
+      hostname = "10.1.27.125";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
 
 
 
