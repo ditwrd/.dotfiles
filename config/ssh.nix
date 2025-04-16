@@ -128,12 +128,20 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-dwawb = {
-      hostname = "10.1.24.62";
+      hostname = "10.1.17.84";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-
-
+    cube-map = {
+      hostname = "10.1.24.255";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-mapd = {
+      hostname = "10.1.21.213";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
 
   };
 

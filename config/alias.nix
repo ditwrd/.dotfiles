@@ -15,11 +15,6 @@
 
     x = "exit";
 
-    sau = "sudo nala update";
-    saupg = "sudo nala upgrade -y";
-    sauu = "sau && sudo nala upgrade -y";
-    sai = "sudo nala install";
-
     awsd = "source _awsd";
 
     lg = "lazygit";
@@ -61,6 +56,8 @@
     wcd = "warp-cli disconnect";
     cpo = "sudo cpupower frequency-set -g powersave";
     cpe = "sudo cpupower frequency-set -g performance";
+
+    y = "yay";
 
 
 
