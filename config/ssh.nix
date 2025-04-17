@@ -138,7 +138,7 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-mapd = {
-      hostname = "10.1.21.213";
+      hostname = "10.1.20.35";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
