@@ -49,7 +49,6 @@
     pkgs.git
     pkgs.volta
     pkgs.go
-    pkgs.uv
     pkgs.rustup
 
     pkgs.jq

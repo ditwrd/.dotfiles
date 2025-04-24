@@ -66,7 +66,7 @@
       user = "git";
       identityFile = "${config.sops.secrets."ssh/work/cube/gitlab".path}";
     };
-    cube-run = {
+    cube-repo-run = {
       hostname = "10.1.29.120";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
@@ -77,67 +77,52 @@
       port = 2209;
       identityFile = "${config.sops.secrets."ssh/work/cube/e2".path}";
     };
-    cube-cf = {
+    cube-cloudflare = {
       hostname = "10.1.28.230";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/cf".path}";
     };
-    cube-gl = {
+    cube-gitlab = {
       hostname = "10.1.19.17";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
     };
-    cube-atl = {
+    cube-atlantis = {
       hostname = "10.1.16.239";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/atl".path}";
     };
-    cube-afbw = {
-      hostname = "10.1.16.27";
-      user = "ubuntu";
-      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
-    };
-    cube-pk = {
-      hostname = "10.1.26.227";
-      user = "ubuntu";
-      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
-    };
-    cube-dj = {
+    cube-dec-jup = {
       hostname = "10.1.22.171";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-mo = {
+    cube-monit = {
       hostname = "10.1.16.50";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-dwaw = {
-      hostname = "10.1.27.125";
+    cube-ac-air-work = {
+      hostname = "10.1.16.27";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-afw = {
-      hostname = "10.1.28.188";
+    cube-ac-air-web = {
+      hostname = "10.1.27.213";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-scm = {
-      hostname = "18.136.120.70";
-      user = "ubuntu";
-      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
-    };
-    cube-dwawb = {
+    cube-py-air-web = {
       hostname = "10.1.17.84";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-map = {
-      hostname = "10.1.24.255";
+    cube-py-air-work = {
+      hostname = "10.1.24.111";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-mapd = {
+    cube-mo-air-post = {
       hostname = "10.1.20.35";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
