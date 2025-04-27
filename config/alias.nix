@@ -59,6 +59,8 @@
 
     y = "yay";
 
+    ggcla = "gcloud config configurations activate";
+
 
 
   };
