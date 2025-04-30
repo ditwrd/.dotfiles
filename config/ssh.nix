@@ -8,6 +8,8 @@
     "ssh/personal/contabo/dit_sec".mode = "0600";
     "ssh/personal/contabo/root_sec".mode = "0600";
 
+    "ssh/freelance/iqm/app".mode = "0600";
+
     "ssh/work/cube/gh".mode = "0600";
     "ssh/work/cube/au".mode = "0600";
     "ssh/work/cube/e2".mode = "0600";
@@ -49,6 +51,16 @@
       hostname = "62.146.233.85";
       user = "dit";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/dit_sec".path}";
+    };
+
+    #          ╭──────────────────────────────────────────────────────────╮
+    #          │                        Freelance                         │
+    #          ╰──────────────────────────────────────────────────────────╯
+
+    iqm_app_dev = {
+      hostname = "35.219.87.146";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
     };
 
 
