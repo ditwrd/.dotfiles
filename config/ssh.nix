@@ -62,6 +62,13 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
     };
+    iqm_db_dev = {
+      hostname = "10.10.20.2";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      proxyJump = "iqm_app_dev";
+    };
+
 
 
     #          ╭──────────────────────────────────────────────────────────╮

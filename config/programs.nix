@@ -32,11 +32,21 @@
       ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
 
+      export PATH="$PATH:$HOME/.local/bin"
+      
+      # Ruby
+      export GEM_HOME="$(gem env user_gemhome)"
+      export PATH="$PATH:$GEM_HOME/bin"
+      
+      # Go
       export PATH="$PATH:${config.home.homeDirectory}/go/bin"
+      
+      # Nix
       export PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin"
+      
+      # Node
       export VOLTA_HOME="$HOME/.volta"
       export PATH="$PATH:$VOLTA_HOME/bin"
-      export PATH="$PATH:$HOME/.local/bin"
       export PNPM_HOME="${config.home.homeDirectory}/.local/share/pnpm"
       case ":$PATH:" in
         *":$PNPM_HOME:"*) ;;
