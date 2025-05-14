@@ -48,7 +48,6 @@
     # ── Software Tools ────────────────────────────────────────────────────
     pkgs.git
     pkgs.volta
-    pkgs.go
     pkgs.rustup
 
     pkgs.jq
