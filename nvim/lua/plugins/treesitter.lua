@@ -4,18 +4,18 @@
 
 ---@type LazySpec
 return {
-	"nvim-treesitter/nvim-treesitter",
-	opts = {
-		ensure_installed = {
-			"lua",
-			"python",
-			"terraform",
-			"javascript",
-			"rust",
-			"dockerfile",
-			"go",
-			"templ",
-			-- add more arguments for adding more treesitter parsers
-		},
-	},
+  "nvim-treesitter/nvim-treesitter",
+  opts = {
+    ensure_installed = {
+      "lua",
+      "python",
+      "terraform",
+      "javascript",
+      "rust",
+      "dockerfile",
+      "go",
+      "templ",
+      -- add more arguments for adding more treesitter parsers
+    },
+  },
 }
