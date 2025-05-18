@@ -16,6 +16,7 @@
 
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/nvim";
+    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/hypr";
     ".tmux.conf".source = .././tmux/.tmux/.tmux.conf;
     ".tmux.conf.local".source = .././tmux/.tmux.conf.local;
     ".zsh_custom".source = .././zsh/custom;
