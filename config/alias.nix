@@ -54,8 +54,8 @@
 
     wcc = "warp-cli connect";
     wcd = "warp-cli disconnect";
-    cpo = "sudo cpupower frequency-set -g powersave";
-    cpe = "sudo cpupower frequency-set -g performance";
+    po = "sudo cpupower frequency-set -g powersave && powerprofilesctl set power-saver";
+    pe = "sudo cpupower frequency-set -g performance && powerprofilesctl set performance";
 
     y = "yay";
 

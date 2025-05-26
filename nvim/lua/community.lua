@@ -57,7 +57,13 @@ return {
   --          ╭─────────────────────────────────────────────────────────╮
   --          │                        WORKFLOW                         │
   --          ╰─────────────────────────────────────────────────────────╯
-  { import = "astrocommunity.workflow.bad-practices-nvim" },
+  -- { import = "astrocommunity.workflow.bad-practices-nvim" },
+  {
+    "antonk52/bad-practices.nvim",
+    opts = {
+      most_splits = 10,
+    },
+  },
   { import = "astrocommunity.workflow.hardtime-nvim" },
   --          ╭─────────────────────────────────────────────────────────╮
   --          │                         MOTION                          │

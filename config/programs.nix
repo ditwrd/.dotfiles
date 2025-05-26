@@ -52,6 +52,9 @@
         *":$PNPM_HOME:"*) ;;
         *) export PATH="$PNPM_HOME:$PATH" ;;
       esac
+
+      # env var
+      export ANTHROPIC_API_KEY="$(cat ${config.sops.secrets."env/avante".path})"
       
       kp() {
         local PID=$(lsof -t -i tcp:$1) || return $?

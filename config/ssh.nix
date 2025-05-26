@@ -21,6 +21,8 @@
     "aws/config".mode = "0600";
     "aws/credentials".mode = "0600";
     "k8s/config".mode = "0600";
+
+    "env/avante".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
@@ -143,6 +145,11 @@
     };
     cube-mo-air-post = {
       hostname = "10.1.20.35";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-mo-n8n = {
+      hostname = "10.1.26.37";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
