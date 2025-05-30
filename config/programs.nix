@@ -55,6 +55,7 @@
 
       # env var
       export ANTHROPIC_API_KEY="$(cat ${config.sops.secrets."env/avante".path})"
+      unset DOCKER_HOST
       
       kp() {
         local PID=$(lsof -t -i tcp:$1) || return $?
