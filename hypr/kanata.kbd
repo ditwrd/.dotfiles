@@ -4,18 +4,21 @@
 )
 
 (defsrc
+  ;; caps to esc & tab
   caps 
   q w e r t y u i o p
   a s d f j k l ; 
   n m , .
+  ;; easier right pinky
+  ' [
 )
 (defvar
-  tap-time 125
-  hold-time 135 
+  tap-time 150
+  hold-time 200 
 )
 
 (defalias
-  escctrl (tap-hold $tap-time $hold-time esc lctl)
+  escctrl (tap-hold $tap-time $hold-time esc tab)
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
   d (multi f24 (tap-hold $tap-time $hold-time d lsft))
@@ -38,6 +41,8 @@
   m (multi f24 (tap-hold $tap-time $hold-time m down))
   comma (multi f24 (tap-hold $tap-time $hold-time , up))
   dot (multi f24 (tap-hold $tap-time $hold-time . right))
+  apo (multi f24 (tap-hold $tap-time $hold-time ' enter))
+  brack (multi f24 (tap-hold $tap-time $hold-time [ bspc))
 )
 
 (deflayer base
@@ -45,4 +50,6 @@
   @q @w @e @r @t @y @u @i @o @p
   @a @s @d @f @j @k @l @; 
   @n @m @comma @dot
+  @apo @brack
+  
 )
