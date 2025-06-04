@@ -153,6 +153,17 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-metercube-admin-dev = {
+      hostname = "10.1.0.6";
+      # hostname = "52.221.238.90";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-metercube-db-dev = {
+      hostname = "10.1.18.10";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
 
   };
 
