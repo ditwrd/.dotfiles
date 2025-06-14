@@ -31,9 +31,9 @@
 
     # ── IaC ───────────────────────────────────────────────────────────────
     pkgs.ansible
-    pkgs.terraform
+    # pkgs.terraform
     pkgs.terraform-docs
-    pkgs.terragrunt
+    # pkgs.terragrunt
 
     # ── Container ─────────────────────────────────────────────────────────
     pkgs.lazydocker

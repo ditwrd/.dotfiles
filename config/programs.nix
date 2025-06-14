@@ -33,6 +33,7 @@
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
 
       export PATH="$PATH:$HOME/.local/bin"
+      export PATH="$HOME/.asdf/shims:$PATH"
       
       # Ruby
       export GEM_HOME="$(gem env user_gemhome)"
@@ -56,6 +57,7 @@
       # env var
       export ANTHROPIC_API_KEY="$(cat ${config.sops.secrets."env/avante".path})"
       unset DOCKER_HOST
+      export TG_PROVIDER_CACHE=1
       
       kp() {
         local PID=$(lsof -t -i tcp:$1) || return $?
@@ -77,6 +79,7 @@
     plugins = [
       "ansible"
       "aws"
+      "asdf"
       "colorize"
       "docker"
       "docker-compose"

@@ -40,6 +40,7 @@
     tgnuke = "terragrunt destroy --auto-approve";
     tgd = "terragrunt destroy";
     tgi = "terragrunt init";
+    tgr = "tg render --json --write";
 
     ils = "export HTTP_PROXY=http://127.0.0.1:10080; export HTTPS_PROXY=http://127.0.0.1:10080; export AWS_CA_BUNDLE=~/.iamlive/ca.pem";
     il = "iamlive --set-ini --mode proxy --sort-alphabetical";
