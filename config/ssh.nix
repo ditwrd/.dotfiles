@@ -12,6 +12,7 @@
 
     "ssh/work/cube/gh".mode = "0600";
     "ssh/work/cube/au".mode = "0600";
+    "ssh/work/cube/mc".mode = "0600";
     "ssh/work/cube/e2".mode = "0600";
     "ssh/work/cube/cf".mode = "0600";
     "ssh/work/cube/unv_i".mode = "0600";
@@ -153,17 +154,38 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
-    cube-metercube-admin-dev = {
-      hostname = "10.1.0.6";
-      # hostname = "52.221.238.90";
+    cube-vpn = {
+      hostname = "10.2.18.76";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-vpn-instance-connect = {
+      hostname = "localhost";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+      port = 2345;
+    };
+    cube-metercube-admin-dev = {
+      hostname = "10.2.36.201";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
     };
     cube-metercube-db-dev = {
-      hostname = "10.1.18.10";
+      hostname = "10.2.51.35";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-app-dev = {
+      hostname = "10.2.39.187";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-dmz = {
+      hostname = "10.2.0.8";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+
 
   };
 
