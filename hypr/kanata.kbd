@@ -1,54 +1,60 @@
-;; defsrc is still necessary
 (defcfg
   process-unmapped-keys yes
 )
 
-(defsrc
-  caps 
-  q w e r t y u i o p
-  a s d f j k l ; 
-  n m , .
-  ' [ ralt
-)
+(defsrc)
+
 (defvar
   tap-time 175
   hold-time 175
 )
 
-(defalias
-  escctrl (tap-hold $tap-time $hold-time esc tab)
-  a (multi f24 (tap-hold $tap-time $hold-time a esc))
-  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
-  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
-  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
-  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
-  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
-  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
-  ; (multi f24 (tap-hold $tap-time $hold-time ; enter))
-  q (multi f24 (tap-hold $tap-time $hold-time q 1))
-  w (multi f24 (tap-hold $tap-time $hold-time w 2))
-  e (multi f24 (tap-hold $tap-time $hold-time e 3))
-  r (multi f24 (tap-hold $tap-time $hold-time r 4))
-  t (multi f24 (tap-hold $tap-time $hold-time t 5))
-  y (multi f24 (tap-hold $tap-time $hold-time y 6))
-  u (multi f24 (tap-hold $tap-time $hold-time u 7))
-  i (multi f24 (tap-hold $tap-time $hold-time i 8))
-  o (multi f24 (tap-hold $tap-time $hold-time o 9))
-  p (multi f24 (tap-hold $tap-time $hold-time p 0))
-  n (multi f24 (tap-hold $tap-time $hold-time n left))
-  m (multi f24 (tap-hold $tap-time $hold-time m down))
-  comma (multi f24 (tap-hold $tap-time $hold-time , up))
-  dot (multi f24 (tap-hold $tap-time $hold-time . right))
-  apo (multi f24 (tap-hold $tap-time $hold-time ' enter))
-  brack (multi f24 (tap-hold $tap-time $hold-time [ bspc))
-  ralt (multi f24 (tap-hold $tap-time $hold-time bspc bspc))
+;; Base layer
+(deflayermap (base)
+  a           (tap-hold $tap-time $hold-time a esc)
+  s           (tap-hold $tap-time $hold-time s lalt)
+  d           (tap-hold $tap-time $hold-time d lsft)
+  f           (tap-hold $tap-time $hold-time f lctl)
+
+  j           (tap-hold $tap-time $hold-time j rctl)
+  k           (tap-hold $tap-time $hold-time k rsft)
+  l           (tap-hold $tap-time $hold-time l ralt)
+  ;           (tap-hold $tap-time $hold-time ; enter)
+
+  ralt        bspc
+
+  lalt        (layer-while-held second)
 )
 
-(deflayer base
-  @escctrl
-  @q @w @e @r @t @y @u @i @o @p
-  @a @s @d @f @j @k @l @; 
-  @n @m @comma @dot
-  @apo @brack @ralt
-  
+;; second - activated by lalt hold
+(deflayermap (second)
+  q           (tap-hold $tap-time $hold-time 1 `)
+  w           2
+  e           3
+  r           4
+  t           5
+  y           6
+  u           7
+  i           8
+  o           9
+  p           0
+
+  a           (tap-hold $tap-time $hold-time tab esc)
+  s           (tap-hold $tap-time $hold-time s lalt)
+  d           (tap-hold $tap-time $hold-time d lsft)
+  f           (tap-hold $tap-time $hold-time f lctl)
+
+  g           -
+  h           =
+  j           [
+  k           ]
+  l           \
+  ;           '
+
+  n           left
+  m           down
+  ,           up
+  .           right
+
+  ralt        del
 )
