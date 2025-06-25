@@ -185,6 +185,12 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-metercube-gh-runner = {
+      hostname = "10.2.18.158";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
 
 
   };
