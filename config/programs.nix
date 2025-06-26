@@ -84,7 +84,6 @@
       "docker"
       "docker-compose"
       "eza"
-      "fzf"
       "git"
       "gitignore"
       "golang"
@@ -94,19 +93,19 @@
       "sudo"
       "systemd"
       "terraform"
-      "volta"
-      "z"
+      "zoxide"
       "zsh-interactive-cd"
 
       # ── Custom ────────────────────────────────────────────────────────────
       "zshfl"
       "zsh-autosuggestions"
+      "atuin"
     ];
   };
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
   };
 
   programs.eza = {
