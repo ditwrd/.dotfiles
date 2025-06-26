@@ -5,6 +5,7 @@
     vs = "z ssh && nvim ${config.home.homeDirectory}/.ssh";
     v = "nvim";
 
+    cd = "z";
     cdd = "cd ..";
     cddd = "cd ../..";
 
