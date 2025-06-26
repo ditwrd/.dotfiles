@@ -46,6 +46,7 @@ return {
   { import = "astrocommunity.editing-support.refactoring-nvim" },
   { import = "astrocommunity.editing-support.comment-box-nvim" },
   { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
   --          ╭─────────────────────────────────────────────────────────╮
   --          │                           GIT                           │
   --          ╰─────────────────────────────────────────────────────────╯
