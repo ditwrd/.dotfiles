@@ -53,3 +53,4 @@ yaycache-hook
 yazi
 zoom
 zoxide
+evil-helix
