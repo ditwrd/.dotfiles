@@ -83,7 +83,7 @@
   v           (unicode ")")
   
   n           \
-  m           _
+  m           (unicode "_")
   ,           +
   .           (unicode "|")
   /           (unicode "?")
