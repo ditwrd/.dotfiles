@@ -11,7 +11,6 @@
 
 ;; Base layer
 (deflayermap (base)
-  a           (tap-hold $tap-time $hold-time a esc)
   s           (tap-hold $tap-time $hold-time s lalt)
   d           (tap-hold $tap-time $hold-time d lsft)
   f           (tap-hold $tap-time $hold-time f lctl)
@@ -19,16 +18,18 @@
   j           (tap-hold $tap-time $hold-time j rctl)
   k           (tap-hold $tap-time $hold-time k rsft)
   l           (tap-hold $tap-time $hold-time l ralt)
-  ;           (tap-hold $tap-time $hold-time ; enter)
+  ;           bspc
+  /           enter
 
-  ralt        bspc
-
-  lalt        (layer-while-held second)
+  ;; lalt        (layer-while-held left)
+  lalt           (tap-hold $tap-time $hold-time esc (layer-while-held left))
+  ralt           (tap-hold $tap-time $hold-time tab (layer-while-held right))
+  ;; A-ralt        (layer-while-held mid)
 )
 
-;; second - activated by lalt hold
-(deflayermap (second)
-  q           (tap-hold $tap-time $hold-time 1 `)
+;; right - activated by ralt hold
+(deflayermap (right)
+  q           1
   w           2
   e           3
   r           4
@@ -39,22 +40,54 @@
   o           9
   p           0
 
-  a           (tap-hold $tap-time $hold-time tab esc)
-  s           (tap-hold $tap-time $hold-time s lalt)
-  d           (tap-hold $tap-time $hold-time d lsft)
-  f           (tap-hold $tap-time $hold-time f lctl)
+  a           del
 
-  g           -
-  h           =
-  j           [
-  k           ]
-  l           \
-  ;           '
-
-  n           left
-  m           down
-  ,           up
-  .           right
-
-  ralt        del
+  h           left
+  j           down
+  k           up
+  l           right
+  
+  lalt           esc
+  ___           _
+  
 )
+
+;; left - activated by lalt hold
+(deflayermap (left)
+  q           (unicode "!")
+  w           (unicode "@")
+  e           (unicode "#")
+  r           (unicode "$")
+  t           (unicode "%")
+  y           (unicode "^")
+  u           (unicode "&")
+  i           (unicode "*")
+  o           `
+  p           (unicode "~")
+
+  a           (unicode r#"""#)
+  s           [
+  d           {
+  f           (unicode "(")
+
+  h           (unicode "/")
+  j           -
+  k           =
+  l           (unicode ":")
+  ;           ;
+
+
+  z           '
+  x           ]
+  c           }
+  v           (unicode ")")
+  
+  n           \
+  m           _
+  ,           +
+  .           (unicode "|")
+  /           (unicode "?")
+  ___           _
+)
+
+;; mid - activated by lalt and ralt hold
