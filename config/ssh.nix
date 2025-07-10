@@ -170,8 +170,23 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
     };
+    cube-metercube-admin-staging = {
+      hostname = "10.2.34.185";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-admin-production = {
+      hostname = "10.2.32.166";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
     cube-metercube-db-dev = {
       hostname = "10.2.51.35";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-db-production = {
+      hostname = "10.2.50.99";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
     };
@@ -180,6 +195,17 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
     };
+    cube-metercube-app-staging = {
+      hostname = "10.2.34.34";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-app-production = {
+      hostname = "10.2.37.41";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+
     cube-metercube-dmz = {
       hostname = "10.2.0.8";
       user = "ubuntu";
