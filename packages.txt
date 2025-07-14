@@ -1,6 +1,5 @@
 acpi
 acpi_call-dkms
-asdf-vm
 atuin
 audacity
 aws-cdk
@@ -54,3 +53,6 @@ yazi
 zoom
 zoxide
 evil-helix
+rainfrog
+mise
+bore

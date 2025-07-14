@@ -211,11 +211,41 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-metercube-dmz-prod = {
+      hostname = "10.2.0.11";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
     cube-metercube-gh-runner = {
       hostname = "10.2.18.158";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-metercube-db-dev-tunnel = {
+      hostname = "10.2.51.35";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+      localForwards = [
+        {
+          bind = {
+            port = 6432;
+          };
+          host = {
+            port = 5432;
+            address = "localhost";
+          };
+        }
+      ];
+
+    };
+
+    # Host cube-metercube-db-dev-tunnel
+    #   HostName 10.2.51.35
+    #   User ubuntu
+    #   IdentityFile ~/.ssh/key
+    #   LocalForward 6432:localhost:5432
+    # ServerAliveInterval 30
+    # ServerAliveCountMax 3
 
 
 

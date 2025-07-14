@@ -33,7 +33,7 @@
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
 
       export PATH="$PATH:$HOME/.local/bin"
-      export PATH="$HOME/.asdf/shims:$HOME/.asdf/installs:$PATH"
+      # export PATH="$HOME/.asdf/shims:$HOME/.asdf/installs:$PATH"
       
       # Ruby
       export GEM_HOME="$(gem env user_gemhome)"
@@ -79,7 +79,8 @@
     plugins = [
       "ansible"
       "aws"
-      "asdf"
+      # "asdf"
+      "mise"
       "colorize"
       "docker"
       "docker-compose"
