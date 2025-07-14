@@ -53,6 +53,5 @@ yazi
 zoom
 zoxide
 evil-helix
-rainfrog
 mise
 bore
