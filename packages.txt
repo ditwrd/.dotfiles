@@ -30,7 +30,6 @@ kanata-bin
 kaniko
 kitty
 lazysql-bin
-logrotate
 logseq-desktop-bin
 neovim
 nix
