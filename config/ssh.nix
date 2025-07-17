@@ -71,6 +71,31 @@
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
       proxyJump = "iqm_app_dev";
     };
+    superpos_app_dev = {
+      hostname = "35.219.32.146";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+    };
+    superpos_db_dev = {
+      hostname = "10.10.20.2";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      proxyJump = "superpos_app_dev";
+      checkHostIP = false;
+    };
+    superpos_planka_dev = {
+      hostname = "35.219.1.120";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+    };
+    
+    superpos_planka_db_dev = {
+      hostname = "10.10.20.3";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      proxyJump = "superpos_planka_dev";
+      checkHostIP = false;
+    };
 
 
 
