@@ -124,6 +124,11 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-monit-new = {
+      hostname = "10.2.22.22";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
     cube-ac-air-work = {
       hostname = "10.1.16.27";
       user = "ubuntu";
@@ -212,7 +217,7 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-metercube-dmz-prod = {
-      hostname = "10.2.0.11";
+      hostname = "10.2.0.30";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
@@ -238,6 +243,23 @@
       ];
 
     };
+    # cube-metercube-gh-runner-tunnel = {
+    #   hostname = "10.2.18.158";
+    #   user = "ubuntu";
+    #   identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    #   localForwards = [
+    #     {
+    #       bind = {
+    #         port = 3000;
+    #       };
+    #       host = {
+    #         port = 8080;
+    #         address = "localhost";
+    #       };
+    #     }
+    #   ];
+    #
+    # };
 
     # Host cube-metercube-db-dev-tunnel
     #   HostName 10.2.51.35

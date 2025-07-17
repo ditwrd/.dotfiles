@@ -63,6 +63,8 @@
 
     ggcla = "gcloud config configurations activate";
 
+    npm =  "pnpm";
+
 
 
   };
