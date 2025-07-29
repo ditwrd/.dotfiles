@@ -7,7 +7,6 @@ aws-cli-v2
 aws-sdk-cpp
 aws-session-manager-plugin
 battop-bin
-brave-bin
 btop
 clamav
 clamtk
@@ -54,3 +53,5 @@ zoxide
 evil-helix
 mise
 bore
+zen-browser-bin
+clipse-bin

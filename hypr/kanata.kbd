@@ -11,6 +11,7 @@
 
 ;; Base layer
 (deflayermap (base)
+  a           (tap-hold $tap-time $hold-time a lmet)
   s           (tap-hold $tap-time $hold-time s lalt)
   d           (tap-hold $tap-time $hold-time d lsft)
   f           (tap-hold $tap-time $hold-time f lctl)
