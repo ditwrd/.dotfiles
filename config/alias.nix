@@ -50,6 +50,8 @@
 
     tfd = "terraform-docs md table . > README.md";
     acp = "aws configure --profile";
+    asl = "aws sso login";
+    ad = "awsd";
 
     hm = "home-manager";
     hms = "home-manager switch -b backup";
@@ -64,8 +66,12 @@
     ggcla = "gcloud config configurations activate";
 
     npm =  "pnpm";
+    npx =  "pnpx";
 
-
-
+    p = "pwd";
+    b = "battop";
+    ksa = "sudo systemctl start kanata";
+    kst = "sudo systemctl stop kanata";
+      
   };
 }

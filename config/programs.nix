@@ -56,6 +56,8 @@
 
       # env var
       export ANTHROPIC_API_KEY="$(cat ${config.sops.secrets."env/avante".path})"
+      export OPENROUTER_API_KEY="$(cat ${config.sops.secrets."env/openrouter".path})"
+      export HSA_OVERRIDE_GFX_VERSION="9.0.0"
       unset DOCKER_HOST
       export TG_PROVIDER_CACHE=1
       

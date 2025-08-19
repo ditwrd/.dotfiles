@@ -7,6 +7,7 @@
     "ssh/personal/contabo/root".mode = "0600";
     "ssh/personal/contabo/dit_sec".mode = "0600";
     "ssh/personal/contabo/root_sec".mode = "0600";
+    "ssh/personal/deploycamp/deploycamp".mode = "0600";
 
     "ssh/freelance/iqm/app".mode = "0600";
 
@@ -24,6 +25,7 @@
     "k8s/config".mode = "0600";
 
     "env/avante".mode = "0600";
+    "env/openrouter".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
@@ -55,6 +57,11 @@
       user = "dit";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/dit_sec".path}";
     };
+    deploycamp = {
+      hostname = "103.150.90.144";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/personal/deploycamp/deploycamp".path}";
+    };
 
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                        Freelance                         │
@@ -75,7 +82,22 @@
       hostname = "35.219.32.146";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      localForwards = [
+        {
+          bind = {
+            port = 9999;
+          };
+          host = {
+            port = 9000;
+            address = "localhost";
+          };
+        }
+      ];
+
     };
+  #     Host your-server
+  # LocalForward 9000 localhost:9000
+    # };
     superpos_db_dev = {
       hostname = "10.10.20.2";
       user = "ubuntu";
@@ -161,6 +183,11 @@
     };
     cube-ac-air-web = {
       hostname = "10.1.27.213";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-ac-hermes-db-prod= {
+      hostname = "10.2.50.242";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
