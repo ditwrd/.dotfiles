@@ -119,7 +119,47 @@
       checkHostIP = false;
     };
 
+    
+    superpos_app_prod = {
+      hostname = "35.219.35.177";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      localForwards = [
+        {
+          bind = {
+            port = 9999;
+          };
+          host = {
+            port = 9000;
+            address = "localhost";
+          };
+        }
+      ];
 
+    };
+  #     Host your-server
+  # LocalForward 9000 localhost:9000
+    # };
+    superpos_db_prod = {
+      hostname = "10.10.20.5";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      proxyJump = "superpos_app_prod";
+      checkHostIP = false;
+    };
+    superpos_planka_prod = {
+      hostname = "35.219.3.112";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+    };
+    
+    superpos_planka_db_prod = {
+      hostname = "10.10.20.4";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
+      proxyJump = "superpos_planka_prod";
+      checkHostIP = false;
+    };
 
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                           Work                           │
@@ -156,7 +196,7 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/gl".path}";
     };
-    cube-atlantis = {
+    cube-atl = {
       hostname = "10.1.16.239";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/atl".path}";
