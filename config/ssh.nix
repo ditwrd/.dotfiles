@@ -134,6 +134,15 @@
             address = "localhost";
           };
         }
+        {
+          bind = {
+            port = 3333;
+          };
+          host = {
+            port = 3000;
+            address = "localhost";
+          };
+        }
       ];
 
     };
@@ -335,6 +344,13 @@
       ];
 
     };
+
+    cube-transactions-2g = {
+      hostname = "10.2.54.240";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
     # cube-metercube-gh-runner-tunnel = {
     #   hostname = "10.2.18.158";
     #   user = "ubuntu";
