@@ -346,7 +346,7 @@
     };
 
     cube-transactions-2g = {
-      hostname = "10.2.54.240";
+      hostname = "10.2.52.7";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
