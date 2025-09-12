@@ -26,6 +26,7 @@
 
     "env/avante".mode = "0600";
     "env/openrouter".mode = "0600";
+    "env/zai".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
