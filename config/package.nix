@@ -39,7 +39,7 @@
     pkgs.lazydocker
 
     # ── k8s ───────────────────────────────────────────────────────────────
-    pkgs.k9s
+    # pkgs.k9s
     pkgs.kubectl
     pkgs.kubeseal
     pkgs.kubernetes-helm
