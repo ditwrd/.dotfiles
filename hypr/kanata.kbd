@@ -55,39 +55,39 @@
 
 ;; left - activated by lalt hold
 (deflayermap (left)
-  q           (unicode "!")
-  w           (unicode "@")
-  e           (unicode "#")
-  r           (unicode "$")
-  t           (unicode "%")
-  y           (unicode "^")
-  u           (unicode "&")
-  i           (unicode "*")
+  q           S-1
+  w           S-2
+  e           S-3
+  r           S-4
+  t           S-5
+  y           S-6
+  u           S-7
+  i           S-8
   o           `
-  p           (unicode "~")
+  p           S-`
 
-  a           (unicode r#"""#)
+  a           S-'
   s           [
-  d           (unicode "{")
-  f           (unicode "(")
+  d           S-[
+  f           S-9
 
-  h           (unicode "/")
+  h           /
   j           -
   k           =
-  l           (unicode ":")
+  l           S-;
   ;           ;
 
 
   z           '
   x           ]
-  c           (unicode "}")
-  v           (unicode ")")
+  c           S-]
+  v           S-0
   
   n           \
-  m           (unicode "_")
+  m           S--
   ,           +
-  .           (unicode "|")
-  /           (unicode "?")
+  .           S-\
+  /           S-/
   ___           _
 )
 
