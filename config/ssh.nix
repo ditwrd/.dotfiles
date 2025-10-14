@@ -251,6 +251,12 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-py-utils = {
+      hostname = "10.1.23.130";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+      
     cube-mo-air-post = {
       hostname = "10.1.20.35";
       user = "ubuntu";
@@ -383,3 +389,4 @@
   };
 
 }
+#j<191J0B81a
