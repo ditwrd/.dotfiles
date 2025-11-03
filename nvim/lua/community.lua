@@ -70,6 +70,7 @@ return {
   --          │                         MOTION                          │
   --          ╰─────────────────────────────────────────────────────────╯
   { import = "astrocommunity.motion.harpoon" },
+  { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.docker.lazydocker" },
   { import = "astrocommunity.game.leetcode-nvim" },
   { import = "astrocommunity.search.grug-far-nvim" },
