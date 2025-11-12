@@ -76,6 +76,9 @@
           echo "Failed to kill process: $PID"
         fi
       }
+      # Initialize zoxide with 'cd' command (disable doctor warnings)
+      export _ZO_DOCTOR=0
+      eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
     '';
   };
 
@@ -100,7 +103,7 @@
       "sudo"
       "systemd"
       "terraform"
-      "zoxide"
+      # "zoxide"
       "zsh-interactive-cd"
 
       # ── Custom ────────────────────────────────────────────────────────────
