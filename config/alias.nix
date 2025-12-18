@@ -73,6 +73,7 @@
     ksa = "sudo systemctl start kanata";
     kst = "sudo systemctl stop kanata";
     bt="bluetui";
+    l="ls -lah";
       
   };
 }

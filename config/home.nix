@@ -19,8 +19,8 @@
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/hypr";
     ".tmux.conf".source = .././tmux/.tmux/.tmux.conf;
     ".tmux.conf.local".source = .././tmux/.tmux.conf.local;
-    ".zsh_custom".source = .././zsh/custom;
-    ".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/zsh/.p10k.zsh";
+    ".config/starship.toml".source = .././shell/starship.toml;
+    ".ssh/snowflake_tf.p8".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."key/cube/snow".path}";
   };
 
   home.sessionVariables = {

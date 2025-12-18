@@ -23,6 +23,8 @@
     "aws/config".mode = "0600";
     "aws/credentials".mode = "0600";
     "k8s/config".mode = "0600";
+    
+    "key/cube/snow".mode = "0600";
 
     "env/avante".mode = "0600";
     "env/openrouter".mode = "0600";
@@ -250,6 +252,16 @@
       hostname = "10.1.16.239";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/atl".path}";
+    };
+    cube-core-dns = {
+      hostname = "10.2.20.121";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-core-dns-legacy = {
+      hostname = "10.1.27.122";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-dec-jup = {
       hostname = "10.1.22.171";
