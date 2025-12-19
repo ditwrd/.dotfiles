@@ -55,3 +55,4 @@ mise
 bore
 zen-browser-bin
 clipse-bin
+starship

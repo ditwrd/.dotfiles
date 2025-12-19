@@ -58,6 +58,7 @@
 
     wcc = "warp-cli connect";
     wcd = "warp-cli disconnect";
+    wcs="warp-cli status";
     po = "sudo cpupower frequency-set -g powersave && powerprofilesctl set power-saver";
     pe = "sudo cpupower frequency-set -g performance && powerprofilesctl set performance";
 
@@ -73,7 +74,8 @@
     ksa = "sudo systemctl start kanata";
     kst = "sudo systemctl stop kanata";
     bt="bluetui";
-    l="ls -lah";
+    l="p && ls -lah";
+
       
   };
 }

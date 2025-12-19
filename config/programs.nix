@@ -76,39 +76,43 @@
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
       eval "$(atuin init zsh)"
+      export ZELLIJ_AUTO_ATTACH=true
+      eval "$(zellij setup --generate-auto-start zsh)"
+      source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+      eval "$(mise activate zsh)"
     '';
   };
 
-  programs.zsh.oh-my-zsh = {
-    enable = false;
-    custom = "${config.home.homeDirectory}/.zsh_custom";
-    plugins = [
-      "ansible"
-      "aws"
-      # "asdf"
-      "mise"
-      "colorize"
-      "docker"
-      "docker-compose"
-      "eza"
-      "git"
-      "gitignore"
-      "golang"
-      "helm"
-      "kubectl"
-      "ssh"
-      "sudo"
-      "systemd"
-      "terraform"
-      # "zoxide"
-      "zsh-interactive-cd"
-
-      # ── Custom ────────────────────────────────────────────────────────────
-      "zshfl"
-      "zsh-autosuggestions"
-      "atuin"
-    ];
-  };
+  # programs.zsh.oh-my-zsh = {
+  #   enable = false;
+  #   custom = "${config.home.homeDirectory}/.zsh_custom";
+  #   plugins = [
+  #     "ansible"
+  #     "aws"
+  #     # "asdf"
+  #     "mise"
+  #     "colorize"
+  #     "docker"
+  #     "docker-compose"
+  #     "eza"
+  #     "git"
+  #     "gitignore"
+  #     "golang"
+  #     "helm"
+  #     "kubectl"
+  #     "ssh"
+  #     "sudo"
+  #     "systemd"
+  #     "terraform"
+  #     # "zoxide"
+  #     "zsh-interactive-cd"
+  #
+  #     # ── Custom ────────────────────────────────────────────────────────────
+  #     "zshfl"
+  #     "zsh-autosuggestions"
+  #     "atuin"
+  #   ];
+  # };
 
   programs.fzf = {
     enable = true;
