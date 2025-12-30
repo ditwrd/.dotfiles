@@ -80,6 +80,8 @@
       eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
       eval "$(mise activate zsh)"
+      eval "$(bd completion zsh)"
+      function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
     '';
   };
 

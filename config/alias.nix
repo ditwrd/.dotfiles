@@ -1,16 +1,13 @@
 { config, ... }:
 {
   home.shellAliases = {
-    vd = "z dot && nvim";
-    vs = "z ssh && nvim ${config.home.homeDirectory}/.ssh";
+    vd = "cd dot && nvim";
+    vs = "cd ssh && nvim ${config.home.homeDirectory}/.ssh";
     v = "nvim";
 
-    # cd = "z";
     cdd = "cd ..";
     cddd = "cd ../..";
 
-    tm = "tmux";
-    tma = "tmux attach -t";
 
     st = "speedtest";
 
