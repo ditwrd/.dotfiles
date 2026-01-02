@@ -29,6 +29,7 @@
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
 
       export PATH="$PATH:$HOME/.local/bin"
+      eval "$(mise activate zsh)"
       
       # Ruby
       export GEM_HOME="$(gem env user_gemhome)"
@@ -73,7 +74,6 @@
       # Initialize zoxide with 'cd' command (disable doctor warnings)
       export _ZO_DOCTOR=0
       
-      eval "$(mise activate zsh)"
       export EDITOR="$(which nvim)"
       
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
@@ -82,7 +82,6 @@
       export ZELLIJ_AUTO_ATTACH=true
       eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-      eval "$(bd completion zsh)"
       function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
     '';
   };
