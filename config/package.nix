@@ -39,7 +39,7 @@
 
     # ── k8s ───────────────────────────────────────────────────────────────
     # pkgs.k9s
-    pkgs.kubectl
+    # pkgs.kubectl
     pkgs.kubeseal
     pkgs.kubernetes-helm
     pkgs.arkade

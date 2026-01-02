@@ -7,6 +7,8 @@
     "ssh/personal/contabo/root".mode = "0600";
     "ssh/personal/contabo/dit_sec".mode = "0600";
     "ssh/personal/contabo/root_sec".mode = "0600";
+    "ssh/personal/contabo/workhorse_root".mode = "0600";
+    "ssh/personal/contabo/workhorse_dit".mode = "0600";
     "ssh/personal/deploycamp/deploycamp".mode = "0600";
 
     "ssh/freelance/iqm/app".mode = "0600";
@@ -40,6 +42,17 @@
       user = "git";
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
+    workhorse_root = {
+      hostname = "62.171.181.195";
+      user = "root";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/workhorse_root".path}";
+    };
+    workhorse_dit = {
+      hostname = "62.171.181.195";
+      user = "dit";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/workhorse_dit".path}";
+    };
+    
     contabo_main = {
       hostname = "62.146.236.13";
       user = "dit";
