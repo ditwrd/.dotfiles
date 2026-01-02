@@ -25,7 +25,7 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
+    # EDITOR = "nvim";
     DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
     AWS_PROFILE = "$(cat ${config.home.homeDirectory}/.awsd)";
   };

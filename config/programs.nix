@@ -74,6 +74,7 @@
       export _ZO_DOCTOR=0
       
       eval "$(mise activate zsh)"
+      export EDITOR="$(which nvim)"
       
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
