@@ -27,7 +27,6 @@
       eval `ssh-agent -s` &>/dev/null
       ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
-      eval "$(mise activate zsh)"
 
       export PATH="$PATH:$HOME/.local/bin"
       
@@ -73,6 +72,8 @@
       
       # Initialize zoxide with 'cd' command (disable doctor warnings)
       export _ZO_DOCTOR=0
+      
+      eval "$(mise activate zsh)"
       
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
