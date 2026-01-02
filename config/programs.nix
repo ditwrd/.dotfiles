@@ -27,6 +27,7 @@
       eval `ssh-agent -s` &>/dev/null
       ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
+      eval "$(mise activate zsh)"
 
       export PATH="$PATH:$HOME/.local/bin"
       
@@ -79,7 +80,6 @@
       export ZELLIJ_AUTO_ATTACH=true
       eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-      eval "$(mise activate zsh)"
       eval "$(bd completion zsh)"
       function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
     '';
