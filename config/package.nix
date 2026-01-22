@@ -46,7 +46,7 @@
 
     # ── Software Tools ────────────────────────────────────────────────────
     pkgs.git
-    pkgs.rustup
+    # pkgs.rustup
 
     pkgs.jq
     pkgs.yq

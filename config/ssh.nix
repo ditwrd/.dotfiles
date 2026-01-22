@@ -38,8 +38,9 @@
     #          │                         Personal                         │
     #          ╰──────────────────────────────────────────────────────────╯
     github = {
-      hostname = "github.com";
+      hostname = "ssh.github.com";
       user = "git";
+      port = 443;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
     workhorse_root = {
@@ -231,8 +232,9 @@
     #          ╰──────────────────────────────────────────────────────────╯
     # ── Cube ──────────────────────────────────────────────────────────────
     github-cube = {
-      hostname = "github.com";
+      hostname = "ssh.github.com";
       user = "git";
+      port = 443;
       identityFile = "${config.sops.secrets."ssh/work/cube/gh".path}";
     };
     gitlab-cube = {
