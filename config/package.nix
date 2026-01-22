@@ -41,7 +41,7 @@
     # pkgs.k9s
     # pkgs.kubectl
     pkgs.kubeseal
-    pkgs.kubernetes-helm
+    # pkgs.kubernetes-helm
     pkgs.arkade
 
     # ── Software Tools ────────────────────────────────────────────────────

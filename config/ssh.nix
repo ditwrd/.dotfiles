@@ -3,6 +3,7 @@
 
   sops.secrets = {
     "ssh/personal/gh".mode = "0600";
+    "ssh/personal/forgejo_local".mode = "0600";
     "ssh/personal/contabo/dit".mode = "0600";
     "ssh/personal/contabo/root".mode = "0600";
     "ssh/personal/contabo/dit_sec".mode = "0600";
@@ -43,6 +44,13 @@
       port = 443;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
+    forgejo_local = {
+      hostname = "localhost";
+      user = "git";
+      port = 2222;
+      identityFile = "${config.sops.secrets."ssh/personal/forgejo_local".path}";
+    };
+    
     workhorse_root = {
       hostname = "62.171.181.195";
       user = "root";
