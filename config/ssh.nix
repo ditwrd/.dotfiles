@@ -332,6 +332,12 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
       
+
+    cube-mo-sqlmesh-post = {
+      hostname = "10.2.51.17";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
     cube-mo-air-post = {
       hostname = "10.1.20.35";
       user = "ubuntu";
