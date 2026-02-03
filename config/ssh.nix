@@ -384,6 +384,21 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
     };
+    cube-metercube-chatbot-dev = {
+      hostname = "10.2.36.80";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-chatbot-staging = {
+      hostname = "10.2.38.45";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
+    cube-metercube-chatbot-production = {
+      hostname = "10.2.33.223";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
+    };
     cube-metercube-app-dev = {
       hostname = "10.2.39.187";
       user = "ubuntu";
