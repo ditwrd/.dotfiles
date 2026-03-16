@@ -306,6 +306,11 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-ac-air-work-2 = {
+      hostname = "10.1.17.50";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
     cube-ac-air-web = {
       hostname = "10.1.27.213";
       user = "ubuntu";
@@ -453,6 +458,12 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-faros-openwebui = {
+      hostname = "10.2.18.231";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
 
     # cube-metercube-gh-runner-tunnel = {
     #   hostname = "10.2.18.158";

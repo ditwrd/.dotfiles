@@ -79,8 +79,8 @@
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
       eval "$(atuin init zsh)"
-      export ZELLIJ_AUTO_ATTACH=true
-      eval "$(zellij setup --generate-auto-start zsh)"
+      # export ZELLIJ_AUTO_ATTACH=true
+      # eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
       function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
     '';
