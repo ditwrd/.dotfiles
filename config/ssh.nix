@@ -459,10 +459,22 @@
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
     cube-faros-openwebui = {
-      hostname = "10.2.18.231";
+      hostname = "10.2.19.195";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-faros-mcp = {
+      hostname = "10.2.16.194";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    cube-faros-db = {
+      hostname = "10.2.55.236";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    
+    
 
 
     # cube-metercube-gh-runner-tunnel = {
