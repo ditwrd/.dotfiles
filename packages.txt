@@ -18,7 +18,7 @@ docker-buildx
 docker-compose
 firefox
 gdu
-ghostty
+kitty
 go-task
 golangci-lint-bin
 google-chrome
