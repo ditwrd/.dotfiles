@@ -10,6 +10,7 @@
 
 
     st = "speedtest";
+    ssh = "kitten ssh";
 
     x = "exit";
 
@@ -57,6 +58,7 @@
     wcd = "warp-cli disconnect";
     wcs="warp-cli status";
     po = "sudo cpupower frequency-set -g powersave && powerprofilesctl set power-saver";
+    pb = "sudo cpupower frequency-set -g powersave && powerprofilesctl set balanced";
     pe = "sudo cpupower frequency-set -g performance && powerprofilesctl set performance";
 
     y = "yay";
