@@ -348,6 +348,12 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-mo-air-fleet-post = {
+      hostname = "10.2.53.150";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+    
     cube-mo-n8n = {
       hostname = "10.1.26.37";
       user = "ubuntu";
