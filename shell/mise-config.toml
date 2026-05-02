@@ -1,0 +1,27 @@
+[tools]
+argocd = "3.3.6"
+bun = "1.3.1"
+elixir = "1.19.3-otp-28"
+erlang = "28.1.1"
+"github:rtk-ai/rtk" = "latest"
+gleam = "1.13.0"
+go = "1.24.2"
+"go:github.com/steveyegge/beads/cmd/bd" = "0.42.0"
+k3d = "5.8.3"
+kompose = "latest"
+kubectl = "1.31.5"
+kubectx = "latest"
+kubeseal = "0.36.6"
+"npm:@open-pencil/cli" = "latest"
+"npm:pake-cli" = "3.7.8"
+opencode = "1.14.30"
+rust = "stable"
+terraform = "1.12.1"
+terragrunt = "0.81.0"
+zig = "0.15.2"
+
+[settings]
+experimental = true
+
+[settings.npm]
+bun = true

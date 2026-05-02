@@ -75,6 +75,10 @@
     bt="bluetui";
     l="p && ls -lah";
 
+
+    o="opencode";
+    mlo="mise ls-remote opencode";
+
       
   };
 }
