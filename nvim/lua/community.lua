@@ -9,7 +9,7 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.ansible" },
   { import = "astrocommunity.pack.terraform" },
-  { import = "astrocommunity.pack.python" },
+  -- { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.typescript" },

@@ -57,8 +57,8 @@
     wcc = "warp-cli connect";
     wcd = "warp-cli disconnect";
     wcs="warp-cli status";
-    po = "sudo cpupower frequency-set -g powersave && powerprofilesctl set power-saver";
-    pb = "sudo cpupower frequency-set -g powersave && powerprofilesctl set balanced";
+    po = "sudo cpupower frequency-set -g powersave && powerprofilesctl set power-saver && sudo ryzenadj --power-saving";
+    pb = "sudo cpupower frequency-set -g powersave && powerprofilesctl set balanced && sudo ryzenadj --max-performance";
     pe = "sudo cpupower frequency-set -g performance && powerprofilesctl set performance";
 
     y = "yay";
