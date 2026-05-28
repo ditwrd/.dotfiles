@@ -343,6 +343,11 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-mo-openmetadata-post = {
+      hostname = "10.2.48.193";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
     cube-mo-air-post = {
       hostname = "10.1.20.35";
       user = "ubuntu";
