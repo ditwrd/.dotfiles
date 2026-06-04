@@ -76,6 +76,11 @@ return {
           function() require("nvim-python-repl").send_statement_definition() end,
           desc = "Send semantic unit to REPL",
         },
+        ["<Leader>uB"] = {
+
+          "<Cmd>Block<CR>",
+          desc = "Block",
+        },
         ["<Leader>B"] = { name = "Bounding Box" },
         ["<Leader>Bb"] = {
           "<Cmd>CBccbox<CR>",
@@ -89,7 +94,24 @@ return {
           "<Cmd>CBline<CR>",
           desc = "Comment line",
         },
+        ["<Leader>ff"] = {
+          function() require("fff").find_files() end,
+          desc = "FFFind files",
+        },
+        ["<Leader>fg"] = {
+          function() require("fff").live_grep() end,
+          desc = "LiFFFe grep",
+        },
+        ["<Leader>fz"] = {
+          function() require("fff").live_grep { grep = { modes = { "fuzzy", "plain" } } } end,
+          desc = "Live ffuzy grep",
+        },
+        ["<Leader>fc"] = {
+          function() require("fff").live_grep { query = vim.fn.expand "<cword>" } end,
+          desc = "Search current word",
+        },
       },
+
       t = {
         -- setting a mapping to false will disable it
         -- ["<esc>"] = false,

@@ -132,4 +132,24 @@ return {
     -- version = '^6.0.0', -- pin major version, include fixes and features that do not have breaking changes
     config = function() require("kitty-scrollback").setup() end,
   },
+  {
+    "dmtrKovalenko/fff.nvim",
+    build = function()
+      -- downloads a prebuilt binary or falls back to cargo build
+      require("fff.download").download_or_build_binary()
+    end,
+    -- for nixos:
+    -- build = "nix run .#release",
+    opts = {
+      debug = {
+        enabled = true,
+        show_scores = true,
+      },
+    },
+    lazy = false, -- the plugin lazy-initialises itself
+  },
+  {
+    "HampusHauffman/block.nvim",
+    config = function() require("block").setup {} end,
+  },
 }

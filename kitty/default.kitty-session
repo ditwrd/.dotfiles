@@ -1,64 +1,84 @@
 
 new_tab ark
-layout stack
+layout splits
 enabled_layouts splits,stack
-set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 2, "active_group_history": [14, 18, 20, 19, 1], "window_groups": [{"id": 1, "window_ids": [1]}, {"id": 18, "window_ids": [18]}, {"id": 19, "window_ids": [19]}, {"id": 20, "window_ids": [20]}]}}
-cd /home/dit/projects/cube/ark
+set_layout_state {"pairs": {"one": 1, "two": {"horizontal": false, "one": 2, "two": {"horizontal": false, "one": 3, "two": 4}}}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 1, "active_group_history": [2, 1, 4, 3], "window_groups": [{"id": 1, "window_ids": [1]}, {"id": 2, "window_ids": [2]}, {"id": 3, "window_ids": [3]}, {"id": 4, "window_ids": [4]}]}}
+cd /home/dit/projects/cube/ark/live/auto
 
-launch 'kitty-unserialize-data={"id": 1, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
-launch 'kitty-unserialize-data={"id": 18}' --cwd=/home/dit/projects/cube/ark/live/auto/_project/acdc/rerewind/prod/s3-notification/cube-hermes-ds
-launch 'kitty-unserialize-data={"id": 19, "cmd_at_shell_startup": "vd"}' --cwd=/home/dit/projects/personal/.dotfiles '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 1}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 2}' --cwd=/home/dit/projects/cube/ark
 focus
-launch 'kitty-unserialize-data={"id": 20}' --cwd=/home/dit/projects/cube/ark/live/auto/s3/acdc/cube-hermes-ds
+launch 'kitty-unserialize-data={"id": 3}' --cwd=/home/dit/.config/opencode '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 4}' --cwd=/home/dit/projects/cube/ark/live/auto/_project/mothership/fleet/prod/iam/service-account/openmetadata-athena-sa
 
 new_tab gitops
 layout stack
 enabled_layouts splits,stack
-set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [3, 4, 2, 15], "window_groups": [{"id": 2, "window_ids": [2]}, {"id": 4, "window_ids": [4]}, {"id": 15, "window_ids": [15]}]}}
+set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [6, 5, 7], "window_groups": [{"id": 5, "window_ids": [5]}, {"id": 6, "window_ids": [6]}, {"id": 7, "window_ids": [7]}]}}
 cd /home/dit/projects/cube/gitops-argocd-infra
 
-launch 'kitty-unserialize-data={"id": 2, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 5}' '--var=IS_NVIM=1 '
 focus
-launch 'kitty-unserialize-data={"id": 4, "cmd_at_shell_startup": "o"}'
-launch 'kitty-unserialize-data={"id": 15}' --cwd=/home/dit/projects/cube/gitops-argocd-infra/argocd/manifest/airflow-fleet
+launch 'kitty-unserialize-data={"id": 6}'
+launch 'kitty-unserialize-data={"id": 7}' --cwd=/home/dit/projects/cube/gitops-argocd-infra/argocd/manifest/airflow-fleet
 
 new_tab acdc-toolkit
 layout stack
 enabled_layouts splits,stack
-set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [6, 5], "window_groups": [{"id": 5, "window_ids": [5]}, {"id": 6, "window_ids": [6]}, {"id": 7, "window_ids": [7]}]}}
+set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [9, 8], "window_groups": [{"id": 8, "window_ids": [8]}, {"id": 9, "window_ids": [9]}, {"id": 10, "window_ids": [10]}]}}
 cd /home/dit/projects/cube/acdc-kratos-toolkit
 
-launch 'kitty-unserialize-data={"id": 5}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 8}' '--var=IS_NVIM=1 '
 focus
-launch 'kitty-unserialize-data={"id": 6}' --cwd=/home/dit
-launch 'kitty-unserialize-data={"id": 7}'
+launch 'kitty-unserialize-data={"id": 9}' --cwd=/home/dit
+launch 'kitty-unserialize-data={"id": 10}'
 
 new_tab acdc-workflow
 layout stack
 enabled_layouts splits,stack
-set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 1, "active_group_history": [16, 9, 10, 8], "window_groups": [{"id": 8, "window_ids": [8]}, {"id": 10, "window_ids": [10]}]}}
+set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 1, "active_group_history": [12, 11], "window_groups": [{"id": 11, "window_ids": [11]}, {"id": 12, "window_ids": [12]}]}}
 cd /home/dit/projects/cube/acdc-kratos-workflow
 
-launch 'kitty-unserialize-data={"id": 8, "cmd_at_shell_startup": ["/usr/bin/nvim"]}' '--var=IS_NVIM=1 '
-launch 'kitty-unserialize-data={"id": 10}'
+launch 'kitty-unserialize-data={"id": 11, "cmd_at_shell_startup": ["/usr/bin/nvim"]}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 12}' '--var=IS_NVIM=1 '
 focus
 
 new_tab k9s
 layout splits
 enabled_layouts splits,stack
-set_layout_state {"pairs": {"one": 17}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 0, "active_group_history": [11, 17], "window_groups": [{"id": 17, "window_ids": [17]}]}}
+set_layout_state {"pairs": {"one": 13}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 0, "active_group_history": [13], "window_groups": [{"id": 13, "window_ids": [13]}]}}
 cd /home/dit
 
-launch 'kitty-unserialize-data={"id": 17, "cmd_at_shell_startup": "k9s"}'
+launch 'kitty-unserialize-data={"id": 13, "cmd_at_shell_startup": ["/usr/bin/k9s"]}'
 focus
 
 new_tab py tsp
 layout splits
 enabled_layouts splits,stack
-set_layout_state {"pairs": {"one": 12}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 0, "active_group_history": [13, 12], "window_groups": [{"id": 12, "window_ids": [12]}]}}
+set_layout_state {"pairs": {"one": 14}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 0, "active_group_history": [14], "window_groups": [{"id": 14, "window_ids": [14]}]}}
 cd /home/dit/projects/cube/pyramid-tsp-digital-shelf
 
-launch 'kitty-unserialize-data={"id": 12}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 14}' '--var=IS_NVIM=1 '
 focus
 
-focus_tab 0
+new_tab
+layout stack
+enabled_layouts splits,stack
+set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [18, 15, 17], "window_groups": [{"id": 15, "window_ids": [15]}, {"id": 17, "window_ids": [17]}, {"id": 18, "window_ids": [18]}]}}
+cd /home/dit/projects/cube/python_playground
+
+launch 'kitty-unserialize-data={"id": 15, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
+focus
+launch 'kitty-unserialize-data={"id": 17, "cmd_at_shell_startup": "o"}' --cwd=/home/dit/.cache/opencode/packages/pyright/node_modules/pyright/dist
+launch 'kitty-unserialize-data={"id": 18, "cmd_at_shell_startup": "v"}' --cwd=/home/dit/.config/opencode '--var=IS_NVIM=1 '
+
+new_tab
+layout splits
+enabled_layouts splits,stack
+set_layout_state {"pairs": {"one": 16}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 0, "active_group_history": [16], "window_groups": [{"id": 16, "window_ids": [16]}]}}
+cd /home/dit/projects/personal/.dotfiles
+
+launch 'kitty-unserialize-data={"id": 16}' '--var=IS_NVIM=1 '
+focus
+
+focus_tab 6
