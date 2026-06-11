@@ -45,21 +45,33 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      up = {
+        root_markers = { "crossplane.yaml" },
+        filetypes = { "yaml" },
+        cmd = {
+          "up",
+          "xpls",
+          "serve",
+          "--verbose",
+        },
+      },
+
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
       -- function(server, opts) require("lspconfig")[server].setup(opts) end
+      --
 
       -- the key is the server that is being setup with `lspconfig`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
-      elixirls = function(_, _)
-        require("lspconfig").elixirls.setup {
-          cmd = { "/usr/bin/elixir-ls" },
-        }
-      end,
+      -- elixirls = function(_, _)
+      --   require("lspconfig").elixirls.setup {
+      --     cmd = { "/usr/bin/elixir-ls" },
+      --   }
+      -- end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {

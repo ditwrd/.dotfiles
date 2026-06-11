@@ -65,8 +65,8 @@
 
     ggcla = "gcloud config configurations activate";
 
-    npm =  "bun";
-    npx =  "bunx";
+    # npm =  "bun";
+    # npx =  "bunx";
 
     p = "pwd";
     b = "battop";

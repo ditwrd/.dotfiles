@@ -102,7 +102,7 @@ return {
           function() require("fff").live_grep() end,
           desc = "LiFFFe grep",
         },
-        ["<Leader>fz"] = {
+        ["<Leader>fw"] = {
           function() require("fff").live_grep { grep = { modes = { "fuzzy", "plain" } } } end,
           desc = "Live ffuzy grep",
         },
