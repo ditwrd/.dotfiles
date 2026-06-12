@@ -60,13 +60,12 @@ focus
 new_tab Port
 layout splits
 enabled_layouts splits,stack
-set_layout_state {"pairs": {"one": 11, "two": {"horizontal": false, "one": 13, "two": 23}}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 1, "active_group_history": [11, 12, 13, 23], "window_groups": [{"id": 11, "window_ids": [11]}, {"id": 13, "window_ids": [13]}, {"id": 23, "window_ids": [26]}]}}
+set_layout_state {"pairs": {"one": 11, "two": 13}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 1, "active_group_history": [12, 13, 11], "window_groups": [{"id": 11, "window_ids": [11]}, {"id": 13, "window_ids": [13]}]}}
 cd /home/dit/projects/cube/port-backstage
 
-launch 'kitty-unserialize-data={"id": 11}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 11, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
 launch 'kitty-unserialize-data={"id": 13}'
 focus
-launch 'kitty-unserialize-data={"id": 26}'
 
 new_tab Port XRD
 layout stack
@@ -74,7 +73,7 @@ enabled_layouts splits,stack
 set_layout_state {"opts": {}, "class": "Stack", "all_windows": {"active_group_idx": 0, "active_group_history": [17, 14, 15], "window_groups": [{"id": 14, "window_ids": [14]}, {"id": 15, "window_ids": [15]}, {"id": 16, "window_ids": [16]}, {"id": 17, "window_ids": [17]}]}}
 cd /home/dit/projects/cube/port-crossplane-modules
 
-launch 'kitty-unserialize-data={"id": 14, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 14}' '--var=IS_NVIM=1 '
 focus
 launch 'kitty-unserialize-data={"id": 15}'
 launch 'kitty-unserialize-data={"id": 16}'
@@ -83,12 +82,12 @@ launch 'kitty-unserialize-data={"id": 17}' --cwd=/home/dit/projects/personal/.do
 new_tab Port Mothership
 layout splits
 enabled_layouts splits,stack
-set_layout_state {"pairs": {"one": 19, "two": {"horizontal": false, "one": 20, "two": 21}}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 2, "active_group_history": [20, 21, 19], "window_groups": [{"id": 19, "window_ids": [20]}, {"id": 20, "window_ids": [21]}, {"id": 21, "window_ids": [22]}]}}
+set_layout_state {"pairs": {"one": 18, "two": {"horizontal": false, "one": 19, "two": 20}}, "opts": {"default_axis_is_horizontal": true}, "class": "Splits", "all_windows": {"active_group_idx": 2, "active_group_history": [18, 19], "window_groups": [{"id": 18, "window_ids": [18]}, {"id": 19, "window_ids": [19]}, {"id": 20, "window_ids": [20]}]}}
 cd /home/dit/projects/cube/port-mothership-resources
 
-launch 'kitty-unserialize-data={"id": 20, "cmd_at_shell_startup": "v"}' '--var=IS_NVIM=1 '
-launch 'kitty-unserialize-data={"id": 21}'
-launch 'kitty-unserialize-data={"id": 22}'
+launch 'kitty-unserialize-data={"id": 18}' '--var=IS_NVIM=1 '
+launch 'kitty-unserialize-data={"id": 19}'
+launch 'kitty-unserialize-data={"id": 20}'
 focus
 
 focus_tab 6
