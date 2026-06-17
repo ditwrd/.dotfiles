@@ -75,6 +75,8 @@
       export _ZO_DOCTOR=0
       
       export EDITOR="$(which nvim)"
+       
+      export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
       
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
