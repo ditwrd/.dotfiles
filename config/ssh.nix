@@ -10,6 +10,7 @@
     "ssh/personal/contabo/root_sec".mode = "0600";
     "ssh/personal/contabo/workhorse_root".mode = "0600";
     "ssh/personal/contabo/workhorse_dit".mode = "0600";
+    "ssh/personal/contabo/workspace_dit".mode = "0600";
     "ssh/personal/deploycamp/deploycamp".mode = "0600";
 
     "ssh/freelance/iqm/app".mode = "0600";
@@ -55,6 +56,16 @@
       hostname = "62.171.181.195";
       user = "root";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/workhorse_root".path}";
+    };
+    
+    workspace_root = {
+      hostname = "62.171.181.195";
+      user = "root";
+    };
+    workspace_dit = {
+      hostname = "62.171.181.195";
+      user = "dit";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/workspace_dit".path}";
     };
     workhorse_dit = {
       hostname = "62.171.181.195";
