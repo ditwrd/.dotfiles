@@ -495,6 +495,13 @@
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
     };
+    cube-fleet-persistent-nfs = {
+      hostname = "10.2.54.169";
+      user = "ubuntu";
+      identityFile = "${config.sops.secrets."ssh/work/cube/au".path}";
+    };
+
+
     
     
 
