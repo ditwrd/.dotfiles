@@ -78,6 +78,7 @@
 
     o="omp";
     mlo="mise ls-remote github:can1357/oh-my-pi";
+    mlr="mise ls-remote";
 
       
   };
