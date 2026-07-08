@@ -33,6 +33,9 @@
     "env/avante".mode = "0600";
     "env/openrouter".mode = "0600";
     "env/zai".mode = "0600";
+    "env/vantage".mode = "0600";
+    "env/instance-vantage".mode = "0600";
+    "env/context7".mode = "0600";
   };
 
   programs.ssh.matchBlocks = {
