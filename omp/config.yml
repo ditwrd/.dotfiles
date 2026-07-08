@@ -1,0 +1,12 @@
+providers:
+  webSearch: auto
+symbolPreset: nerd
+theme:
+  dark: titanium
+setupVersion: 1
+modelRoles:
+  default: opencode-go/deepseek-v4-flash
+  smol: opencode-go/deepseek-v4-flash
+  slow: opencode-go/deepseek-v4-pro
+  advisor: opencode-go/deepseek-v4-pro
+defaultThinkingLevel: auto

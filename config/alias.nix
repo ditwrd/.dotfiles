@@ -76,8 +76,8 @@
     l="p && ls -lah";
 
 
-    o="opencode";
-    mlo="mise ls-remote opencode";
+    o="omp";
+    mlo="mise ls-remote github:can1357/oh-my-pi";
 
       
   };
