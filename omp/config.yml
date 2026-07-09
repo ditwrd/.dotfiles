@@ -1,37 +1,38 @@
-providers: 
+providers:
   webSearch: auto
 symbolPreset: nerd
-theme: 
+theme:
   dark: titanium
 setupVersion: 1
-modelRoles: 
-  default: opencode-go/deepseek-v4-flash
-  smol: opencode-go/deepseek-v4-flash
-  slow: opencode-go/deepseek-v4-pro
-  advisor: opencode-go/deepseek-v4-pro
+modelRoles:
+  default: openrouter/deepseek/deepseek-v4-flash
+  smol: openrouter/deepseek/deepseek-v4-flash
+  slow: openrouter/deepseek/deepseek-v4-pro
+  advisor: openrouter/deepseek/deepseek-v4-pro
 defaultThinkingLevel: auto
-statusLine: 
+statusLine:
   preset: nerd
-tui: 
+tui:
   textSizing: true
-display: 
+display:
   showTokenUsage: true
   cacheMissMarker: true
-advisor: 
+advisor:
   enabled: true
   subagents: true
-memory: 
+memory:
   backend: mnemopi
-autolearn: 
+autolearn:
   enabled: true
   autoContinue: true
-edit: 
+edit:
   mode: hashline
-lsp: 
+lsp:
   formatOnWrite: true
   diagnosticsOnEdit: true
-commands: 
+commands:
   enableClaudeUser: false
   enableClaudeProject: false
   enableOpencodeUser: false
   enableOpencodeProject: false
+disabledExtensions: []

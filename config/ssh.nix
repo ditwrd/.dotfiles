@@ -32,6 +32,7 @@
 
     "env/avante".mode = "0600";
     "env/openrouter".mode = "0600";
+    "env/openrouter-cube".mode = "0600";
     "env/zai".mode = "0600";
     "env/vantage".mode = "0600";
     "env/instance-vantage".mode = "0600";

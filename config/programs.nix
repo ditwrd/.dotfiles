@@ -54,7 +54,7 @@
       # export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic
       # export ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets."env/zai".path})"
       export API_TIMEOUT_MS=600000
-      export OPENROUTER_API_KEY="$(cat ${config.sops.secrets."env/openrouter".path})"
+      export OPENROUTER_API_KEY="$(cat ${config.sops.secrets."env/openrouter-cube".path})"
       export HSA_OVERRIDE_GFX_VERSION="9.0.0"
       unset DOCKER_HOST
       export TG_PROVIDER_CACHE=1
