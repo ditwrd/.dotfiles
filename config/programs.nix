@@ -88,6 +88,9 @@
       # eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
       function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+      eval "$(wt config shell init zsh)"
+      
     '';
   };
 
