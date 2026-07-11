@@ -84,8 +84,15 @@ description = "Worktree: switch / create"
 [[keys.command]]
 key = "prefix+shift+d"
 type = "plugin_action"
-command = "worktrunk.remove"
-description = "Worktree: remove"
+command = "remote-worktrunk.remove"
+description = "Remote Worktrunk: remove"
+
+[[keys.command]]
+key = "prefix+p"
+type = "plugin_action"
+command = "remote-worktrunk.open"
+description = "Remote Worktrunk: pull remote branch/PR/issue"
+
 
 [keys]
 # Prefix key to enter prefix mode (default: "ctrl+b")
