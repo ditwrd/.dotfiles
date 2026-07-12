@@ -49,58 +49,23 @@
       port = 443;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
-    forgejo_local = {
-      hostname = "localhost";
-      user = "git";
-      port = 2222;
-      identityFile = "${config.sops.secrets."ssh/personal/forgejo_local".path}";
-    };
+    # forgejo_local = {
+    #   hostname = "localhost";
+    #   user = "git";
+    #   port = 2222;
+    #   identityFile = "${config.sops.secrets."ssh/personal/forgejo_local".path}";
+    # };
     
-    workhorse_root = {
-      hostname = "62.171.181.195";
-      user = "root";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/workhorse_root".path}";
-    };
-    
-    workspace_root = {
-      hostname = "62.171.181.195";
-      user = "root";
-    };
     workspace_dit = {
       hostname = "62.171.181.195";
       user = "dit";
       identityFile = "${config.sops.secrets."ssh/personal/contabo/workspace_dit".path}";
     };
-    workhorse_dit = {
-      hostname = "62.171.181.195";
-      user = "dit";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/workhorse_dit".path}";
-    };
     
-    contabo_main = {
-      hostname = "62.146.236.13";
-      user = "dit";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/dit".path}";
-    };
-    contabo_root = {
-      hostname = "62.146.236.13";
-      user = "root";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/root".path}";
-    };
-    contabo_sec_root = {
+    appspace_root = {
       hostname = "62.146.233.85";
       user = "root";
       # identityFile = "${config.sops.secrets."ssh/personal/contabo/root_sec".path}";
-    };
-    contabo_sec = {
-      hostname = "62.146.233.85";
-      user = "dit";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/dit_sec".path}";
-    };
-    deploycamp = {
-      hostname = "103.150.90.144";
-      user = "ubuntu";
-      identityFile = "${config.sops.secrets."ssh/personal/deploycamp/deploycamp".path}";
     };
 
     #          ╭──────────────────────────────────────────────────────────╮
