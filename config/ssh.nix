@@ -39,7 +39,7 @@
     "env/context7".mode = "0600";
   };
 
-  programs.ssh.matchBlocks = {
+  programs.ssh.settings = {
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                         Personal                         │
     #          ╰──────────────────────────────────────────────────────────╯
@@ -90,7 +90,7 @@
     contabo_sec_root = {
       hostname = "62.146.233.85";
       user = "root";
-      identityFile = "${config.sops.secrets."ssh/personal/contabo/root_sec".path}";
+      # identityFile = "${config.sops.secrets."ssh/personal/contabo/root_sec".path}";
     };
     contabo_sec = {
       hostname = "62.146.233.85";
@@ -122,17 +122,15 @@
       hostname = "35.219.32.146";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
-      localForwards = [
-        {
-          bind = {
-            port = 9999;
-          };
-          host = {
-            port = 9000;
-            address = "localhost";
-          };
-        }
-      ];
+      LocalForward = {
+        bind = {
+          port = 9999;
+        };
+        host = {
+          port = 9000;
+          address = "localhost";
+        };
+      };
 
     };
   #     Host your-server
@@ -164,7 +162,7 @@
       hostname = "35.219.53.164";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
-      localForwards = [
+      LocalForward = [
         {
           bind = {
             port = 9999;
@@ -184,13 +182,12 @@
           };
         }
       ];
-
     };
     superpos_app_prod = {
       hostname = "35.219.35.177";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/freelance/iqm/app".path}";
-      localForwards = [
+      LocalForward = [
         {
           bind = {
             port = 9999;
@@ -210,7 +207,6 @@
           };
         }
       ];
-
     };
   #     Host your-server
   # LocalForward 9000 localhost:9000
@@ -465,17 +461,15 @@
       hostname = "10.2.51.35";
       user = "ubuntu";
       identityFile = "${config.sops.secrets."ssh/work/cube/mc".path}";
-      localForwards = [
-        {
-          bind = {
-            port = 6432;
-          };
-          host = {
-            port = 5432;
-            address = "localhost";
-          };
-        }
-      ];
+      LocalForward = {
+        bind = {
+          port = 6432;
+        };
+        host = {
+          port = 5432;
+          address = "localhost";
+        };
+      };
 
     };
 

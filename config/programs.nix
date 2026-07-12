@@ -4,26 +4,54 @@
 
   programs.git = {
     enable = true;
-    userName = "Aditya W";
-    userEmail = "hi@ditwrd.dev";
-    extraConfig = {
-      pull = {
-        rebase = true;
-      };
-    };
+    includes = [
+      {
+        condition = "gitdir:~/projects/personal/";
+        contents = {
+          user.email = "aditya.wardianto11@gmail.com";
+        };
+      }
+      {
+        condition = "gitdir:~/projects/cube/";
+        contents = {
+          user.email = "aditya@cube.asia";
+        };
+      }
+    ];
+    settings = [
+      {
+        user = {
+          name = "Aditya W";
+        };
+      }
+      {
+        pull.rebase = true;
+      }
+      {
+        credential."https://github.com".helper = "!/usr/bin/gh auth git-credential";
+      }
+      {
+        credential."https://gist.github.com".helper = "!/usr/bin/gh auth git-credential";
+      }
+    ];
   };
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
-    compression = true;
+    enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        Compression = true;
+        AddKeysToAgent = "yes";
+      };
+    };
   };
 
   programs.zsh = {
     enable = true;
     autocd = true;
     enableCompletion = true;
-    initExtra = ''
+    initContent = ''
       eval `ssh-agent -s` &>/dev/null
       ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
       ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
