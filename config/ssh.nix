@@ -4,13 +4,8 @@
   sops.secrets = {
     "ssh/personal/gh".mode = "0600";
     "ssh/personal/forgejo_local".mode = "0600";
-    "ssh/personal/contabo/dit".mode = "0600";
-    "ssh/personal/contabo/root".mode = "0600";
-    "ssh/personal/contabo/dit_sec".mode = "0600";
-    "ssh/personal/contabo/root_sec".mode = "0600";
-    "ssh/personal/contabo/workhorse_root".mode = "0600";
-    "ssh/personal/contabo/workhorse_dit".mode = "0600";
     "ssh/personal/contabo/workspace_dit".mode = "0600";
+    "ssh/personal/contabo/appspace_dit".mode = "0600";
     "ssh/personal/deploycamp/deploycamp".mode = "0600";
 
     "ssh/freelance/iqm/app".mode = "0600";
@@ -49,12 +44,6 @@
       port = 443;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
-    # forgejo_local = {
-    #   hostname = "localhost";
-    #   user = "git";
-    #   port = 2222;
-    #   identityFile = "${config.sops.secrets."ssh/personal/forgejo_local".path}";
-    # };
     
     workspace_dit = {
       hostname = "62.171.181.195";
@@ -65,7 +54,11 @@
     appspace_root = {
       hostname = "62.146.233.85";
       user = "root";
-      # identityFile = "${config.sops.secrets."ssh/personal/contabo/root_sec".path}";
+    };
+    appspace_dit = {
+      hostname = "62.146.233.85";
+      user = "dit";
+      identityFile = "${config.sops.secrets."ssh/personal/contabo/appspace_dit".path}";
     };
 
     #          ╭──────────────────────────────────────────────────────────╮
