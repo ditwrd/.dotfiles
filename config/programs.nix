@@ -43,6 +43,14 @@
       "*" = {
         Compression = true;
         AddKeysToAgent = "yes";
+        ForwardAgent = false;
+        ServerAliveInterval = 0;
+        ServerAliveCountMax = 3;
+        HashKnownHosts= false;
+        UserKnownHostsFile="~/.ssh/known_hosts";
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist= "10m";
       };
     };
   };

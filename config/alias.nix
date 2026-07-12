@@ -10,7 +10,6 @@
 
 
     st = "speedtest";
-    ssh = "kitten ssh";
 
     x = "exit";
 
