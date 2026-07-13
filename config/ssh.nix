@@ -42,6 +42,7 @@
       hostname = "ssh.github.com";
       user = "git";
       port = 443;
+      controlMaster = false;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
     
@@ -212,6 +213,7 @@
       hostname = "ssh.github.com";
       user = "git";
       port = 443;
+      controlMaster = false;
       identityFile = "${config.sops.secrets."ssh/work/cube/gh".path}";
     };
     gitlab-cube = {

@@ -1,14 +1,14 @@
 providers: 
-  webSearch: auto
+  webSearch: public
 symbolPreset: nerd
 theme: 
   dark: titanium
 setupVersion: 1
 modelRoles: 
-  default: openrouter/deepseek/deepseek-v4-flash
+  default: opencode-go/deepseek-v4-flash
   smol: openrouter/deepseek/deepseek-v4-flash
   slow: openrouter/deepseek/deepseek-v4-pro
-  advisor: openrouter/deepseek/deepseek-v4-pro
+  advisor: opencode-go/deepseek-v4-pro
 defaultThinkingLevel: auto
 statusLine: 
   preset: nerd
@@ -42,3 +42,7 @@ github:
   enabled: true
 secrets: 
   enabled: true
+retry: 
+  fallbackChains: 
+    default: 
+      - openrouter/deepseek/deepseek-v4-flash
