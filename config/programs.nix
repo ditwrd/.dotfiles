@@ -60,9 +60,11 @@
     autocd = true;
     enableCompletion = true;
     initContent = ''
-      eval `ssh-agent -s` &>/dev/null
-      ssh-add ${config.sops.secrets."ssh/personal/gh".path} &>/dev/null
-      ssh-add ${config.sops.secrets."ssh/work/cube/gh".path} &>/dev/null
+      if [ -z "$SSH_AUTH_SOCK" ]; then
+       eval `ssh-agent -s` &>/dev/null
+       ssh-add ~/.config/sops-nix/secrets/ssh/personal/gh &>/dev/null
+       ssh-add ~/.config/sops-nix/secrets/ssh/work/cube/gh &>/dev/null
+      fi
 
       export PATH="$PATH:$HOME/.local/bin"
       eval "$(mise activate zsh)"

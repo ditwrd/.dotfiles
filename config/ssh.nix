@@ -43,6 +43,7 @@
       user = "git";
       port = 443;
       controlMaster = false;
+      identitiesOnly = true;
       identityFile = "${config.sops.secrets."ssh/personal/gh".path}";
     };
     
@@ -214,6 +215,7 @@
       user = "git";
       port = 443;
       controlMaster = false;
+      identitiesOnly = true;
       identityFile = "${config.sops.secrets."ssh/work/cube/gh".path}";
     };
     gitlab-cube = {
