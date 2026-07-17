@@ -46,3 +46,4 @@ retry:
   fallbackChains: 
     default: 
       - openrouter/deepseek/deepseek-v4-flash
+      - opencode-go/deepseek-v4-flash
