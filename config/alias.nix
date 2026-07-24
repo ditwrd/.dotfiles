@@ -76,9 +76,25 @@
 
 
     o="omp";
-    mlo="mise ls-remote github:can1357/oh-my-pi";
+    mlo="mise ls-remote github:can1357/oh-my-pi --minimum-release-age=0";
+    mlh="mise ls-remote herdr --minimum-release-age=0";
     mlr="mise ls-remote";
 
+
+    # from atuin history analysis
+    k = "kubectl";
+    u = "uv";
+    ur = "uv run";
+    us = "uv sync";
+    bp = "btop";
+    nt = "nmtui";
+    sc = "systemctl";
+    yy = "yes | y";
+    gt = "go test ./...";
+    m = "mise";
+    mi = "mise install";
+    me = "mise env";
+    mug = "mise use -g";
       
   };
 }

@@ -1,14 +1,36 @@
 providers: 
-  webSearch: public
+  webSearchOrder: 
+    - public
+    - perplexity
+    - gemini
+    - anthropic
+    - codex
+    - xai
+    - zai
+    - exa
+    - tinyfish
+    - jina
+    - kagi
+    - tavily
+    - firecrawl
+    - brave
+    - kimi
+    - parallel
+    - synthetic
+    - searxng
+    - startpage
+    - duckduckgo
+    - ecosia
+    - google
+    - mojeek
 symbolPreset: nerd
 theme: 
   dark: titanium
 setupVersion: 1
 modelRoles: 
   default: opencode-go/deepseek-v4-flash
-  smol: openrouter/deepseek/deepseek-v4-flash
-  slow: openrouter/deepseek/deepseek-v4-pro
   advisor: opencode-go/deepseek-v4-pro
+  tiny: opencode-go/deepseek-v4-flash
 defaultThinkingLevel: auto
 statusLine: 
   preset: nerd
@@ -44,6 +66,4 @@ secrets:
   enabled: true
 retry: 
   fallbackChains: 
-    default: 
-      - openrouter/deepseek/deepseek-v4-flash
-      - opencode-go/deepseek-v4-flash
+    {}
