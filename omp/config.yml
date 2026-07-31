@@ -29,7 +29,7 @@ theme:
 setupVersion: 1
 modelRoles: 
   default: opencode-go/deepseek-v4-flash
-  advisor: opencode-go/deepseek-v4-pro
+  advisor: anthropic/claude-sonnet-5
   tiny: opencode-go/deepseek-v4-flash
 defaultThinkingLevel: auto
 statusLine: 
@@ -43,6 +43,7 @@ advisor:
   enabled: true
   subagents: true
   syncBacklog: "3"
+  immuneTurns: 0
 memory: 
   backend: mnemopi
 autolearn: 
