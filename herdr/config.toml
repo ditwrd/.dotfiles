@@ -70,7 +70,7 @@ description = "herdr-plus: quick actions"
 [[keys.command]]
 key = "prefix+space"
 type = "plugin_action"
-command = "herdr-picker-plus.open"
+command = "herdr-navigator.open"
 description = "picker center"
 
 # Override herdr's built-in "new worktree" key (prefix+shift+g) with worktrunk's

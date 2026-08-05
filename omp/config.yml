@@ -28,9 +28,10 @@ theme:
   dark: titanium
 setupVersion: 1
 modelRoles: 
-  default: opencode-go/deepseek-v4-flash
   advisor: anthropic/claude-sonnet-5
-  tiny: opencode-go/deepseek-v4-flash
+  tiny: anthropic/claude-haiku-4-5
+  default: anthropic/claude-sonnet-5
+  smol: anthropic/claude-haiku-4-5
 defaultThinkingLevel: auto
 statusLine: 
   preset: nerd
@@ -40,12 +41,12 @@ display:
   showTokenUsage: true
   cacheMissMarker: true
 advisor: 
-  enabled: true
+  enabled: false
   subagents: true
   syncBacklog: "3"
   immuneTurns: 0
 memory: 
-  backend: mnemopi
+  backend: local
 autolearn: 
   enabled: true
   autoContinue: true
@@ -68,3 +69,12 @@ secrets:
 retry: 
   fallbackChains: 
     {}
+astGrep: 
+  enabled: true
+dev: 
+  autoqa: false
+compaction: 
+  handoffSaveToDisk: true
+  strategy: handoff
+  thresholdTokens: 150000
+  enabled: true
