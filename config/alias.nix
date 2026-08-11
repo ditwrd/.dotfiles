@@ -76,6 +76,7 @@
 
 
     o="omp";
+    gc="omp -p /commit";
     mlo="mise ls-remote github:can1357/oh-my-pi --minimum-release-age=0";
     mlh="mise ls-remote herdr --minimum-release-age=0";
     mlr="mise ls-remote";
