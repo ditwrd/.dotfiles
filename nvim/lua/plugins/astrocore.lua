@@ -24,6 +24,13 @@ return {
       virtual_text = true,
       underline = true,
     },
+    -- Disable astrocommunity's sql pack autocmd: it calls the removed
+    -- `require("sqls").on_attach()` API. Current sqls.nvim configures
+    -- itself natively via its `lsp/sqls.lua` runtime file, so this is dead
+    -- and only errors on LspAttach for sql filetypes.
+    autocmds = {
+      sqls_attach = false,
+    },
     -- passed to `vim.filetype.add`
     filetypes = {
       -- see `:h vim.filetype.add` for usage

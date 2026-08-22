@@ -26,12 +26,13 @@ providers:
 symbolPreset: nerd
 theme: 
   dark: titanium
-setupVersion: 1
+setupVersion: 2
 modelRoles: 
   advisor: anthropic/claude-sonnet-5
-  tiny: anthropic/claude-haiku-4-5
-  default: anthropic/claude-sonnet-5
+  tiny: openrouter/anthropic/claude-haiku-4.5
   smol: anthropic/claude-haiku-4-5
+  default: opencode-go/deepseek-v4-flash
+  designer: opencode-go/deepseek-v4-pro
 defaultThinkingLevel: auto
 statusLine: 
   preset: nerd
@@ -42,7 +43,6 @@ display:
   cacheMissMarker: true
 advisor: 
   enabled: false
-  subagents: true
   syncBacklog: "3"
   immuneTurns: 0
 memory: 
@@ -68,13 +68,30 @@ secrets:
   enabled: true
 retry: 
   fallbackChains: 
-    {}
+    advisor: 
+      - opencode-go/deepseek-v4-flash
+    tiny: 
+      - opencode-go/deepseek-v4-flash
+    smol: 
+      - opencode-go/deepseek-v4-flash
+    slow: 
+      - opencode-go/deepseek-v4-flash
 astGrep: 
   enabled: true
 dev: 
   autoqa: false
 compaction: 
   handoffSaveToDisk: true
-  strategy: handoff
   thresholdTokens: 150000
   enabled: true
+  methodOrder: 
+    - handoff
+    - soft
+    - shake
+    - snapcompact
+    - remote
+task: 
+  agentAdvisor: 
+    task: "on"
+composer: 
+  shape: box
