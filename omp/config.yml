@@ -1,5 +1,5 @@
-providers: 
-  webSearchOrder: 
+providers:
+  webSearchOrder:
     - public
     - perplexity
     - gemini
@@ -24,74 +24,84 @@ providers:
     - google
     - mojeek
 symbolPreset: nerd
-theme: 
+theme:
   dark: titanium
 setupVersion: 2
-modelRoles: 
+modelRoles:
   advisor: anthropic/claude-sonnet-5
   tiny: openrouter/anthropic/claude-haiku-4.5
   smol: anthropic/claude-haiku-4-5
-  default: opencode-go/deepseek-v4-flash
   designer: opencode-go/deepseek-v4-pro
+  slow: anthropic/claude-sonnet-5:auto
+  default: anthropic/claude-sonnet-5
 defaultThinkingLevel: auto
-statusLine: 
+statusLine:
   preset: nerd
-tui: 
+tui:
   textSizing: true
-display: 
+display:
   showTokenUsage: true
   cacheMissMarker: true
-advisor: 
+advisor:
   enabled: false
   syncBacklog: "3"
   immuneTurns: 0
-memory: 
+memory:
   backend: local
-autolearn: 
+autolearn:
   enabled: true
   autoContinue: true
-edit: 
+edit:
   mode: hashline
-lsp: 
+lsp:
   formatOnWrite: true
   diagnosticsOnEdit: true
-commands: 
+commands:
   enableClaudeUser: false
   enableClaudeProject: false
   enableOpencodeUser: false
   enableOpencodeProject: false
-disabledExtensions: 
+disabledExtensions:
   []
-github: 
+github:
   enabled: true
-secrets: 
+secrets:
   enabled: true
-retry: 
-  fallbackChains: 
-    advisor: 
+retry:
+  fallbackChains:
+    advisor:
       - opencode-go/deepseek-v4-flash
-    tiny: 
+    tiny:
       - opencode-go/deepseek-v4-flash
-    smol: 
+      - zai/glm-5.3-flash
+    smol:
       - opencode-go/deepseek-v4-flash
-    slow: 
+      - zai/glm-5.3-flash
+    slow:
       - opencode-go/deepseek-v4-flash
-astGrep: 
+      - zai/glm-5.3-flash
+    default:
+      - opencode-go/deepseek-v4-flash
+      - zai/glm-5.3-flash
+astGrep:
   enabled: true
-dev: 
+dev:
   autoqa: false
-compaction: 
-  handoffSaveToDisk: true
+compaction:
+  handoffSaveToDisk: false
   thresholdTokens: 150000
   enabled: true
-  methodOrder: 
+  methodOrder:
+    - snapcompact
     - handoff
     - soft
     - shake
-    - snapcompact
     - remote
-task: 
-  agentAdvisor: 
+task:
+  agentAdvisor:
     task: "on"
-composer: 
+composer:
   shape: box
+steeringMode: one-at-a-time
+snapcompact:
+  toolResults: false

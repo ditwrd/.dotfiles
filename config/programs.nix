@@ -2,6 +2,14 @@
 {
   programs.home-manager.enable = true;
 
+  xdg.configFile."lazygit/config.yml" = {
+    text = ''
+      git:
+        diffRenderers:
+          - command: delta --paging=never
+    '';
+  };
+
   programs.git = {
     enable = true;
     includes = [
@@ -23,6 +31,19 @@
         user = {
           name = "Aditya W";
         };
+      }
+      {
+        core.pager = "delta";
+      }
+      {
+        interactive.diffFilter = "delta --color-only";
+      }
+      {
+        delta.navigate = true;
+        delta.dark = true;
+      }
+      {
+        merge.conflictStyle = "zdiff3";
       }
       {
         pull.rebase = true;
