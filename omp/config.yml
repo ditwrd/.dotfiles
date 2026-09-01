@@ -29,11 +29,11 @@ theme:
 setupVersion: 2
 modelRoles:
   advisor: anthropic/claude-sonnet-5
-  tiny: openrouter/anthropic/claude-haiku-4.5
-  smol: anthropic/claude-haiku-4-5
-  designer: opencode-go/deepseek-v4-pro
-  slow: anthropic/claude-sonnet-5:auto
-  default: anthropic/claude-sonnet-5
+  smol: zai/glm-5.3-flash:auto
+  designer: anthropic/claude-opus-5:auto
+  slow: zai/glm-5.3-flash:auto
+  default: zai/glm-5.3-flash
+  tiny: opencode-go/deepseek-v4-flash:auto
 defaultThinkingLevel: auto
 statusLine:
   preset: nerd
@@ -43,9 +43,9 @@ display:
   showTokenUsage: true
   cacheMissMarker: true
 advisor:
-  enabled: false
-  syncBacklog: "3"
-  immuneTurns: 0
+  enabled: true
+  syncBacklog: "off"
+  immuneTurns: 3
 memory:
   backend: local
 autolearn:
@@ -70,19 +70,15 @@ secrets:
 retry:
   fallbackChains:
     advisor:
-      - opencode-go/deepseek-v4-flash
+      - zai/glm-5.3
     tiny:
-      - opencode-go/deepseek-v4-flash
       - zai/glm-5.3-flash
     smol:
       - opencode-go/deepseek-v4-flash
-      - zai/glm-5.3-flash
     slow:
       - opencode-go/deepseek-v4-flash
-      - zai/glm-5.3-flash
     default:
       - opencode-go/deepseek-v4-flash
-      - zai/glm-5.3-flash
 astGrep:
   enabled: true
 dev:
