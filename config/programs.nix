@@ -144,6 +144,7 @@
       eval "$(starship init zsh)"
       source $HOME/.atuin/bin/env
       eval "$(atuin init zsh)"
+      eval "$(awsd init zsh)"
       # export ZELLIJ_AUTO_ATTACH=true
       # eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
