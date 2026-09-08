@@ -13,7 +13,7 @@
 
     x = "exit";
 
-    awsd = "source _awsd";
+    # awsd = "source _awsd";
 
     lg = "lazygit";
     ld = "lazydocker";
