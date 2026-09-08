@@ -142,6 +142,7 @@
       
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
+      source $HOME/.atuin/bin/env
       eval "$(atuin init zsh)"
       # export ZELLIJ_AUTO_ATTACH=true
       # eval "$(zellij setup --generate-auto-start zsh)"
