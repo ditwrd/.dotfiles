@@ -29,6 +29,22 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# Records every call, so that "was not called at all" is as observable as "was
+# called with this profile".
+cat >"${tmp}/powerprofilesctl" <<'STUB'
+#!/bin/sh
+printf '%s\n' "$*" >>"${PROFILE_LOG}"
+STUB
+chmod +x "${tmp}/powerprofilesctl"
+
+# Exported so that every invocation of the subject uses the stub, including the
+# latency cases below that run it directly rather than through check().  Without
+# this the suite calls the real powerprofilesctl and writes the real profile
+# state file on the machine running the tests.
+export PROFILE_LOG="${tmp}/profile.log"
+export CHARGER_CHECK_PROFILECTL="${tmp}/powerprofilesctl"
+export CHARGER_CHECK_PROFILE_STATE="${tmp}/profile"
+
 cat >"${tmp}/notify" <<'STUB'
 #!/bin/sh
 printf '%s\n' "$*" >>"${NOTIFY_LOG}"
@@ -61,12 +77,13 @@ ramp() {
     done
 }
 
-# check <expected exit> <substring> <description> [preexisting state]
+# check <expected exit> <substring> <description> [preexisting state] [preexisting profile]
 check() {
     local want="${1}" substring="${2}" description="${3}"
-    local existing="${4:-}" out rc
-    rm --force -- "${tmp}/state"
+    local existing="${4:-}" existing_profile="${5:-}" out rc
+    rm --force -- "${tmp}/state" "${tmp}/profile" "${tmp}/profile.log"
     [ -z "${existing}" ] || printf '%s\n' "${existing}" >"${tmp}/state"
+    [ -z "${existing_profile}" ] || printf '%s\n' "${existing_profile}" >"${tmp}/profile"
     set +e
     out="$(NOTIFY_LOG="${tmp}/notify.log" \
         CHARGER_CHECK_NOTIFY="${tmp}/notify" CHARGER_CHECK_STATE="${tmp}/state" \
@@ -502,5 +519,37 @@ grep --quiet 'Charging slowly' "${tmp}/notify.log" ||
     { printf '[FAIL]    the slow charge verdict does not say what it measured\n' >&2; exit 1; }
 printf '[OK]      a small figure is a slow charge, not a fault\n'
 rm --force -- "${tmp}/sys/BAT0/power_now"
+
+# The profile follows the verdict, not the mains claim: a charger that is
+# really charging earns performance, and the transition into it is the only
+# thing that calls the daemon.
+fake Charging 21000000 47
+check 0 "charging" "charging selects performance"
+grep --quiet '^set performance$' "${tmp}/profile.log" ||
+    { printf '[FAIL]    charging did not select performance\n' >&2; exit 1; }
+printf '[OK]      charging selects performance\n'
+
+# The same verdict arriving again is not a transition, so a profile chosen by
+# hand survives every later run.
+fake Charging 21000000 47
+check 0 "charging" "an unchanged verdict leaves the profile alone" "" good
+[ ! -s "${tmp}/profile.log" ] ||
+    { printf '[FAIL]    an unchanged verdict touched the profile\n' >&2; exit 1; }
+printf '[OK]      an unchanged verdict leaves the profile alone\n'
+
+# The state this whole file exists for: mains reported, nothing delivered.  The
+# udev-driven script the profile used to live in read AC online and switched to
+# performance here, over a battery that was carrying the load.
+fake "Not charging" 21000000 47
+check 1 "CONNECTED BUT NOT CHARGING" "a failing charger selects power-saver"
+grep --quiet '^set power-saver$' "${tmp}/profile.log" ||
+    { printf '[FAIL]    a failing charger did not select power-saver\n' >&2; exit 1; }
+printf '[OK]      a failing charger selects power-saver\n'
+
+fake Discharging 21000000 47 85 0
+check 2 "on battery" "unplugging selects power-saver"
+grep --quiet '^set power-saver$' "${tmp}/profile.log" ||
+    { printf '[FAIL]    unplugging did not select power-saver\n' >&2; exit 1; }
+printf '[OK]      unplugging selects power-saver\n'
 
 printf 'all charger-check cases pass\n'

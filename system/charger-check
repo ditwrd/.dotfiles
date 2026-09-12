@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #/ Usage: charger-check [--help]
 #/
-#/ Report whether a connected charger is actually charging this laptop, and
-#/ announce the verdict when one is plugged in.
+#/ Report whether a connected charger is actually charging this laptop,
+#/ announce the verdict when one is plugged in, and put the power profile where
+#/ that verdict says it belongs.
 #/ Exit: 0 charging or holding at the cap, 1 connected but not charging,
 #/       2 on battery (the drain is expected there; only the unplug is news).
 #/
@@ -49,6 +50,18 @@
 #/ the state file, so a cable fumbled back in within one run is still announced -
 #/ and a fresh attempt clears the fault of the attempt before it.
 #/
+#/ The power profile rides on the same verdicts.  It used to be a separate
+#/ udev-driven script reading AC online, which meant a plug whose Power
+#/ Delivery negotiation failed - mains reported, nothing delivered, the exact
+#/ state this file exists to catch - still switched the laptop to performance
+#/ while the battery carried the load.  So the profile is set here, where
+#/ "charged" is measured rather than assumed: charging or holding at the cap is
+#/ performance, connected-but-not-charging and on-battery are power-saver.  The
+#/ profile is only touched when that verdict changes, not on every run, so a
+#/ profile picked by hand with po/pb/pe still survives until the charger state
+#/ itself changes - the promise the separate script made, now made off what the
+#/ battery does.
+#/
 #/ POWER_SUPPLY_SYSFS and the CHARGER_CHECK_* variables are overridable so that
 #/ every branch can be exercised against a fake sysfs tree; see
 #/ charger-check.test.sh.
@@ -79,6 +92,8 @@ repeat="${CHARGER_CHECK_REPEAT:-900}"
 state="${CHARGER_CHECK_STATE:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.state}"
 plug_file="${CHARGER_CHECK_PLUG:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.plug}"
 notify="${CHARGER_CHECK_NOTIFY:-notify-send}"
+profile_file="${CHARGER_CHECK_PROFILE_STATE:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.profile}"
+profilectl="${CHARGER_CHECK_PROFILECTL:-powerprofilesctl}"
 
 # The verdict is the output of this command, so it goes to stdout; problems go
 # to stderr.
@@ -122,6 +137,28 @@ announce() {
 }
 
 replug="Unplug the USB-C cable and plug it back in until charging starts."
+
+# apply_profile <verdict> <profile>
+#
+# The profile follows the charger verdict, not the mains claim, so a charger
+# that negotiated nothing does not get the laptop switched to performance while
+# the battery carries the load.  The file holds the verdict the profile was last
+# set from; an unchanged verdict means the profile is left alone, which is what
+# keeps a hand-picked profile (po/pb/pe) alive until the charger state really
+# changes.  A failure is reported and not recorded, so the next run retries -
+# at boot this races power-profiles-daemon, and that race is not worth failing
+# a verdict over.
+apply_profile() {
+    local verdict="${1}" profile="${2}"
+    if [ -r "${profile_file}" ] && [ "$(cat "${profile_file}")" = "${verdict}" ]; then
+        return 0
+    fi
+    if "${profilectl}" set "${profile}" 2>/dev/null; then
+        printf '%s\n' "${verdict}" >"${profile_file}"
+    else
+        error "powerprofilesctl set ${profile} failed"
+    fi
+}
 
 battery=''
 ac_online=''
@@ -174,6 +211,7 @@ if [ "${ac_online}" != 1 ]; then
         announce good '󰂃 On battery' \
             "Charger unplugged, running on battery (${capacity}%)." || true
     fi
+    apply_profile battery power-saver
     printf '0 0\n' >"${state}"
     printf 'on battery, %s%%\n' "${capacity}"
     exit 2
@@ -200,6 +238,7 @@ if [ -z "${plug}" ] && [ "$(read_attr "${battery}/status")" = Charging ]; then
         announce good '󰂄 Charging again' \
             "The charger is charging this laptop again (battery ${capacity}%)." || true
     fi
+    apply_profile good performance
     printf '%s 1\n' "${last_alert}" >"${state}"
     printf 'charging, %s%%\n' "${capacity}"
     exit 0
@@ -327,6 +366,7 @@ if [ "${kind}" = fault ]; then
     if [ -n "${plug}" ] || [ "${last_alert}" -eq 0 ] || [ -n "${repeat_due}" ]; then
         announce fault "${title}" "${body}" || true
     fi
+    apply_profile fault power-saver
     printf '%s 1\n' "${last_alert}" >"${state}"
     exit 1
 fi
@@ -337,5 +377,6 @@ fi
 if [ -n "${plug}" ] || [ "${last_alert}" -gt 0 ]; then
     announce good "${title}" "${body}" || true
 fi
+apply_profile good performance
 printf '%s 1\n' "${last_alert}" >"${state}"
 exit 0
