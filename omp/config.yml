@@ -32,7 +32,7 @@ modelRoles:
   smol: zai/glm-5.3-flash:auto
   designer: anthropic/claude-opus-5:auto
   slow: zai/glm-5.3-flash:auto
-  default: zai/glm-5.3-flash
+  default: opencode-go/deepseek-v4.1-flash
   tiny: opencode-go/deepseek-v4-flash:auto
   plan: openrouter/amazon/nova-micro-v1:auto
 defaultThinkingLevel: auto
@@ -62,8 +62,7 @@ commands:
   enableClaudeProject: false
   enableOpencodeUser: false
   enableOpencodeProject: false
-disabledExtensions:
-  []
+disabledExtensions: []
 github:
   enabled: true
 secrets:
@@ -75,11 +74,11 @@ retry:
     tiny:
       - zai/glm-5.3-flash
     smol:
-      - opencode-go/deepseek-v4-flash
+      - opencode-go/deepseek-v4.1-flash
     slow:
-      - opencode-go/deepseek-v4-flash
+      - opencode-go/deepseek-v4.1-flash
     default:
-      - opencode-go/deepseek-v4-flash
+      - opencode-go/deepseek-v4.1-flash
 astGrep:
   enabled: true
 dev:
@@ -103,3 +102,4 @@ steeringMode: one-at-a-time
 snapcompact:
   toolResults: false
 hideThinkingBlock: false
+
