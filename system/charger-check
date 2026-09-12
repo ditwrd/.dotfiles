@@ -1,0 +1,341 @@
+#!/usr/bin/env bash
+#/ Usage: charger-check [--help]
+#/
+#/ Report whether a connected charger is actually charging this laptop, and
+#/ announce the verdict when one is plugged in.
+#/ Exit: 0 charging or holding at the cap, 1 connected but not charging,
+#/       2 on battery (the drain is expected there; only the unplug is news).
+#/
+#/ The ThinkPad EC keeps reporting a mains supply (AC online=1) even when USB-C
+#/ Power Delivery negotiation fails and the battery ends up carrying the load.
+#/ In that state it also reports the battery as "Not charging" with POWER_NOW=0,
+#/ so neither the AC state nor the battery status can be trusted: plugging in
+#/ can silently do nothing while the battery keeps draining.  Two signals are
+#/ left, and they are watched together: the trend of ENERGY_NOW, which answers
+#/ in whichever direction the battery goes, and the EC's own POWER_NOW, which
+#/ is 0 W below the cap in that state while a working charger reports tens of
+#/ watts - so a plug is judged as soon as either one speaks, rather than on a
+#/ counter that a mild drain steps no faster than once a minute.  Silence is
+#/ the third signal: the figure down at the idle line with the counter flat is
+#/ a plug delivering nothing, so that verdict arrives in two seconds rather
+#/ than waiting out a window it has nothing left to learn from.  Two lines and
+#/ not one, because the figures between them are a charger delivering little
+#/ rather than none - 2.82 W was measured on a plug that then charged - and
+#/ what that is, a slow charge or a sub-resolution drain, the counter cannot
+#/ say in a window this short.
+#/
+#/ Notifications: the three states of a plug - plugged and charging (or holding
+#/ at the cap), plugged but not charging, unplugged - are each announced on the
+#/ transition into them, so plugging in is announced either way, as the good
+#/ verdict or as the fault a bad charger hides.  A fault is critical and never
+#/ expires; the other two are normal urgency and expire on their own.  Every
+#/ notification carries one fixed tag, so a later verdict replaces the previous
+#/ one instead of stacking up - unplugging in particular retracts the warning
+#/ about the adapter that was just removed.  A fault is announced when it
+#/ appears and then at most once per CHARGER_CHECK_REPEAT, so a flapping charger
+#/ cannot spam; the transitions themselves only happen so often.  That window
+#/ rate-limits the fault and nothing else: a verdict that clears a fault goes
+#/ out the moment it is reached, because it is the news whoever is staring at
+#/ the warning is waiting for.  Held back by the window, it once left the
+#/ warning on screen through a charge that had already started.  The state file
+#/ holds "<epoch of the fault warning still standing> <AC state last seen>":
+#/ the epoch is what rate-limits repeats and what makes the next fault announce
+#/ itself at once, the AC state is what makes a plug an announcement.
+#/
+#/ A plug is answered before the trend is sampled, since the verdict for the
+#/ charger being tried cannot exist yet: a notice says the plug arrived, and the
+#/ verdict replaces it seconds later under the same tag.  charger-watch sees the
+#/ adapter's own uevent and records a plug in a marker file rather than only in
+#/ the state file, so a cable fumbled back in within one run is still announced -
+#/ and a fresh attempt clears the fault of the attempt before it.
+#/
+#/ POWER_SUPPLY_SYSFS and the CHARGER_CHECK_* variables are overridable so that
+#/ every branch can be exercised against a fake sysfs tree; see
+#/ charger-check.test.sh.
+set -euo pipefail
+IFS=$'\n\t'
+
+sysfs="${POWER_SUPPLY_SYSFS:-/sys/class/power_supply}"
+floor="${CHARGER_CHECK_FLOOR:-3}"
+# The figure at or below which nothing is being delivered at all, as against
+# the floor above which a charger is certainly being taken.  They are two
+# numbers because the hardware needs two: the failed negotiation this file
+# exists for reports a literal 0 W, while a charger that is merely slow to take
+# reports small positive figures - 2.82 W was measured on a plug that then
+# charged normally - and a single threshold called that a fault.  Between the
+# two the counter is the only signal, and below the counter's own resolution
+# a trickle and a trickle-sized drain cannot be told apart in any window this
+# tool will wait out, so a positive figure is left alone rather than guessed at.
+idle="${CHARGER_CHECK_IDLE:-1}"
+settle="${CHARGER_CHECK_SETTLE:-5}"
+# Samples at or below the idle figure (0.5 s each) that settle the "nothing is
+# being delivered" verdict on their own.  Two seconds against a charger that
+# reports itself taken within half a second, so a plug that works is never
+# called a fault, and a plug that does nothing is called one in two seconds
+# instead of waiting out the window at five.
+confirm="${CHARGER_CHECK_CONFIRM:-4}"
+threshold="${CHARGER_CHECK_THRESHOLD:-0.5}"
+repeat="${CHARGER_CHECK_REPEAT:-900}"
+state="${CHARGER_CHECK_STATE:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.state}"
+plug_file="${CHARGER_CHECK_PLUG:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.plug}"
+notify="${CHARGER_CHECK_NOTIFY:-notify-send}"
+
+# The verdict is the output of this command, so it goes to stdout; problems go
+# to stderr.
+error() { printf '[ERROR]   %s\n' "${*}" >&2; }
+usage() { grep '^#/' "${0}" | cut --characters=4-; exit 0; }
+
+case "${1:-}" in
+    --help | -h) usage ;;
+    '') ;;
+    *)
+        error "unexpected argument: ${1}"
+        exit 2
+        ;;
+esac
+
+read_attr() { cat "${1}" 2>/dev/null || true; }
+
+# announce <good|fault> <title> <body>
+#
+# -t 0 (never expire) on a fault: a critical warning must stay until it is
+# dismissed, which is what mako's default-timeout would otherwise deny it.
+# Only a notification that actually went out may arm the repeat window: a send
+# that fails (no session bus, daemon down, run from an activation context)
+# would otherwise consume the whole window and silence the warning at exactly
+# the moment it was supposed to arrive.  A fault sets last_alert to now, good
+# news clears it - this is what "a warning is still standing" means.
+announce() {
+    local kind="${1}" title="${2}" body="${3}" opts=(--urgency=normal)
+    [ "${kind}" = fault ] && opts=(--urgency=critical -t 0)
+    if "${notify}" --app-name=charger-check "${opts[@]}" \
+        --hint=string:x-canonical-private-synchronous:charger-check \
+        "${title}" "${body}" 2>/dev/null; then
+        if [ "${kind}" = fault ]; then
+            last_alert="$(date +%s)"
+        else
+            last_alert=0
+        fi
+        return 0
+    fi
+    return 1
+}
+
+replug="Unplug the USB-C cable and plug it back in until charging starts."
+
+battery=''
+ac_online=''
+for ps in "${sysfs}"/*; do
+    case "$(read_attr "${ps}/type")" in
+        Battery) [ -n "${battery}" ] || battery="${ps}" ;;
+        Mains)
+            if [ -r "${ps}/online" ]; then ac_online="$(read_attr "${ps}/online")"; fi
+            ;;
+    esac
+done
+
+if [ -z "${battery}" ]; then
+    error "no battery under ${sysfs}"
+    exit 2
+fi
+
+last_alert=0
+seen_ac=''
+if [ -r "${state}" ]; then
+    # IFS is newline/tab, so ask for the space separator explicitly.
+    IFS=' ' read -r last_alert seen_ac <"${state}" || true
+fi
+case "${last_alert}" in '' | *[!0-9]*) last_alert=0 ;; esac
+# Whether the repeat window has elapsed since the warning still standing.
+repeat_due=''
+if [ "$(date +%s)" -ge "$((last_alert + repeat))" ]; then repeat_due=1; fi
+
+# charger-watch saw the adapter report itself online and left a marker: that is
+# a plug this run can be certain of even where the state file never saw the
+# unplug - a cable out and back within one run - so it is read and consumed here,
+# before any branch can return past it.
+plug=''
+if [ -e "${plug_file}" ]; then
+    plug=1
+    rm --force -- "${plug_file}"
+fi
+
+# Unplugged: draining is expected, so there is no verdict to report - but the
+# transition itself is the third thing worth knowing.  It is also the retraction
+# of a standing fault: the adapter being complained about is gone, and the same
+# tag means this replaces that critical warning instead of sitting beside it.
+# Only the transition is announced; left unplugged, the runs that follow are
+# silent.  Clearing the fault epoch here is what makes the next plug announce
+# itself, including when a failing charger is swapped for another one.
+if [ "${ac_online}" != 1 ]; then
+    capacity="$(read_attr "${battery}/capacity")"
+    capacity="${capacity:-0}"
+    if [ "${seen_ac:-}" = 1 ]; then
+        announce good '󰂃 On battery' \
+            "Charger unplugged, running on battery (${capacity}%)." || true
+    fi
+    printf '0 0\n' >"${state}"
+    printf 'on battery, %s%%\n' "${capacity}"
+    exit 2
+fi
+
+# Seen unplugged before: this run is the moment of a plug, the moment the
+# verdict was asked for, so it is announced even if it was announced before.
+if [ "${seen_ac:-}" = 0 ]; then plug=1; fi
+
+# A working charger already established: no need to sample what the EC reports
+# and what the previous run confirmed.  This is the path taken on almost every
+# poll while charging, so it must stay cheap.
+if [ -z "${plug}" ] && [ "$(read_attr "${battery}/status")" = Charging ]; then
+    capacity="$(read_attr "${battery}/capacity")"
+    capacity="${capacity:-0}"
+    # ...except to retract a warning that this run disproves.  The status word
+    # alone does not disprove one - the EC reports Charging while the battery
+    # drains, which is the whole reason this file exists - so a power figure is
+    # what it takes.  That is the charger being taken, and it is news now rather
+    # than in a repeat window's time.
+    watts="$(read_attr "${battery}/power_now")"
+    case "${watts:-}" in '' | *[!0-9]*) watts=0 ;; esac
+    if [ "${last_alert}" -gt 0 ] && [ "${watts}" -gt 0 ]; then
+        announce good '󰂄 Charging again' \
+            "The charger is charging this laptop again (battery ${capacity}%)." || true
+    fi
+    printf '%s 1\n' "${last_alert}" >"${state}"
+    printf 'charging, %s%%\n' "${capacity}"
+    exit 0
+fi
+
+# "Not charging" covers both a battery that has reached its configured cap and
+# a charger that cannot carry the load, so measure what the energy does - but
+# answer the plug first: the trend takes seconds, and until the verdict exists
+# the only honest thing to say is that the plug was seen.  Same tag, so the
+# verdict replaces this notice rather than sitting under it, and clearing the
+# fault epoch is the point: it warned about the attempt before this one.
+if [ -n "${plug}" ]; then
+    announce good '󰚥 Checking the charger' \
+        "Charger plugged in; measuring what the battery does." || true
+fi
+
+first="$(read_attr "${battery}/energy_now")"
+case "${first:-}" in '' | *[!0-9]*) first=0 ;; esac
+last="${first}"
+watts=0
+start="$(date +%s)"
+# The counter only steps by 0.01 Wh - every 3.6 s at a 10 W drain, and most of
+# a minute at 1 W - so waiting on it alone is what made this late.  The EC's
+# power figure moves first and separates the cases cleanly (0 W against a
+# charging 19-32 W on this hardware), so it is watched at half-second cadence
+# and either signal settles the verdict: the counter moving at all is the
+# battery answering, in whichever direction, while a figure at or above the
+# floor is a charger being taken.  The counter is read first on purpose, so a
+# discharging battery outranks a figure the EC should not be trusted with:
+# reporting "Charging" while the battery drains is the lie this file exists to
+# catch.  The third signal is the absence of both, and it is the one a plug
+# that does nothing shows: a figure down at the idle line held for a few
+# samples, which closes the window in a couple of seconds instead of exhausting
+# it.  It is the idle line and not the floor, because the figure between them
+# is a charger delivering something - little, but something - and calling that
+# a fault is what a single threshold got wrong.  A charger that is slow to
+# take - the case the window was there for - is not lost by this either: it is
+# announced as the fault only if nothing at all arrives, and the charging
+# verdict retracts the fault the moment the figure does.
+below=0
+for ((i = 0; i < settle * 2; i++)); do
+    sleep 0.5
+    last="$(read_attr "${battery}/energy_now")"
+    case "${last:-}" in '' | *[!0-9]*) last="${first}" ;; esac
+    if [ "${last}" != "${first}" ]; then break; fi
+    watts="$(read_attr "${battery}/power_now")"
+    case "${watts:-}" in '' | *[!0-9]*) watts=0 ;; esac
+    if [ "${watts}" -ge "$((floor * 1000000))" ]; then break; fi
+    if [ "${watts}" -le "$((idle * 1000000))" ]; then
+        below=$((below + 1))
+        if [ "${below}" -ge "${confirm}" ]; then break; fi
+    else
+        below=0
+    fi
+done
+watts="$(read_attr "${battery}/power_now")"
+case "${watts:-}" in '' | *[!0-9]*) watts=0 ;; esac
+end="$(date +%s)"
+
+rate="$(awk -v a="${first}" -v b="${last}" -v t="$((end - start))" \
+    'BEGIN { printf "%.2f", (b - a) / 1000000 * 3600 / (t ? t : 1) }')"
+capacity="$(read_attr "${battery}/capacity")"
+capacity="${capacity:-0}"
+cap="$(read_attr "${battery}/charge_control_end_threshold")"
+cap="${cap:-100}"
+
+# Whether the battery is draining is the trend's call, but how fast is better
+# read from power_now: the energy counter steps by 0.01 Wh and the EC refreshes
+# it lazily, so a short window times it coarsely (a 10 W drain measures as
+# 3.60 W).  The EC reports nothing at all while it is saying "Not charging",
+# which is exactly the state being diagnosed - so the counter figure has to
+# stand in, labelled for what it is: it can only ever see whole steps, so it
+# is a floor, never the rate.
+going="$(awk -v w="${watts}" 'BEGIN { printf "%.2f", w / 1000000 }')"
+if [ "${watts}" -gt 0 ]; then
+    shown="${going}"
+    qualifier=''
+else
+    shown="${rate#-}"
+    qualifier=' or more'
+fi
+
+if awk -v r="${rate}" -v th="${threshold}" 'BEGIN { exit !(r < -th) }'; then
+    kind=fault
+    title='󰚥 Charger is not charging'
+    body="A charger is connected but the battery is discharging at ${shown} W${qualifier}. ${replug}"
+    printf 'CONNECTED BUT DRAINING at %s W%s (battery %s%%)\n' "${shown}" "${qualifier}" "${capacity}"
+elif [ "${watts}" -ge "$((floor * 1000000))" ]; then
+    kind=good
+    title='󰂄 Charging'
+    body="Charging at ${going} W (battery ${capacity}%)."
+    printf 'CHARGING at %s W (battery %s%%)\n' "${going}" "${capacity}"
+elif awk -v r="${rate}" -v th="${threshold}" 'BEGIN { exit !(r > th) }'; then
+    kind=good
+    title='󰂄 Charging'
+    body="Charging at ${shown} W${qualifier} (battery ${capacity}%)."
+    printf 'CHARGING at %s W%s (battery %s%%)\n' "${shown}" "${qualifier}" "${capacity}"
+else
+    # A flat counter below the floor is one of three things, and the figures
+    # tell them apart: nothing delivered at all, which is the failed
+    # negotiation and the signature of which is a literal 0 W; something small
+    # delivered, which is a charger doing its job slowly and not a fault; and a
+    # full battery being held, which is what the cap means.
+    if [ "${capacity}" -lt "$((cap - 2))" ] && [ "${watts}" -le "$((idle * 1000000))" ]; then
+        kind=fault
+        title='󰚥 Charger is not charging'
+        body="A charger is connected but only ${going} W is going in, and the battery is not charging (${capacity}%, cap ${cap}%). ${replug}"
+        printf 'CONNECTED BUT NOT CHARGING at %s%% (%s W, cap %s%%)\n' "${capacity}" "${going}" "${cap}"
+    elif [ "${capacity}" -lt "$((cap - 2))" ]; then
+        kind=good
+        title='󰂄 Charging'
+        body="Charging slowly at ${going} W (battery ${capacity}%)."
+        printf 'CHARGING SLOWLY at %s W (battery %s%%)\n' "${going}" "${capacity}"
+    else
+        kind=good
+        title='󰁹 Holding at the cap'
+        body="Plugged in, holding at ${capacity}% (cap ${cap}%)."
+        printf 'holding at cap %s%% (%s W)\n' "${cap}" "${rate}"
+    fi
+fi
+
+if [ "${kind}" = fault ]; then
+    # A fault with no warning standing is news and goes out at once; a repeat
+    # waits out the window, which is what keeps a flapping charger quiet.
+    if [ -n "${plug}" ] || [ "${last_alert}" -eq 0 ] || [ -n "${repeat_due}" ]; then
+        announce fault "${title}" "${body}" || true
+    fi
+    printf '%s 1\n' "${last_alert}" >"${state}"
+    exit 1
+fi
+
+# Good news is the answer that was asked for wherever it arrives - on a plug, or
+# as the retraction of a fault the trend has just disproved.  Only the fault
+# waits for the window.
+if [ -n "${plug}" ] || [ "${last_alert}" -gt 0 ]; then
+    announce good "${title}" "${body}" || true
+fi
+printf '%s 1\n' "${last_alert}" >"${state}"
+exit 0

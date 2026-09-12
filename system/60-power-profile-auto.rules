@@ -1,0 +1,13 @@
+# Set the power profile when the AC adapter is plugged in or unplugged.
+#
+# This uses RUN rather than ENV{SYSTEMD_WANTS} on purpose.  systemd acts on
+# SYSTEMD_WANTS dependencies only when a device first becomes active, so every
+# later "change" event on the always-active AC device would be ignored.
+#
+# --no-block keeps udev from waiting for the unit, as 90-vconsole.rules does.
+#
+# start, not restart: restart would SIGTERM an invocation that is already
+# running, and a repeat event is a no-op anyway (the script only acts when the
+# reported state differs from the state it last applied).
+ACTION=="add|change", SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_TYPE}=="Mains", \
+  RUN+="/usr/bin/systemctl --no-block start power-profile-auto.service"

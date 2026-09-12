@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Apply the power profile that matches the AC adapter state.
+#
+# Started by the udev rule, and once at boot.  It acts only when the reported AC
+# state differs from the last state it applied.  A repeated event for an
+# unchanged state is therefore a no-op, so a profile chosen by hand with
+# po / pb / pe survives until the adapter is next plugged or unplugged.
+#
+# No arguments and no output on success: its only caller is udev, which logs
+# failures to the journal through power-profile-auto.service.
+#
+# POWER_SUPPLY_SYSFS, POWER_PROFILE_STATE and POWER_PROFILECTL are overridable so
+# that both branches can be exercised without touching the live hardware.
+set -euo pipefail
+IFS=$'\n\t'
+
+sysfs="${POWER_SUPPLY_SYSFS:-/sys/class/power_supply}"
+state="${POWER_PROFILE_STATE:-/run/power-profile-auto.state}"
+ctl="${POWER_PROFILECTL:-/usr/bin/powerprofilesctl}"
+
+error() { printf '[ERROR]   %s\n' "${*}" >&2; }
+
+ac_online=''
+for ps in "${sysfs}"/*; do
+    [ "$(cat "${ps}/type" 2>/dev/null)" = Mains ] || continue
+    [ -r "${ps}/online" ] || continue
+    ac_online="$(cat "${ps}/online")"
+done
+
+# No AC adapter on this machine: nothing to track.
+[ -n "${ac_online}" ] || exit 0
+
+# This state was already handled; leave the current profile as it is.
+if [ -r "${state}" ] && [ "$(cat "${state}")" = "${ac_online}" ]; then
+    exit 0
+fi
+
+if [ "${ac_online}" = 1 ]; then
+    profile=performance
+else
+    profile=power-saver
+fi
+
+# Record the state only after the profile really changed, so that a failure
+# (the daemon not being up yet, for example) is retried by the next event.
+if ! "${ctl}" set "${profile}"; then
+    error "powerprofilesctl set ${profile} failed"
+    exit 1
+fi
+printf '%s\n' "${ac_online}" >"${state}"

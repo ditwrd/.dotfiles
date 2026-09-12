@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+#/ Usage: charger-watch
+#/
+#/ Run the charger check the instant the hardware reports a change.
+#/
+#/ charger-check on a timer cannot see a plug until the next tick, and the tick
+#/ was most of the delay between the cable going in and the verdict arriving.
+#/ This listens to the kernel's own uevents instead, so the check starts in the
+#/ milliseconds after the EC reports something, and it listens to the battery as
+#/ well as the adapter: the moment the EC starts charging, that is a battery
+#/ event too, so the verdict follows the hardware rather than a schedule.
+#/
+#/ Replugging is a person fumbling with a connector, so a plug that produces
+#/ several events, or several plugs in a row, must each be answered.  systemd
+#/ gives that for free: a start while the oneshot is still running is a no-op, so
+#/ one burst of events is one check, and the runs cannot overlap and interleave
+#/ their verdicts.  A plug is the exception - it restarts the unit, because the
+#/ attempt it begins is the one the verdict is wanted for, and the run still
+#/ sampling is answering the attempt before it.
+#/
+#/ The property block says which way the adapter went, and the check cannot
+#/ always work that out for itself: a cable that is out and back within one run
+#/ leaves a state file that never saw the unplug, so the plug it is waiting for
+#/ never arrives.  A mains supply reporting itself online is recorded in a marker
+#/ file instead, and the check reads that as the plug itself whether or not it
+#/ can still see the transition - the fumbled cable is the case this exists for.
+#/
+#/ The kernel uevent socket is readable by an unprivileged process - no root
+#/ here, unlike the udev rule that drives the power profile.
+#/
+#/ --no-block: the watcher has to be back at the socket at once, not wait out
+#/ the seconds a sampling run takes.  /sys/class/power_supply holds the verdict
+#/ either way, so nothing of the event stream is lost meanwhile.
+#/
+#/ The CHARGER_WATCH_* variables are overridable so that this can be exercised
+#/ without touching the live setup; see charger-watch.test.sh.
+set -euo pipefail
+IFS=$'\n\t'
+
+udevadm="${CHARGER_WATCH_UDEVADM:-udevadm}"
+systemctl="${CHARGER_WATCH_SYSTEMCTL:-systemctl}"
+unit="${CHARGER_WATCH_UNIT:-charger-check.service}"
+plug_file="${CHARGER_WATCH_PLUG:-${XDG_RUNTIME_DIR:-/tmp}/charger-check.plug}"
+
+# One event's properties have all been read.  Mains plus ONLINE=1 is the plug
+# itself; anything else is a nudge, and what it means is for the check to read
+# from the live sysfs tree, which the kernel has already updated by now.
+dispatch() {
+    if [ -n "${mains:-}" ] && [ -n "${online:-}" ]; then plug=1; fi
+    if [ -n "${plug:-}" ]; then
+        : >"${plug_file}"
+        "${systemctl}" --user restart --no-block "${unit}" || true
+    elif [ -n "${event:-}" ]; then
+        "${systemctl}" --user start --no-block "${unit}" || true
+    fi
+    event=''
+    mains=''
+    online=''
+    plug=''
+}
+
+exec "${udevadm}" monitor --kernel --property \
+    --subsystem-match=power_supply \
+    --subsystem-match=usb_power_delivery \
+    --subsystem-match=typec 2>/dev/null |
+while IFS= read -r line; do
+    case "${line}" in
+        KERNEL*)
+            # A header closes whatever block came before it, blank line or not.
+            dispatch
+            event=1
+            ;;
+        '') dispatch ;;
+        POWER_SUPPLY_TYPE=Mains) mains=1 ;;
+        POWER_SUPPLY_ONLINE=1) online=1 ;;
+    esac
+done
