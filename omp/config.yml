@@ -29,12 +29,12 @@ theme:
 setupVersion: 2
 modelRoles:
   advisor: anthropic/claude-opus-5:auto
-  smol: zai/glm-5.3-flash:auto
+  smol: opencode-go/deepseek-v4.1-flash:auto
   designer: anthropic/claude-opus-5:auto
-  slow: zai/glm-5.3-flash:auto
-  default: opencode-go/deepseek-v4.1-flash
-  tiny: opencode-go/deepseek-v4-flash:auto
-  plan: openrouter/amazon/nova-micro-v1:auto
+  slow: opencode-go/deepseek-v4.1-flash:auto
+  default: opencode-go/deepseek-v4.1-flash:auto
+  tiny: opencode-go/deepseek-v4.1-flash:auto
+  plan: anthropic/claude-fable-5:auto
 defaultThinkingLevel: auto
 statusLine:
   preset: nerd
@@ -69,16 +69,17 @@ secrets:
   enabled: true
 retry:
   fallbackChains:
-    advisor:
-      - zai/glm-5.3
     tiny:
       - zai/glm-5.3-flash
     smol:
-      - opencode-go/deepseek-v4.1-flash
+      - zai/glm-5.3-flash
     slow:
-      - opencode-go/deepseek-v4.1-flash
+      - zai/glm-5.3-flash
     default:
+      - zai/glm-5.3-flash
+    advisor:
       - opencode-go/deepseek-v4.1-flash
+      - zai/glm-5.3-flash
 astGrep:
   enabled: true
 dev:
@@ -102,4 +103,3 @@ steeringMode: one-at-a-time
 snapcompact:
   toolResults: false
 hideThinkingBlock: false
-

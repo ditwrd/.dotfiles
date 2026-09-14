@@ -223,6 +223,12 @@
       user = "git";
       identityFile = "${config.sops.secrets."ssh/work/cube/gitlab".path}";
     };
+    gitlab-cube-proxy= {
+      hostname = "git.internal-app.cube.asia";
+      user = "git";
+      identityFile = "${config.sops.secrets."ssh/work/cube/gitlab".path}";
+      proxyCommand= "nc -X connect -x localhost:1080 %h %p";
+    };
     cube-repo-run = {
       hostname = "10.1.29.120";
       user = "ubuntu";
