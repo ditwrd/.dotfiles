@@ -1,28 +1,3 @@
-providers:
-  webSearchOrder:
-    - public
-    - perplexity
-    - gemini
-    - anthropic
-    - codex
-    - xai
-    - zai
-    - exa
-    - tinyfish
-    - jina
-    - kagi
-    - tavily
-    - firecrawl
-    - brave
-    - kimi
-    - parallel
-    - synthetic
-    - searxng
-    - startpage
-    - duckduckgo
-    - ecosia
-    - google
-    - mojeek
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -32,14 +7,16 @@ modelRoles:
   smol: opencode-go/deepseek-v4.1-flash:auto
   designer: anthropic/claude-opus-5:auto
   slow: opencode-go/deepseek-v4.1-flash:auto
-  default: opencode-go/deepseek-v4.1-flash:auto
   tiny: opencode-go/deepseek-v4.1-flash:auto
   plan: anthropic/claude-fable-5:auto
+  web: web/public
+  default: anthropic/claude-sonnet-5-5
 defaultThinkingLevel: auto
 statusLine:
   preset: nerd
 tui:
   textSizing: true
+  titleSpinner: pulse
 display:
   showTokenUsage: true
   cacheMissMarker: true
@@ -62,7 +39,8 @@ commands:
   enableClaudeProject: false
   enableOpencodeUser: false
   enableOpencodeProject: false
-disabledExtensions: []
+disabledExtensions:
+  []
 github:
   enabled: true
 secrets:
@@ -80,6 +58,32 @@ retry:
     advisor:
       - opencode-go/deepseek-v4.1-flash
       - zai/glm-5.3-flash
+    web:
+      - web/perplexity
+      - google-gemini-cli/gemini-2.5-flash
+      - google-antigravity/gemini-2.5-flash
+      - google/gemini-2.5-flash
+      - anthropic/claude-haiku-4-5
+      - openai-codex/gpt-5.6-luna
+      - xai/grok-4.5
+      - web/zai
+      - web/exa
+      - web/tinyfish
+      - web/jina
+      - web/kagi
+      - web/tavily
+      - web/firecrawl
+      - web/brave
+      - web/kimi
+      - web/parallel
+      - web/synthetic
+      - web/searxng
+      - web/startpage
+      - web/duckduckgo
+      - web/ecosia
+      - web/google
+      - web/mojeek
+      - web/hosted
 astGrep:
   enabled: true
 dev:
@@ -99,6 +103,7 @@ task:
     task: "on"
 composer:
   shape: box
+  tokenRate: true
 steeringMode: one-at-a-time
 snapcompact:
   toolResults: false
