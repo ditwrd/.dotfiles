@@ -1,8 +1,14 @@
-{ config, sops-nix, ... }:
-
 {
-  home.username = "dit";
-  home.homeDirectory = "/home/dit";
+  config,
+  pkgs,
+  lib,
+  sops-nix,
+  username,
+  homeDirectory,
+  ...
+}: {
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -13,11 +19,8 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-
   home.file = {
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/nvim";
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/hypr";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/waybar";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/kitty";
     ".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/herdr/config.toml";
     ".config/herdr/plugins/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/herdr/plugins/config";
@@ -30,20 +33,19 @@
     ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/starship.toml";
     ".config/zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/zellij.kdl";
     ".config/mise/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/mise-config.toml";
-    ".local/bin/charger-check".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/system/charger-check";
-    ".local/bin/charger-watch".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/system/charger-watch";
     ".ssh/snowflake_tf.p8".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."key/cube/snow".path}";
     ".ssh/github_cube".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/work/cube/gh".path}";
     ".ssh/github".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/personal/gh".path}";
-      
   };
 
-  home.sessionVariables = {
-    # EDITOR = "nvim";
-    DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
-    AWS_PROFILE = "$(cat ${config.home.homeDirectory}/.awsd)";
-  };
-
+  home.sessionVariables =
+    {
+      # EDITOR = "nvim";
+      AWS_PROFILE = "$(cat ${config.home.homeDirectory}/.awsd)";
+    }
+    // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+      DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
+    };
 
   imports = [
     sops-nix.homeManagerModules.sops

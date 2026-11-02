@@ -8,53 +8,73 @@
     nixpkgs.follows = "nixpkgs-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { nixpkgs, sops-nix, nixpkgs-stable, nixpkgs-master, home-manager, ... }:
-    let
-      system = "x86_64-linux";
+  outputs = {
+    nixpkgs,
+    sops-nix,
+    nixpkgs-stable,
+    nixpkgs-master,
+    home-manager,
+    ...
+  }: let
+    inherit (nixpkgs) lib;
 
-      pkgs = import nixpkgs {
+    pkgsConfig = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+    mkPkgs = flake: system:
+      import flake {
         inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
+        config = pkgsConfig;
       };
-      pkgs-stable = import nixpkgs-stable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
+
+    hosts = {
+      linux = {
+        system = "x86_64-linux";
+        username = "dit";
+        homeDirectory = "/home/dit";
       };
-      pkgs-master = import nixpkgs-master {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-    in
-    {
-      homeConfigurations."dit" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        extraSpecialArgs = {
-          inherit pkgs-stable pkgs-master sops-nix;
-        };
-
-        modules = [
-          ./config/alias.nix
-          ./config/home.nix
-          ./config/package.nix
-          ./config/programs.nix
-          ./config/services.nix
-          ./config/ssh.nix
-        ];
-
+      darwin = {
+        system = "aarch64-darwin";
+        username = "dit";
+        homeDirectory = "/Users/dit";
       };
     };
+
+    mkHome = host: let
+      pkgs = mkPkgs nixpkgs host.system;
+    in
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit (host) username homeDirectory;
+          pkgs-stable = mkPkgs nixpkgs-stable host.system;
+          pkgs-master = mkPkgs nixpkgs-master host.system;
+          inherit sops-nix;
+        };
+        modules =
+          [
+            ./config/alias.nix
+            ./config/home.nix
+            ./config/package.nix
+            ./config/programs.nix
+            ./config/services.nix
+            ./config/ssh.nix
+          ]
+          ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+            ./config/linux.nix
+          ]
+          ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+            ./config/darwin.nix
+          ];
+      };
+  in {
+    homeConfigurations = {
+      dit = mkHome hosts.linux;
+      "dit@mac" = mkHome hosts.darwin;
+    };
+  };
 }

@@ -1,6 +1,9 @@
-{ pkgs, pkgs-stable, pkgs-master, ... }:
-
 {
+  pkgs,
+  pkgs-stable,
+  pkgs-master,
+  ...
+}: {
   home.packages = [
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                         Terminal                         │
@@ -19,7 +22,6 @@
     pkgs.alejandra
     pkgs.deadnix
     pkgs.statix
-
 
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                       DevOps Tools                       │
@@ -46,6 +48,7 @@
 
     # ── Software Tools ────────────────────────────────────────────────────
     pkgs.git
+    pkgs.gh
     # pkgs.rustup
 
     pkgs.jq
@@ -57,6 +60,5 @@
     pkgs.sops
     pkgs.age
     pkgs.presenterm
-
   ];
 }

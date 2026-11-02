@@ -1,6 +1,14 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.home-manager.enable = true;
+
+  # lazygit reads ~/Library/Application Support unless XDG_CONFIG_HOME is set;
+  # the rest of the CLI tools follow the same convention.
+  xdg.enable = true;
 
   xdg.configFile."lazygit/config.yml" = {
     text = ''
@@ -49,10 +57,10 @@
         pull.rebase = true;
       }
       {
-        credential."https://github.com".helper = "!/usr/bin/gh auth git-credential";
+        credential."https://github.com".helper = "!${lib.getExe pkgs.gh} auth git-credential";
       }
       {
-        credential."https://gist.github.com".helper = "!/usr/bin/gh auth git-credential";
+        credential."https://gist.github.com".helper = "!${lib.getExe pkgs.gh} auth git-credential";
       }
     ];
   };
@@ -67,17 +75,20 @@
         ForwardAgent = false;
         ServerAliveInterval = 0;
         ServerAliveCountMax = 3;
-        HashKnownHosts= false;
-        UserKnownHostsFile="~/.ssh/known_hosts";
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
         ControlMaster = "auto";
         ControlPath = "~/.ssh/master-%r@%n:%p";
-        ControlPersist= "10m";
+        ControlPersist = "10m";
       };
     };
   };
 
   programs.zsh = {
     enable = true;
+    # xdg.enable triggers a future-default warning; pin the legacy layout so
+    # ~/.zshrc keeps being written on both platforms.
+    dotDir = config.home.homeDirectory;
     autocd = true;
     enableCompletion = true;
     initContent = ''
@@ -89,17 +100,19 @@
 
       export PATH="$PATH:$HOME/.local/bin"
       eval "$(mise activate zsh)"
-      
+
       # Ruby
-      export GEM_HOME="$(gem env user_gemhome)"
-      export PATH="$PATH:$GEM_HOME/bin"
-      
+      if command -v gem >/dev/null 2>&1; then
+        export GEM_HOME="$(gem env user_gemhome)"
+        export PATH="$PATH:$GEM_HOME/bin"
+      fi
+
       # Go
       export PATH="$PATH:${config.home.homeDirectory}/go/bin"
-      
+
       # Nix
       export PATH="$PATH:${config.home.homeDirectory}/.nix-profile/bin"
-      
+
       # Node
       export PNPM_HOME="${config.home.homeDirectory}/.local/share/pnpm"
       case ":$PATH:" in
@@ -114,13 +127,13 @@
       # export ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets."env/zai".path})"
       export API_TIMEOUT_MS=600000
       export OPENROUTER_API_KEY="$(cat ${config.sops.secrets."env/openrouter-cube".path})"
-      export HSA_OVERRIDE_GFX_VERSION="9.0.0"
+      ${lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''export HSA_OVERRIDE_GFX_VERSION="9.0.0"''}
       unset DOCKER_HOST
       export TG_PROVIDER_CACHE=1
       export CONTEXT7_API_KEY=$(cat ${config.sops.secrets."env/context7".path})
       export VANTAGE_API_KEY=$(cat ${config.sops.secrets."env/vantage".path})
       export INSTANCE_VANTAGE_API_KEY=$(cat ${config.sops.secrets."env/instance-vantage".path})
-      
+
       kp() {
         local PID=$(lsof -t -i tcp:$1) || return $?
         [ -z "$PID" ] && echo "No process is using this port: $1" && return 0
@@ -132,17 +145,17 @@
           echo "Failed to kill process: $PID"
         fi
       }
-      
+
       # Initialize zoxide with 'cd' command (disable doctor warnings)
       export _ZO_DOCTOR=0
-      
+
       export EDITOR="$(which nvim)"
-       
+
       export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
-      
+
       eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
       eval "$(starship init zsh)"
-      source $HOME/.atuin/bin/env
+      [ -f "$HOME/.atuin/bin/env" ] && source "$HOME/.atuin/bin/env"
       eval "$(atuin init zsh)"
       eval "$(awsd init zsh)"
       # export ZELLIJ_AUTO_ATTACH=true
@@ -151,7 +164,7 @@
       function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
 
       eval "$(wt config shell init zsh)"
-      
+
     '';
   };
 
@@ -197,5 +210,4 @@
     git = true;
     icons = "auto";
   };
-
 }
