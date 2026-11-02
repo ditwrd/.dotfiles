@@ -3,14 +3,14 @@ theme:
   dark: titanium
 setupVersion: 2
 modelRoles:
-  advisor: anthropic/claude-opus-5:auto
+  advisor: opencode-go/deepseek-v4.1-flash:auto
   smol: opencode-go/deepseek-v4.1-flash:auto
   designer: anthropic/claude-opus-5:auto
   slow: opencode-go/deepseek-v4.1-flash:auto
   tiny: opencode-go/deepseek-v4.1-flash:auto
-  plan: anthropic/claude-fable-5:auto
+  plan: opencode-go/deepseek-v4.1-flash:auto
   web: web/public
-  default: anthropic/claude-sonnet-5-5
+  default: opencode-go/deepseek-v4.1-flash
 defaultThinkingLevel: auto
 statusLine:
   preset: nerd
@@ -39,8 +39,7 @@ commands:
   enableClaudeProject: false
   enableOpencodeUser: false
   enableOpencodeProject: false
-disabledExtensions:
-  []
+disabledExtensions: []
 github:
   enabled: true
 secrets:

@@ -65,6 +65,17 @@
       "args": [
         "mcp-server-calculator"
       ]
+    },
+    "rea": {
+      "type": "stdio",
+      "command": "bunx",
+      "args": [
+        "rea-agents@6.8.0",
+        "mcp"
+      ],
+      "env": {
+        "REA_JADX_MCP_JAR": "/home/dit/.local/share/mise/installs/http-jadx-headless-mcp/0.7.1/jadx-headless-mcp-0.7.1-all.jar"
+      }
     }
   }
 }
