@@ -2,8 +2,6 @@
   description = "Home Manager configuration of dit";
 
   inputs = {
-    nixpkgs-master.url = "github:NixOs/nixpkgs/master";
-    nixpkgs-stable.url = "github:NixOs/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixpkgs-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
@@ -14,22 +12,10 @@
   outputs = {
     nixpkgs,
     sops-nix,
-    nixpkgs-stable,
-    nixpkgs-master,
     home-manager,
     ...
   }: let
     inherit (nixpkgs) lib;
-
-    pkgsConfig = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
-    mkPkgs = flake: system:
-      import flake {
-        inherit system;
-        config = pkgsConfig;
-      };
 
     hosts = {
       linux = {
@@ -45,14 +31,18 @@
     };
 
     mkHome = host: let
-      pkgs = mkPkgs nixpkgs host.system;
+      pkgs = import nixpkgs {
+        inherit (host) system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
     in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           inherit (host) username homeDirectory;
-          pkgs-stable = mkPkgs nixpkgs-stable host.system;
-          pkgs-master = mkPkgs nixpkgs-master host.system;
           inherit sops-nix;
         };
         modules =
@@ -61,8 +51,9 @@
             ./config/home.nix
             ./config/package.nix
             ./config/programs.nix
+            ./config/secrets.nix
             ./config/services.nix
-            ./config/ssh.nix
+            ./config/ssh
           ]
           ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
             ./config/linux.nix

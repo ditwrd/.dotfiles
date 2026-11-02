@@ -9,6 +9,8 @@
   };
 
   home.shellAliases = {
+    hms = "home-manager switch -b backup";
+
     po = "powerprofilesctl set power-saver";
     pb = "powerprofilesctl set balanced";
     pe = "powerprofilesctl set performance";

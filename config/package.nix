@@ -1,9 +1,4 @@
-{
-  pkgs,
-  pkgs-stable,
-  pkgs-master,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [
     #          ╭──────────────────────────────────────────────────────────╮
     #          │                         Terminal                         │

@@ -6,7 +6,10 @@
   username,
   homeDirectory,
   ...
-}: {
+}: let
+  dotfiles = "${config.home.homeDirectory}/projects/personal/.dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in {
   home.username = username;
   home.homeDirectory = homeDirectory;
 
@@ -20,19 +23,19 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/nvim";
-    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/kitty";
-    ".config/herdr/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/herdr/config.toml";
-    ".config/herdr/plugins/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/herdr/plugins/config";
-    ".config/tern/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/tern/settings.json";
-    ".omp/agent/config.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/omp/config.yml";
-    ".omp/agent/mcp.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/omp/mcp.json";
-    ".omp/agent/commands".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/omp/commands";
-    ".omp/agent/extensions".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/omp/extensions";
+    ".config/nvim".source = link "nvim";
+    ".config/kitty".source = link "kitty";
+    ".config/herdr/config.toml".source = link "herdr/config.toml";
+    ".config/herdr/plugins/config".source = link "herdr/plugins/config";
+    ".config/tern/settings.json".source = link "tern/settings.json";
+    ".omp/agent/config.yml".source = link "omp/config.yml";
+    ".omp/agent/mcp.json".source = link "omp/mcp.json";
+    ".omp/agent/commands".source = link "omp/commands";
+    ".omp/agent/extensions".source = link "omp/extensions";
     ".zsh/zsh-autosuggestions".source = .././shell/zsh-autosuggestions;
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/starship.toml";
-    ".config/zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/zellij.kdl";
-    ".config/mise/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/projects/personal/.dotfiles/shell/mise-config.toml";
+    ".config/starship.toml".source = link "shell/starship.toml";
+    ".config/zellij/config.kdl".source = link "shell/zellij.kdl";
+    ".config/mise/config.toml".source = link "shell/mise-config.toml";
     ".ssh/snowflake_tf.p8".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."key/cube/snow".path}";
     ".ssh/github_cube".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/work/cube/gh".path}";
     ".ssh/github".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/personal/gh".path}";
