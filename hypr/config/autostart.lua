@@ -10,7 +10,6 @@ end
 once("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 once("swaybg -o \\* -i /home/dit/Downloads/wallpaper.png")
 once("waybar")
-once("fcitx5 -d")
 once("mako")
 once("syncthing")
 once("nm-applet --indicator")
@@ -23,7 +22,6 @@ once("udiskie")
 -- Idle
 once(d.idlehandler)
 
-once("clipse -listen")
 once("systemctl --user start vicinae")
 
 -- Pre-warmed apps on fixed workspaces

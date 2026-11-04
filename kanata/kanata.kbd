@@ -1,3 +1,10 @@
+;; On macOS this file is read by dev.kanata.kanata, a root LaunchDaemon, while
+;; the file itself is owned by dit. So never add `danger-enable-cmd` here or a
+;; `(cmd ...)` action below: a root process must not run commands from a keymap
+;; anyone logged in as dit can edit. What actually enforces it is the binary,
+;; pkgs.kanata, which is built without the cmd feature (is_cmd_enabled stays
+;; false and it says so in the log) - keep it that way and do not stage a
+;; `pkgs.kanata.override { withCmd = true; }` copy for the daemon.
 (defcfg
   process-unmapped-keys yes
 )

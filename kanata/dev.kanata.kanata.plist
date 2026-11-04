@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Root LaunchDaemon for kanata, derived from kanata v1.12.0
+  cfg_samples/kanata.plist. Root is required because the Karabiner
+  VirtualHIDDevice daemon exposes its IPC in
+  "/Library/Application Support/org.pqrs/tmp/rootonly" (mode 700, owner root);
+  home-manager's launchd.agents writes a user agent and cannot do that.
+
+  config/darwin.nix substitutes @KANATA_CFG@ with the keymap's absolute path
+  and writes the result to ~/.config/kanata/dev.kanata.kanata.plist, because a
+  daemon running as root does not resolve "~" to this user's home.
+
+  The binary path is fixed on purpose. /usr/local/libexec/kanata is a copy of
+  the profile binary, never a store or profile path, so a "home-manager switch"
+  cannot change the executable behind an existing TCC grant. A stable symlink
+  under $HOME was rejected: a root daemon executing a user writable path is a
+  local privilege escalation surface.
+
+  macOS prerequisites. All of them are manual; nix does none of this:
+
+  1. Driver v6.2.0. kanata's karabiner IPC is pinned to that release and newer
+     minors are not guaranteed. Install the pkg from
+     https://github.com/pqrs-org/Karabiner-DriverKit-VirtualHIDDevice/releases/tag/v6.2.0
+     then force activate and approve the system extension:
+       sudo /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager forceActivate
+     System Settings > General > Login Items & Extensions > Driver Extensions
+     must list org.pqrs.Karabiner-DriverKit-VirtualHIDDevice as enabled.
+
+  2. VHID daemon. The standalone pkg does not start it. With Karabiner-Elements
+     installed, KE manages the daemon itself and this step is skipped. Without
+     KE, install kanata's cfg_samples/karabiner-vhid-daemon.plist as
+     /Library/LaunchDaemons/org.pqrs.Karabiner-VirtualHIDDevice-Daemon.plist and
+     "sudo launchctl bootstrap system" it. A missing daemon shows up as a
+     repeating "connect_failed asio.system:2" in /var/log/kanata.log.
+
+  3. Stage the binary. The daemon runs this copy, never a store or profile
+     path, so TCC attaches to a path that home-manager switch does not change:
+       sudo install -d -m 0755 /usr/local/libexec
+       sudo install -m 0755 "$(command -v kanata)" /usr/local/libexec/kanata
+
+  4. Permissions. A root daemon cannot raise a TCC prompt, so establish them
+     from an interactive run of the staged path first, so the grant lands on
+     the executable the daemon actually runs:
+       sudo /usr/local/libexec/kanata -c @KANATA_CFG@
+     Input Monitoring is required to read the keyboard. Accessibility is also
+     required for the grab through this driver, not only for mouse events.
+     ctrl+space+esc ends that run. The macos-request-permissions flag
+     (same binary, flag instead of -c) only registers the Accessibility entry.
+
+  5. Install the daemon:
+       sudo install -m 0644 -o root -g wheel \
+         ~/.config/kanata/dev.kanata.kanata.plist /Library/LaunchDaemons/
+       sudo launchctl bootstrap system /Library/LaunchDaemons/dev.kanata.kanata.plist
+     After a keymap edit only the job needs a restart (alias ksa). After an
+     edit to this plist: bootout, reinstall, bootstrap. Logs: /var/log/kanata.log
+
+  The keymap the daemon reads is owned by dit and is a symlink into the
+  dotfiles repo, so it is user writable while the daemon is root. That is only
+  safe because the staged binary is pkgs.kanata, built without the cmd feature:
+  a cmd action cannot run even if the keymap asks for it. Never stage
+  `pkgs.kanata.override { withCmd = true; }` here, and keep danger-enable-cmd
+  and (cmd ...) out of the keymap.
+
+  Re-copying the binary on a kanata upgrade can invalidate Input Monitoring.
+  If remapping stops, toggle kanata off and on in that pane.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>dev.kanata.kanata</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/libexec/kanata</string>
+    <string>--cfg</string>
+    <string>@KANATA_CFG@</string>
+  </array>
+  <key>UserName</key>
+  <string>root</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <dict>
+    <key>SuccessfulExit</key>
+    <false/>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/var/log/kanata.log</string>
+  <key>StandardErrorPath</key>
+  <string>/var/log/kanata.log</string>
+</dict>
+</plist>

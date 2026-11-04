@@ -101,7 +101,7 @@
     },
     "custom/pacman": {
         "format": "󰅢 {}",
-        "interval": 30,
+        "interval": 3600,
         "exec": "checkupdates | wc -l",
         "exec-if": "exit 0",
         "on-click": "kitty -e sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",

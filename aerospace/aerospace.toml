@@ -1,0 +1,176 @@
+# AeroSpace config — macOS counterpart of hypr/config/keybinds.lua.
+# Symlinked to ~/.config/aerospace/aerospace.toml by config/darwin.nix.
+# mainMod = alt, same as Hyprland. Optionally reload after editing: aerospace reload-config
+
+config-version = 2
+start-at-login = true
+auto-reload-config = true
+
+# App autostart is a login-item concern on macOS, not the WM's job.
+after-startup-command = []
+
+# dwindle ≈ tiles; 'auto' picks the orientation from the window's aspect ratio.
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Flat array (config-version = 2 unlocks it); keeps all ten workspaces plus the
+# scratchpad alive while empty. Root keys must precede the first table header.
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "S"]
+
+# Omitting this already falls back to [] (the 'move-mouse monitor-lazy-center'
+# value only exists in the shipped default config), but it is stated explicitly
+# so no future default can move the cursor and fight focus-follows-mouse below.
+on-focused-monitor-changed = []
+
+[key-mapping]
+preset = 'qwerty'
+
+# hypr decorations.lua: gaps_in = 8, gaps_out = 16 (border_size = 1 has no counterpart).
+[gaps.inner]
+horizontal = 8
+vertical = 8
+
+[gaps.outer]
+left = 16
+bottom = 16
+top = 16
+right = 16
+
+# hypr input.lua: follow_mouse = 2 (sloppy focus).
+[focus-follows-mouse]
+enabled = true
+
+# hypr windowrules.lua float list has no macOS counterpart beyond Finder and
+# System Settings; rules 3-4 mirror autostart.lua's pre-warmed kitty on ws 1 and
+# zen on ws 2. Bundle ids from AeroSpace's own list (com.apple.*); kitty's is the
+# one its macOS bundle ships with - confirm on the Mac with `aerospace list-apps`
+# rather than trusting it blind.
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = net.kovidgoyal.kitty'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.apple.Safari'
+run = 'move-node-to-workspace 2'
+
+[mode.main.binding]
+# Apps
+alt-enter = 'exec-and-forget open -na kitty'
+
+# Window actions
+alt-q = 'close'
+alt-v = 'layout floating tiling'
+alt-f = 'fullscreen'
+
+# Screenshots (hypr: alt+SHIFT+S region shot)
+alt-shift-s = 'exec-and-forget screencapture -i -c'
+
+# hypr alt+Tab cycles groups; the closest model here is depth-first traversal.
+alt-tab = 'focus dfs-next'
+
+# Move focus (vim keys)
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move windows
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Quick resize (vim keys: h/l width, k/j height)
+alt-ctrl-shift-h = 'resize width -50'
+alt-ctrl-shift-l = 'resize width +50'
+alt-ctrl-shift-k = 'resize height -50'
+alt-ctrl-shift-j = 'resize height +50'
+
+# Interactive resize submap
+alt-r = 'mode resize'
+
+# Workspaces: switch (hypr alt+1..9, alt+0 for ws 10)
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 0'
+alt-period = 'workspace --wrap-around next'
+alt-comma = 'workspace --wrap-around prev'
+alt-slash = 'workspace-back-and-forth'
+
+# Workspaces: move window silently
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 0'
+alt-ctrl-left = 'move-node-to-workspace --focus-follows-window --wrap-around prev'
+alt-ctrl-right = 'move-node-to-workspace --focus-follows-window --wrap-around next'
+
+# Workspaces: move window and follow it
+alt-ctrl-1 = 'move-node-to-workspace --focus-follows-window 1'
+alt-ctrl-2 = 'move-node-to-workspace --focus-follows-window 2'
+alt-ctrl-3 = 'move-node-to-workspace --focus-follows-window 3'
+alt-ctrl-4 = 'move-node-to-workspace --focus-follows-window 4'
+alt-ctrl-5 = 'move-node-to-workspace --focus-follows-window 5'
+alt-ctrl-6 = 'move-node-to-workspace --focus-follows-window 6'
+alt-ctrl-7 = 'move-node-to-workspace --focus-follows-window 7'
+alt-ctrl-8 = 'move-node-to-workspace --focus-follows-window 8'
+alt-ctrl-9 = 'move-node-to-workspace --focus-follows-window 9'
+alt-ctrl-0 = 'move-node-to-workspace --focus-follows-window 0'
+
+# Scratchpad: 'S' is a normal workspace in the persistent pool, not an overlay.
+# Move a window there with alt-minus, visit it with alt-equal, return with alt-slash.
+alt-minus = 'move-node-to-workspace S'
+alt-equal = 'workspace S'
+
+[mode.resize.binding]
+h = 'resize width -50'
+l = 'resize width +50'
+k = 'resize height -50'
+j = 'resize height +50'
+left = 'resize width -50'
+right = 'resize width +50'
+up = 'resize height -50'
+down = 'resize height +50'
+esc = 'mode main'
+enter = 'mode main'
+
+# ── Intentionally omitted (hypr bind / why) ──
+# alt-e          Finder is native, no file manager to launch.
+# alt-space      Spotlight owns Cmd+Space; a second launcher bind is noise.
+# alt-y          Sticky windows do not exist in AeroSpace.
+# alt-j          hypr binds alt+j twice (focus down + togglesplit); duplicates are a
+#                hard error here, focus down wins, togglesplit has no equivalent.
+# alt-shift-m    Session exit is macOS's own Cmd+Ctrl+Q.
+# alt-shift-f    Cursor submap (and alt-c) — AeroSpace exposes no cursor API.
+# alt-f1, alt-shift-f1  Second scratchpad; one ('S') is enough.
+# SUPER+L        Screen lock is Cmd+Ctrl+Q.
+# alt-o          Waybar reload; no bar.
+# XF86Audio*, XF86MonBrightness*  macOS handles media and brightness keys itself.
+# ctrl+Print, alt+Print          Native Cmd+Shift+3/4/5.
+# alt+mouse:272/273              No mouse-modifier drag binds.
+#
+# Unsupported Hyprland features (no AeroSpace equivalent, not emulated):
+# borders, rounding, blur, shadows, opacity, animations, sticky windows, window
+# groups, wobbly scratchpad overlays, cursor mode / wl-kbptr, per-window rules
+# for waypaper/pavucontrol/discord/mpv/PiP (no macOS counterparts).

@@ -91,6 +91,23 @@
     dotDir = config.home.homeDirectory;
     autocd = true;
     enableCompletion = true;
+    # /usr/share/zsh/site-functions (310 completion files shipped by pacman
+    # packages: _docker, _yay, _pacman, …) is outside NIX_PROFILES and was
+    # never in fpath.
+    initExtraBeforeCompInit = ''
+      [[ -d /usr/share/zsh/site-functions ]] && fpath+=(/usr/share/zsh/site-functions)
+    '';
+    # compinit's audit + fpath scan costs ~58 ms per shell vs ~16 ms for -C.
+    # Trust the dump unless the nix profile changed since it was written, so
+    # new tools' completions still appear after a home-manager switch.
+    completionInit = ''
+      autoload -U compinit
+      if [[ ~/.zcompdump -nt ~/.local/state/nix/profiles/home-manager ]]; then
+        compinit -C
+      else
+        compinit
+      fi
+    '';
     initContent = ''
       if [ -z "$SSH_AUTH_SOCK" ]; then
        eval `ssh-agent -s` &>/dev/null
@@ -101,10 +118,19 @@
       export PATH="$PATH:$HOME/.local/bin"
       eval "$(mise activate zsh)"
 
-      # Ruby
+      # Ruby — `gem env user_gemhome` boots a whole ruby interpreter (~180 ms)
+      # on every shell, so cache its answer and re-ask only when ruby changes.
       if command -v gem >/dev/null 2>&1; then
-        export GEM_HOME="$(gem env user_gemhome)"
-        export PATH="$PATH:$GEM_HOME/bin"
+        _gem_home_cache="$HOME/.cache/gem_home"
+        if [[ ! -s $_gem_home_cache ]] || [[ $_gem_home_cache -ot "$(command -v ruby)" ]]; then
+          mkdir -p "$HOME/.cache"
+          gem env user_gemhome >| "$_gem_home_cache" 2>/dev/null
+        fi
+        if [[ -s $_gem_home_cache ]]; then
+          export GEM_HOME="$(<"$_gem_home_cache")"
+          export PATH="$PATH:$GEM_HOME/bin"
+        fi
+        unset _gem_home_cache
       fi
 
       # Go
@@ -157,7 +183,17 @@
       eval "$(starship init zsh)"
       [ -f "$HOME/.atuin/bin/env" ] && source "$HOME/.atuin/bin/env"
       eval "$(atuin init zsh)"
-      eval "$(awsd init zsh)"
+      # awsd init costs ~57 ms; cache the generated shell code, refreshing when
+      # the binary itself changes.
+      if command -v awsd >/dev/null 2>&1; then
+        _awsd_init_cache="$HOME/.cache/awsd_init.zsh"
+        if [[ ! -s $_awsd_init_cache ]] || [[ $_awsd_init_cache -ot "$(command -v awsd)" ]]; then
+          mkdir -p "$HOME/.cache"
+          awsd init zsh >| "$_awsd_init_cache" 2>/dev/null
+        fi
+        [[ -s $_awsd_init_cache ]] && source "$_awsd_init_cache"
+        unset _awsd_init_cache
+      fi
       # export ZELLIJ_AUTO_ATTACH=true
       # eval "$(zellij setup --generate-auto-start zsh)"
       source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

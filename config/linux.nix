@@ -74,6 +74,33 @@
     Install.WantedBy = ["timers.target"];
   };
 
+  # Nothing ever collected the store: 328 home-manager generations and ~20k
+  # store paths accumulated over 21 months, because neither CachyOS nor this
+  # config shipped a gc timer.  Two weeks of generations is the rollback depth
+  # that is actually used; anything older is dead weight in /nix/store.
+  systemd.user.services.nix-gc = {
+    Unit.Description = "Collect nix generations and unreachable store paths";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "/usr/bin/nix-collect-garbage --delete-older-than 14d";
+      # Runs in the background on battery too, so keep it out of the way of
+      # whatever is on screen.
+      Nice = 10;
+      IOSchedulingClass = "idle";
+    };
+  };
+
+  systemd.user.timers.nix-gc = {
+    Unit.Description = "Weekly nix garbage collection";
+    Timer = {
+      OnCalendar = "weekly";
+      # Catch up after the laptop was off for the scheduled slot.
+      Persistent = true;
+      RandomizedDelaySec = "1h";
+    };
+    Install.WantedBy = ["timers.target"];
+  };
+
   # The timer polls; this listens.  A plug is a hardware event, and waiting up
   # to a tick to notice it was most of the delay between the cable going in and
   # the verdict arriving, so the kernel's own uevents drive the check directly.

@@ -36,6 +36,10 @@ in {
     ".config/starship.toml".source = link "shell/starship.toml";
     ".config/zellij/config.kdl".source = link "shell/zellij.kdl";
     ".config/mise/config.toml".source = link "shell/mise-config.toml";
+    # One keymap file for both platforms. Linux reads it from here via the
+    # systemd unit, macOS through the root LaunchDaemon, which needs the
+    # absolute path because root's HOME is not this one.
+    ".config/kanata/kanata.kbd".source = link "kanata/kanata.kbd";
     ".ssh/snowflake_tf.p8".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."key/cube/snow".path}";
     ".ssh/github_cube".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/work/cube/gh".path}";
     ".ssh/github".source = config.lib.file.mkOutOfStoreSymlink "${config.sops.secrets."ssh/personal/gh".path}";
