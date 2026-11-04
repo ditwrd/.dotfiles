@@ -52,6 +52,20 @@ worktrunk = "0.66.0"
 yamllint = "latest"
 zig = "0.15.2"
 
+# zerobrew ships bare binaries (zb-linux-x64, zb-darwin-arm64, plus zbx/zb-brew
+# siblings), so format/bin are required and each asset is named per platform to
+# keep autodetection from picking a sibling binary.
+[tools."github:zerobrewhq/zerobrew"]
+version = "0.4.2"
+format = "raw"
+bin = "zb"
+
+[tools."github:zerobrewhq/zerobrew".platforms]
+linux-x64 = { asset_pattern = "zb-linux-x64" }
+linux-arm64 = { asset_pattern = "zb-linux-arm64" }
+macos-arm64 = { asset_pattern = "zb-darwin-arm64" }
+macos-x64 = { asset_pattern = "zb-darwin-x64" }
+
 [settings]
 experimental = true
 
