@@ -5,17 +5,24 @@ Documentation=https://github.com/jtroo/kanata
 # Reference copy of the unit that actually runs on this laptop.  Nothing in
 # this flake installs system units (home-manager standalone cannot), so the
 # live definition is /usr/lib/systemd/system/kanata.service plus the drop-in
-# /etc/systemd/system/kanata.service.d/10-keymap-path.conf, which only
-# overrides ExecStart.  Keep the two in sync when either changes.
+# /etc/systemd/system/kanata.service.d/10-keymap-path.conf, which pins the
+# binary and the keymap path.  Keep the two in sync when either changes.
 #
-# kanata_cmd_allowed, not kanata: the keymap uses cmd actions.  No -d: that
-# switch logs every keystroke at DEBUG, which wrote 72k journal lines per boot
-# and pushed the 50M journal cap into vacuuming the kernel phase.
+# /usr/bin/kanata, never /usr/bin/kanata_cmd_allowed: this is a root unit, and
+# the keymap resolves through the home-manager mkOutOfStoreSymlink chain to
+# kanata/kanata.kbd in this worktree, which dit can rewrite.  A cmd-enabled
+# binary behind a user-writable keymap is a local privilege escalation - add
+# `(defcfg danger-enable-cmd yes)` and a `(cmd ...)` and root runs it.
+# pkgs.kanata is compiled to never allow cmd and logs that at startup; the
+# macOS daemon stages the same binary for the same reason.
+#
+# No -d: that switch logs every keystroke at DEBUG, which wrote 72k journal
+# lines per boot and pushed the 50M journal cap into vacuuming the kernel phase.
 [Service]
 Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:$HOME/.cargo/bin
 Environment=DISPLAY=:0
 Type=simple
-ExecStart=/usr/bin/kanata_cmd_allowed --cfg /home/dit/.config/kanata/kanata.kbd
+ExecStart=/usr/bin/kanata --cfg /home/dit/.config/kanata/kanata.kbd
 Restart=no
 
 [Install]
