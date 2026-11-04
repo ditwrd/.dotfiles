@@ -131,7 +131,7 @@ bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ workspace = "+1" }), "Mo
 bind(mainMod .. " + minus", hl.dsp.window.move({ workspace = "special" }), "Move active window to Special workspace")
 bind(mainMod .. " + equal", hl.dsp.workspace.toggle_special("special"), "Toggles the Special workspace")
 bind(mainMod .. " + F1", hl.dsp.workspace.toggle_special("scratchpad"), "Call special workspace scratchpad")
-bind(mainMod .. " + ALT + SHIFT + F1", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }), "Move active window to special workspace scratchpad")
+bind(mainMod .. " + SHIFT + F1", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }), "Move active window to special workspace scratchpad")
 
 -- ── Cursor submap (mouse mode, like Sway) ──
 bind(mainMod .. " + SHIFT + F", hl.dsp.submap("cursor"), "Activates cursor mode")
