@@ -41,7 +41,17 @@ node = "latest"
 "npm:calldiff" = "latest"
 "npm:cf" = "latest"
 "npm:pake-cli" = "3.7.8"
-python = "3.12"
+# No global `python` pin on purpose. A pinned version lands first in PATH and
+# takes over every Arch script shebanged `#!/usr/bin/env python3`
+# (powerprofilesctl, g-ir-scanner, spd-conf, libwacom-*, KateDJ...), where
+# pacman's PyGObject/gobject-introspection C extensions only exist for the
+# system cpython. With no pin, mise shims fall through to /usr/bin/python3.
+# Projects declare their own version in .python-version instead.
+#
+# powerprofilesctl is still called from inside 3.12-pinned projects (pg,
+# pontoon, py-mojo, lab-mojo), so that interpreter carries its own bindings:
+#   ~/.local/share/mise/installs/python/3.12/bin/python3 -m pip install --user PyGObject setuptools
+# setuptools also restores distutils, which 3.12 dropped.
 rtk = "0.51.0"
 rust = "latest"
 terraform = "1.12.1"
@@ -51,6 +61,7 @@ vault = "2.0.1"
 worktrunk = "0.66.0"
 yamllint = "latest"
 zig = "0.15.2"
+claude = "2.1.318"
 
 # zerobrew ships bare binaries (zb-linux-x64, zb-darwin-arm64, plus zbx/zb-brew
 # siblings), so format/bin are required and each asset is named per platform to

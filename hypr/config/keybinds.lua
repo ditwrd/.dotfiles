@@ -135,10 +135,13 @@ bind(mainMod .. " + SHIFT + F1", hl.dsp.window.move({ workspace = "special:scrat
 
 -- ── Cursor submap (mouse mode, like Sway) ──
 bind(mainMod .. " + SHIFT + F", hl.dsp.submap("cursor"), "Activates cursor mode")
-exec(mainMod .. " + C", "hyprctl keyword cursor:inactive_timeout 0; hyprctl keyword cursor:hide_on_key_press false; hyprctl dispatch submap cursor", "Activates cursor mode")
+bind(mainMod .. " + C", function()
+	hl.config({ cursor = { inactive_timeout = 0, hide_on_key_press = false } })
+	hl.dispatch(hl.dsp.submap("cursor"))
+end, "Activates cursor mode")
 hl.define_submap("cursor", function()
 	-- Jump cursor to a position via wl-kbptr (exits and re-enters the submap)
-	exec("f", "hyprctl dispatch submap reset && wl-kbptr -c ~/.config/hypr/wl-kbptr.config && hyprctl dispatch submap cursor", "Jump cursor to a position")
+	exec("f", [[hyprctl dispatch 'hl.dsp.submap("reset")' && wl-kbptr -c ~/.config/hypr/wl-kbptr.config && hyprctl dispatch 'hl.dsp.submap("cursor")']], "Jump cursor to a position")
 
 	-- Cursor movement
 	exec("j", "wlrctl pointer move 0 10", "Move cursor down", { repeating = true })
@@ -158,5 +161,8 @@ hl.define_submap("cursor", function()
 	exec("g", "wlrctl pointer scroll 0 10", "Scroll right", { repeating = true })
 
 	-- Exit (restores cursor timeout/hide)
-	exec("escape", "hyprctl keyword cursor:inactive_timeout 3; hyprctl keyword cursor:hide_on_key_press true; hyprctl dispatch submap reset", "Exit cursor mode")
+	bind("escape", function()
+		hl.config({ cursor = { inactive_timeout = 3, hide_on_key_press = true } })
+		hl.dispatch(hl.dsp.submap("reset"))
+	end, "Exit cursor mode")
 end)

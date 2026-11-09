@@ -10,7 +10,6 @@ hl.config({
 		mouse_move_enables_dpms = true,
 		key_press_enables_dpms = true,
 		always_follow_on_dnd = true,
-		layers_hog_keyboard_focus = true,
 		animate_manual_resizes = true,
 		animate_mouse_windowdragging = true,
 		disable_autoreload = false,
@@ -29,6 +28,10 @@ hl.config({
 		swallow_exception_regex = "^(wev)$",
 	},
 
+	layers = {
+		layers_hog_keyboard_focus = true,
+	},
+
 	debug = {
 		vfr = true,
 	},
@@ -40,7 +43,9 @@ hl.config({
 	dwindle = {
 		preserve_split = true,
 		permanent_direction_override = false,
-		special_scale_factor = 0.95,
+		-- special_scale_factor was removed: deprecated in 0.57 (pointer: "use workspace
+		-- rules"), no workspace-rule field exists for it, and the setting had no visible
+		-- effect on named or unnamed special workspaces.
 		split_width_multiplier = 1.2,
 		use_active_for_splits = true,
 		default_split_ratio = 1.2,
