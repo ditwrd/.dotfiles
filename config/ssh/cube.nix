@@ -67,6 +67,7 @@
     cube-mo-n8n = host;
     cube-vpn = host;
     cube-vpn-instance-connect = host // {hostname = "localhost";} // {port = 2345;};
+    cube-ac-hermes-dash = host;
 
     cube-metercube-admin-dev = host // {identityFile = key "mc";};
     cube-metercube-admin-staging = host // {identityFile = key "mc";};
