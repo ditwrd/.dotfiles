@@ -4,21 +4,14 @@
   attrName,
   ...
 }: let
-  kanataConfig = "${config.home.homeDirectory}/.config/kanata/kanata.kbd";
+  dotfiles = "${config.home.homeDirectory}/projects/personal/.dotfiles";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in {
   # macOS has no pacman list, so the tools the shared shell config and aliases
   # expect come from nix. mise then installs everything listed in
-  # shell/mise-config.toml. kanata is here for the daemon: the plist runs a
-  # copy of this binary, and `command -v kanata` is how the copy is made.
+  # shell/mise-config.toml.
   home.packages = with pkgs; [
     atuin
-    # Tiling WM, mirroring the Linux Hyprland setup.  Caveat: home-manager links
-    # the store-built AeroSpace.app into ~/Applications/Home Manager Apps, so the
-    # bundle path changes on every switch while macOS TCC (Accessibility) and the
-    # start-at-login SMAppService item key off that path - permissions may need
-    # re-granting after an upgrade.  If that gets annoying the sanctioned
-    # alternative is the Homebrew cask in /Applications, but only one of the two.
-    kanata
     kitty
     lazygit
     lazydocker
@@ -31,35 +24,30 @@ in {
   # matches this account's exported name; name it explicitly anyway.
   home.shellAliases = {
     hms = "home-manager switch -b backup --flake ${config.home.homeDirectory}/projects/personal/.dotfiles#${attrName}";
-
-    # Start if stopped, restart if loaded: bootstrap refuses a label that is
-    # already loaded, and kickstart cannot reach one that was booted out.
-    # Stop is bootout and not `kill SIGTERM`, because KeepAlive relaunches a
-    # job that died from a signal. Restarting is also how an edited keymap is
-    # picked up.
-    ksa = "sudo launchctl bootstrap system /Library/LaunchDaemons/dev.kanata.kanata.plist || sudo launchctl kickstart -k system/dev.kanata.kanata";
-    kst = "sudo launchctl bootout system/dev.kanata.kanata";
   };
 
   # tern looks in ~/Library/Application Support on darwin, while home.nix
   # symlinks its config to ~/.config/tern.
   home.sessionVariables.TERN_CONFIG_DIR = "${config.home.homeDirectory}/.config/tern";
 
-  # kanata's macOS backend grabs the keyboard through the Karabiner
-  # VirtualHIDDevice driver and talks to its daemon over IPC under
-  # /Library/Application Support/org.pqrs/tmp/rootonly (mode 700, root), so it
-  # has to run as root. home-manager's launchd.agents writes a USER LaunchAgent
-  # and cannot; the daemon is a root LaunchDaemon instead. The plist is tracked
-  # in kanata/dev.kanata.kanata.plist, which also carries the one-time macOS
-  # prerequisites (driver, VHID daemon, TCC grants) and the install commands.
+  # The keyboard on macOS is Karabiner-Elements, not kanata: kanata's macOS
+  # backend needs a root grabber talking to the Karabiner VirtualHIDDevice
+  # daemon, and its pinned driver protocol (v6.2.0) is rejected by the daemon
+  # that Karabiner-Elements 16.3.0 installs (v8.5.0).  The two cannot share one
+  # machine.  Linux keeps kanata (hypr/kanata.service + kanata/kanata.kbd).
   #
-  # It runs /usr/local/libexec/kanata, a staged copy of the profile binary, and
-  # not a store or profile path: `home-manager switch` must not change the
-  # executable behind an existing TCC grant, so upgrading kanata is a
-  # deliberate re-copy. A symlink under $HOME was rejected because a root
-  # daemon executing a user writable path is a local privilege escalation
-  # surface.
-  home.file.".config/kanata/dev.kanata.kanata.plist".text =
-    builtins.replaceStrings ["@KANATA_CFG@"] [kanataConfig]
-    (builtins.readFile ../kanata/dev.kanata.kanata.plist);
+  # Karabiner-Elements itself is installed with the Homebrew cask, not
+  # pkgs.karabiner-elements: nixpkgs pins 15.7.0 and a store-path app bundle
+  # would change its path on every switch, invalidating the TCC grants and the
+  # DriverKit system extension.  The cask installs 16.3.0 in /Applications.
+  # See karabiner/README.md for the one-time permission steps.
+  #
+  # The whole directory is linked, not karabiner.json: Karabiner-Elements
+  # watches dirname(karabiner.json) with FSEvents and rewrites the file
+  # atomically (new inode + rename), so a symlink to the file itself is neither
+  # detected nor preserved.  The target must also be out-of-store, because KE
+  # writes karabiner.json, assets/ and automatic_backups/ into this directory
+  # and a /nix/store path is read-only.  The resolved target is stable across
+  # switches, so the watcher is not re-pointed on every activation.
+  home.file.".config/karabiner".source = link "karabiner";
 }

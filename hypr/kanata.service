@@ -13,8 +13,7 @@ Documentation=https://github.com/jtroo/kanata
 # kanata/kanata.kbd in this worktree, which dit can rewrite.  A cmd-enabled
 # binary behind a user-writable keymap is a local privilege escalation - add
 # `(defcfg danger-enable-cmd yes)` and a `(cmd ...)` and root runs it.
-# pkgs.kanata is compiled to never allow cmd and logs that at startup; the
-# macOS daemon stages the same binary for the same reason.
+# pkgs.kanata is compiled to never allow cmd and logs that at startup.
 #
 # No -d: that switch logs every keystroke at DEBUG, which wrote 72k journal
 # lines per boot and pushed the 50M journal cap into vacuuming the kernel phase.

@@ -1,7 +1,7 @@
 symbolPreset: nerd
 theme:
   dark: titanium
-setupVersion: 2
+setupVersion: 3
 modelRoles:
   advisor: opencode-go/deepseek-v4.1-flash:auto
   smol: opencode-go/deepseek-v4.1-flash:auto
@@ -107,3 +107,5 @@ steeringMode: one-at-a-time
 snapcompact:
   toolResults: false
 hideThinkingBlock: false
+update:
+  auto: false
