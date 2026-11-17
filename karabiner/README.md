@@ -73,15 +73,24 @@ Global parameters: `to_if_alone` 175 ms, `to_if_held_down` threshold 175 ms
 | key | tap | hold |
 | --- | --- | --- |
 | `a s d f j k l` | letter | `cmd opt shift ctrl ctrl shift opt` |
-| `left option` | `esc` | `left` layer |
-| `right option` | `tab` | `right` layer |
+| `left command` | `esc` | `left` layer |
+| `right command` | `tab` | `right` layer |
+| `left option` | | sends `left command` |
+| `right option` | | sends `right command` |
 | `;` | | `return` |
 | `/` | | `backspace` |
 
-`right` layer (hold right option): `q..p` -> `1..0`, `a` -> forward delete,
-`h j k l` -> arrows, `left option` -> `esc`.
+The two keys next to space carry the layers because on a Mac keyboard that is
+`command`, not `option`. To keep `command` usable, `option` and `command` swap
+identities: the `option` keys send `command` (`from left_option`/`right_option`
+-> `to left_command`/`right_command` in "Base remaps"), so `cmd+c` is typed as
+`option`+`c` or as home-row `a` hold + `c`. `option` as a modifier is on the
+home row (`s`, `l`).
 
-`left` layer (hold left option): shifted digits on `q..i` (`shift`+`1..8`),
+`right` layer (hold right command): `q..p` -> `1..0`, `a` -> forward delete,
+`h j k l` -> arrows, `left command` -> `esc`.
+
+`left` layer (hold left command): shifted digits on `q..i` (`shift`+`1..8`),
 `o`/`p` -> backtick/tilde, `a` -> `"`, `s`/`d` -> `[`/`{`, `f` -> `(`, `h` ->
 `/`, `j` -> `-`, `k` -> `=`, `l` -> `:`, `;` -> `;`, `z` -> `'`, `x`/`c` ->
 `]`/`}`, `v` -> `)`, `n` -> `\`, `m` -> `_`, `,` -> `+`, `.` -> `|`, `/` ->
@@ -113,6 +122,11 @@ Kanata's `mid` layer was commented out in its keymap and is not carried over.
   (`basic.hpp`, the home-row roll handling), so one fast key would leave the
   layer dead for the rest of the hold. A plain tap is still `esc`/`tab`, and a
   hold past 175 ms released without another key is silent, as in kanata.
+- **Layer key identity.** kanata's `lalt`/`ralt` were Alt, the key next to space
+  on a PC layout; on a Mac keyboard that key is `command`, so the layers moved
+  to `command` and `option`/`command` swapped identities (`option` sends
+  `command`). The physical `command` keys therefore never send `command` -
+  `command` comes from the `option` keys or from a home-row `a`/`j` hold.
 - **Both layers held.** Karabiner-Elements uses plain boolean variables, so one
   order is fixed in the file: the `right` layer rules come first and win.
   kanata used the most recently pressed layer.
@@ -129,5 +143,6 @@ python3 -m json.tool karabiner.json > /dev/null   # parse
 ```
 
 Live check: hold a home-row key for a second and press another key - the
-modifier applies; tap it - the letter is typed. Hold `right option` and press
-`h` - left arrow. Then check Settings > Log if a rule does not fire.
+modifier applies; tap it - the letter is typed. Hold `right command` and press
+`h` - left arrow. `option`+`c` in a text field - copy. Then check Settings > Log
+if a rule does not fire.

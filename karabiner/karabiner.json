@@ -382,9 +382,9 @@
               },
               {
                 "type": "basic",
-                "description": "right layer: left_option -> escape",
+                "description": "right layer: left_command -> escape",
                 "from": {
-                  "key_code": "left_option",
+                  "key_code": "left_command",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1145,9 +1145,9 @@
             "manipulators": [
               {
                 "type": "basic",
-                "description": "left_option: tap escape, hold left_layer",
+                "description": "left_command: tap escape, hold left_layer",
                 "from": {
-                  "key_code": "left_option",
+                  "key_code": "left_command",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1171,9 +1171,9 @@
               },
               {
                 "type": "basic",
-                "description": "right_option: tap tab, hold right_layer",
+                "description": "right_command: tap tab, hold right_layer",
                 "from": {
-                  "key_code": "right_option",
+                  "key_code": "right_command",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1453,6 +1453,40 @@
                 "to": [
                   {
                     "key_code": "delete_or_backspace"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "description": "left_option -> left_command (command moves one key out)",
+                "from": {
+                  "key_code": "left_option",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "description": "right_option -> right_command (command moves one key out)",
+                "from": {
+                  "key_code": "right_option",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_command"
                   }
                 ]
               }
