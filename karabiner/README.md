@@ -93,6 +93,7 @@ Global parameters: `to_if_alone` 175 ms, `to_if_held_down` threshold 175 ms
 | key | tap | hold |
 | --- | --- | --- |
 | `a s d f j k l` | letter | `cmd opt shift ctrl ctrl shift opt` |
+| `r` / `u` | letter | `cmd` left / `cmd` right (macOS only, not in kanata) |
 | `left command` | `esc` | `left` layer |
 | `right command` | `tab` | `right` layer |
 | `left option` | | sends `left command` |
@@ -104,15 +105,15 @@ The two keys next to space carry the layers because on a Mac keyboard that is
 `command`, not `option`. To keep `command` usable, `option` and `command` swap
 identities: the `option` keys send `command` (`from left_option`/`right_option`
 -> `to left_command`/`right_command` in "Base remaps"), so `cmd+c` is typed as
-`option`+`c` or as home-row `a` hold + `c`. `option` as a modifier is on the
-home row (`s`, `l`).
+`option`+`c` or as `a` hold + `c` (or `r` hold + `c`). `option` as a modifier is
+on the home row (`s`, `l`).
 
 Where each modifier comes from, in full:
 
 | modifier | instant | 175 ms hold |
 | --- | --- | --- |
-| `command` left | `left option` | `a` |
-| `command` right | `right option` | - |
+| `command` left | `left option` | `a`, `r` |
+| `command` right | `right option` | `u` |
 | `control` left | physical `ctrl` | `f` |
 | `control` right | physical `ctrl` | `j` |
 | `option` left | - | `s` |
@@ -165,6 +166,11 @@ Kanata's `mid` layer was commented out in its keymap and is not carried over.
   `command`). The physical `command` keys therefore never send `command` -
   `command` comes from either `option` key or from a home-row `a` hold
   (`left_command`); `j` is `right_control`, not `command`.
+- **`r` and `u` (macOS only).** Not in kanata: `r` hold is `left_command`, `u`
+  hold is `right_command`, so `command` is reachable from the index fingers.
+  Both are frequent letters (`r` ~6%, `u` ~2.8%) and in vim `u` is undo: hold
+  one past 175 ms before the next key and that key arrives as a `command` chord.
+  `kanata/kanata.kbd` has no equivalent, so Linux and macOS differ here.
 - **Both layers held.** Karabiner-Elements uses plain boolean variables, so one
   order is fixed in the file: the `right` layer rules come first and win.
   kanata used the most recently pressed layer.

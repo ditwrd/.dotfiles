@@ -1420,6 +1420,73 @@
             ]
           },
           {
+            "description": "Index command: r/u tap letter, hold command (not in kanata)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "description": "r: tap r, hold left_command",
+                "from": {
+                  "key_code": "r",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "r",
+                    "halt": true
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command",
+                    "halt": true
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "r"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "basic",
+                "description": "u: tap u, hold right_command",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "u",
+                    "halt": true
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command",
+                    "halt": true
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_canceled": [
+                    {
+                      "key_code": "u"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
             "description": "Base remaps",
             "manipulators": [
               {
