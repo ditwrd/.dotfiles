@@ -28,9 +28,14 @@
         username = "dit";
         homeDirectory = "/Users/dit";
       };
+      "darwin-work" = {
+        system = "aarch64-darwin";
+        username = "aditya.wardianto";
+        homeDirectory = "/Users/aditya.wardianto";
+      };
     };
 
-    mkHome = host: let
+    mkHome = attrName: host: let
       pkgs = import nixpkgs {
         inherit (host) system;
         config = {
@@ -43,7 +48,7 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit (host) username homeDirectory;
-          inherit sops-nix;
+          inherit sops-nix attrName;
         };
         modules =
           [
@@ -64,8 +69,9 @@
       };
   in {
     homeConfigurations = {
-      dit = mkHome hosts.linux;
-      "dit@mac" = mkHome hosts.darwin;
+      dit = mkHome "dit" hosts.linux;
+      "dit@mac" = mkHome "dit@mac" hosts.darwin;
+      "aditya.wardianto" = mkHome "aditya.wardianto" hosts."darwin-work";
     };
   };
 }

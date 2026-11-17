@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  attrName,
   ...
 }: let
   kanataConfig = "${config.home.homeDirectory}/.config/kanata/kanata.kbd";
@@ -29,10 +30,10 @@ in {
     zoxide
   ];
 
-  # Bare `home-manager switch` infers $USER and would pick the Linux `dit`
-  # attribute, so the mac one has to be named on the command line.
+  # Bare `home-manager switch` infers $USER as the flake attribute, which only
+  # matches this account's exported name; name it explicitly anyway.
   home.shellAliases = {
-    hms = "home-manager switch -b backup --flake ${config.home.homeDirectory}/projects/personal/.dotfiles#dit@mac";
+    hms = "home-manager switch -b backup --flake ${config.home.homeDirectory}/projects/personal/.dotfiles#${attrName}";
 
     # Start if stopped, restart if loaded: bootstrap refuses a label that is
     # already loaded, and kickstart cannot reach one that was booted out.
