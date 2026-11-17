@@ -65,6 +65,26 @@ this README is the place for prose.
 `assets/` and `automatic_backups/` are Karabiner-Elements runtime directories,
 git-ignored.
 
+## Profiles
+
+Two profiles, `selected` decides which one is live at load:
+
+| profile | contents | use |
+| --- | --- | --- |
+| `kanata` | the keymap below, parameters 175/175/500 | normal use, `selected: true` |
+| `Default` | no simple modifications, no rules, default parameters | plain keyboard, for A/B a misbehaving rule |
+
+Switch at runtime from the menu bar (Karabiner-Elements > Preferences >
+Profiles) or via the CLI, which writes back into this same file:
+
+```sh
+/Applications/Karabiner-Elements.app/Contents/MacOS/karabiner_cli --select-profile kanata
+/Applications/Karabiner-Elements.app/Contents/MacOS/karabiner_cli --show-current-profile-name
+```
+
+`Default` intentionally has no `basic.to_if_*` overrides, so it uses
+Karabiner-Elements' own defaults; the keymap profile inherits nothing from it.
+
 ## Mapping
 
 Global parameters: `to_if_alone` 175 ms, `to_if_held_down` threshold 175 ms
@@ -139,8 +159,13 @@ Kanata's `mid` layer was commented out in its keymap and is not carried over.
 
 ```sh
 python3 -m json.tool karabiner.json > /dev/null   # parse
+python3 -c 'import json;[print(p["name"], p["selected"], len(p["complex_modifications"]["rules"])) for p in json.load(open("karabiner.json"))["profiles"]]'
 /Applications/Karabiner-Elements.app/Contents/MacOS/karabiner_cli --show-current-profile-name
 ```
+
+The profile line must print `kanata True 5` then `Default False 0`, and the CLI
+must answer `kanata`. If `Default` shows `selected` true, the GUI switched
+profiles - that is a real change, commit it or switch back.
 
 Live check: hold a home-row key for a second and press another key - the
 modifier applies; tap it - the letter is typed. Hold `right command` and press

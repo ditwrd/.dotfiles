@@ -6,7 +6,7 @@
   },
   "profiles": [
     {
-      "name": "Default profile",
+      "name": "kanata",
       "selected": true,
       "simple_modifications": [],
       "fn_function_keys": [],
@@ -18,7 +18,7 @@
         },
         "rules": [
           {
-            "description": "Right layer: hold right option (kanata 'right')",
+            "description": "Right layer: hold right command (kanata 'right')",
             "manipulators": [
               {
                 "type": "basic",
@@ -407,7 +407,7 @@
             ]
           },
           {
-            "description": "Left layer: hold left option (kanata 'left')",
+            "description": "Left layer: hold left command (kanata 'left')",
             "manipulators": [
               {
                 "type": "basic",
@@ -1154,10 +1154,10 @@
                     ]
                   }
                 },
-                "to" : [
+                "to": [
                   {
-                    "set_variable" : {
-                      "name" : "left_layer",
+                    "set_variable": {
+                      "name": "left_layer",
                       "value": true,
                       "key_up_value": false
                     }
@@ -1180,10 +1180,10 @@
                     ]
                   }
                 },
-                "to" : [
+                "to": [
                   {
-                    "set_variable" : {
-                      "name" : "right_layer",
+                    "set_variable": {
+                      "name": "right_layer",
                       "value": true,
                       "key_up_value": false
                     }
@@ -1493,6 +1493,20 @@
             ]
           }
         ]
+      },
+      "virtual_hid_keyboard": {
+        "keyboard_type_v2": "ansi"
+      },
+      "devices": []
+    },
+    {
+      "name": "Default",
+      "selected": false,
+      "simple_modifications": [],
+      "fn_function_keys": [],
+      "complex_modifications": {
+        "parameters": {},
+        "rules": []
       },
       "virtual_hid_keyboard": {
         "keyboard_type_v2": "ansi"
