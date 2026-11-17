@@ -113,12 +113,16 @@ Where each modifier comes from, in full:
 | --- | --- | --- |
 | `command` left | `left option` | `a` |
 | `command` right | `right option` | - |
-| `control` left | - | `f` |
-| `control` right | - | `j` |
-| `option` | - | `s` (left), `l` (right) |
+| `control` left | physical `ctrl` | `f` |
+| `control` right | physical `ctrl` | `j` |
+| `option` left | - | `s` |
+| `option` right | - | `l` |
 | `shift` | physical `shift` | `d` (left), `k` (right) |
 
-Holds stack (`f` then `a` -> `ctrl`+`command`). `caps_lock` is untouched.
+Holds stack (`f` then `a` -> `ctrl`+`command`). `caps_lock`, both physical
+`ctrl` keys and both `shift` keys have no rule, so they keep their normal
+meaning; only `command` (taken by the layers) and `option` (turned into
+`command`) change identity.
 
 `right` layer (hold right command): `q..p` -> `1..0`, `a` -> forward delete,
 `h j k l` -> arrows, `left command` -> `esc`.
