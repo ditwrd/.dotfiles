@@ -107,6 +107,19 @@ identities: the `option` keys send `command` (`from left_option`/`right_option`
 `option`+`c` or as home-row `a` hold + `c`. `option` as a modifier is on the
 home row (`s`, `l`).
 
+Where each modifier comes from, in full:
+
+| modifier | instant | 175 ms hold |
+| --- | --- | --- |
+| `command` left | `left option` | `a` |
+| `command` right | `right option` | - |
+| `control` left | - | `f` |
+| `control` right | - | `j` |
+| `option` | - | `s` (left), `l` (right) |
+| `shift` | physical `shift` | `d` (left), `k` (right) |
+
+Holds stack (`f` then `a` -> `ctrl`+`command`). `caps_lock` is untouched.
+
 `right` layer (hold right command): `q..p` -> `1..0`, `a` -> forward delete,
 `h j k l` -> arrows, `left command` -> `esc`.
 
@@ -146,7 +159,8 @@ Kanata's `mid` layer was commented out in its keymap and is not carried over.
   on a PC layout; on a Mac keyboard that key is `command`, so the layers moved
   to `command` and `option`/`command` swapped identities (`option` sends
   `command`). The physical `command` keys therefore never send `command` -
-  `command` comes from the `option` keys or from a home-row `a`/`j` hold.
+  `command` comes from either `option` key or from a home-row `a` hold
+  (`left_command`); `j` is `right_control`, not `command`.
 - **Both layers held.** Karabiner-Elements uses plain boolean variables, so one
   order is fixed in the file: the `right` layer rules come first and win.
   kanata used the most recently pressed layer.
