@@ -18,15 +18,12 @@ in {
     # start-at-login SMAppService item key off that path - permissions may need
     # re-granting after an upgrade.  If that gets annoying the sanctioned
     # alternative is the Homebrew cask in /Applications, but only one of the two.
-    aerospace
     kanata
     kitty
     lazygit
     lazydocker
     mise
     starship
-    tmux
-    zellij
     zoxide
   ];
 
