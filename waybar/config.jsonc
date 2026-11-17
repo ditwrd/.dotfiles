@@ -14,6 +14,6 @@
     "tray"
   ],
   "include": [
-    "/home/dit/.config/waybar/hyprwhspr-module.jsonc"
+    "~/.config/waybar/hyprwhspr-module.jsonc"
   ]
 }

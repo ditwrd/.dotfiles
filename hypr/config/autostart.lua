@@ -1,6 +1,8 @@
 -- Autostart. Runs once per compositor start.
 local d = require("config.defaults")
 
+local home = os.getenv("HOME")
+
 local function once(cmd, rules)
 	hl.on("hyprland.start", function()
 		hl.exec_cmd(cmd, rules)
@@ -8,7 +10,7 @@ local function once(cmd, rules)
 end
 
 once("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-once("swaybg -o \\* -i /home/dit/Downloads/wallpaper.png")
+once("swaybg -o \\* -i " .. home .. "/Downloads/wallpaper.png")
 once("waybar")
 once("mako")
 once("syncthing")
