@@ -45,7 +45,7 @@
     tfd = "terraform-docs md table . > README.md";
     acp = "aws configure --profile";
     asl = "aws sso login";
-    asls = "aws sso login --sso-session ss";
+    asls = "aws sso login --sso-session sso";
     ad = "awsd";
 
     hm = "home-manager";
