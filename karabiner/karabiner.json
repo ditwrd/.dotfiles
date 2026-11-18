@@ -1,1584 +1,1112 @@
 {
-  "global": {
-    "check_for_updates": true,
-    "show_in_menu_bar": true,
-    "show_profile_name_in_menu_bar": false
-  },
-  "profiles": [
-    {
-      "name": "kanata",
-      "selected": true,
-      "simple_modifications": [],
-      "fn_function_keys": [],
-      "complex_modifications": {
-        "parameters": {
-          "basic.to_if_alone_timeout_milliseconds": 175,
-          "basic.to_if_held_down_threshold_milliseconds": 175,
-          "basic.to_delayed_action_delay_milliseconds": 500
+    "profiles": [
+        {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.simultaneous_threshold_milliseconds": 40,
+                    "basic.to_if_alone_timeout_milliseconds": 125,
+                    "basic.to_if_held_down_threshold_milliseconds": 125
+                },
+                "rules": [
+                    {
+                        "description": "Right layer: hold right command (kanata 'right')",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: q -> 1",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "1" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: w -> 2",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "2" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: e -> 3",
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "3" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: r -> 4",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "4" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: t -> 5",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "5" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: y -> 6",
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "6" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: u -> 7",
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "7" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: i -> 8",
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "8" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: o -> 9",
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "9" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: p -> 0",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "0" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: a -> delete_forward",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "delete_forward" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: h -> left_arrow",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: j -> down_arrow",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "down_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: k -> up_arrow",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "up_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right_layer: l -> right_arrow",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "right_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "right layer: left_command -> escape",
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Left layer: hold left command (kanata 'left')",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: q -> 1 with shift",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "1",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: w -> 2 with shift",
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "2",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: e -> 3 with shift",
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "3",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: r -> 4 with shift",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: t -> 5 with shift",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "5",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: y -> 6 with shift",
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "6",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: u -> 7 with shift",
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "7",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: i -> 8 with shift",
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: o -> grave_accent_and_tilde",
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "grave_accent_and_tilde" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: p -> grave_accent_and_tilde with shift",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: a -> quote with shift",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "quote",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: s -> open_bracket",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "open_bracket" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: d -> open_bracket with shift",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: f -> 9 with shift",
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: h -> slash",
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "slash" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: j -> hyphen",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "hyphen" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: k -> equal_sign",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "equal_sign" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: l -> semicolon with shift",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "semicolon",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: semicolon -> semicolon",
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "semicolon" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: z -> quote",
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "quote" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: x -> close_bracket",
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "close_bracket" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: c -> close_bracket with shift",
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: v -> 0 with shift",
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: n -> backslash",
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "backslash" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: m -> hyphen with shift",
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: comma -> equal_sign with shift",
+                                "from": {
+                                    "key_code": "comma",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: period -> backslash with shift",
+                                "from": {
+                                    "key_code": "period",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "backslash",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "left_layer",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "description": "left_layer: slash -> slash with shift",
+                                "from": {
+                                    "key_code": "slash",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash",
+                                        "modifiers": ["left_shift"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Layer keys (tap escape/tab, hold layer)",
+                        "manipulators": [
+                            {
+                                "description": "left_command: tap escape, hold left_layer",
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "left_layer",
+                                            "value": true
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "right_command: tap tab, hold right_layer",
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "right_layer",
+                                            "value": true
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Home row mods (kanata tap-hold)",
+                        "manipulators": [
+                            {
+                                "description": "a: tap a, hold left_command",
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "a" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "a"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "left_command"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "s: tap s, hold left_option",
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "s" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "s"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "left_option"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "d: tap d, hold left_shift",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "d" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "d"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "left_shift"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "f: tap f, hold left_control",
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "f" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "f"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "j: tap j, hold right_control",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "j" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "j"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "right_control"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "k: tap k, hold right_shift",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "k" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "k"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "right_shift"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "l: tap l, hold right_option",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "l" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "l"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "right_option"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Index command: r/u tap letter, hold command (not in kanata)",
+                        "manipulators": [
+                            {
+                                "description": "r: tap r, hold left_command",
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "r" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "r"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "left_command"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "u: tap u, hold right_command",
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to_delayed_action": { "to_if_canceled": [{ "key_code": "u" }] },
+                                "to_if_alone": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "u"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "key_code": "right_command"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Base remaps",
+                        "manipulators": [
+                            {
+                                "description": "semicolon -> return",
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "return_or_enter" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "slash -> backspace",
+                                "from": {
+                                    "key_code": "slash",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "delete_or_backspace" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "left_option -> left_command (command moves one key out)",
+                                "from": {
+                                    "key_code": "left_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_command" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "right_option -> right_command (command moves one key out)",
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_command" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "kanata",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
-        "rules": [
-          {
-            "description": "Right layer: hold right command (kanata 'right')",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "right_layer: q -> 1",
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "1"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: w -> 2",
-                "from": {
-                  "key_code": "w",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "2"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: e -> 3",
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "3"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: r -> 4",
-                "from": {
-                  "key_code": "r",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "4"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: t -> 5",
-                "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "5"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: y -> 6",
-                "from": {
-                  "key_code": "y",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "6"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: u -> 7",
-                "from": {
-                  "key_code": "u",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "7"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: i -> 8",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "8"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: o -> 9",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "9"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: p -> 0",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "0"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: a -> delete_forward",
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "delete_forward"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: h -> left_arrow",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: j -> down_arrow",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: k -> up_arrow",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_layer: l -> right_arrow",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right layer: left_command -> escape",
-                "from": {
-                  "key_code": "left_command",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "escape"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "right_layer",
-                    "value": true
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Left layer: hold left command (kanata 'left')",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "left_layer: q -> 1 with shift",
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "1",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: w -> 2 with shift",
-                "from": {
-                  "key_code": "w",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "2",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: e -> 3 with shift",
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "3",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: r -> 4 with shift",
-                "from": {
-                  "key_code": "r",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "4",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: t -> 5 with shift",
-                "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "5",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: y -> 6 with shift",
-                "from": {
-                  "key_code": "y",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "6",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: u -> 7 with shift",
-                "from": {
-                  "key_code": "u",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "7",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: i -> 8 with shift",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "8",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: o -> grave_accent_and_tilde",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "grave_accent_and_tilde"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: p -> grave_accent_and_tilde with shift",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "grave_accent_and_tilde",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: a -> quote with shift",
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "quote",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: s -> open_bracket",
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "open_bracket"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: d -> open_bracket with shift",
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "open_bracket",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: f -> 9 with shift",
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "9",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: h -> slash",
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "slash"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: j -> hyphen",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "hyphen"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: k -> equal_sign",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "equal_sign"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: l -> semicolon with shift",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "semicolon",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: semicolon -> semicolon",
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "semicolon"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: z -> quote",
-                "from": {
-                  "key_code": "z",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "quote"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: x -> close_bracket",
-                "from": {
-                  "key_code": "x",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "close_bracket"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: c -> close_bracket with shift",
-                "from": {
-                  "key_code": "c",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "close_bracket",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: v -> 0 with shift",
-                "from": {
-                  "key_code": "v",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "0",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: n -> backslash",
-                "from": {
-                  "key_code": "n",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "backslash"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: m -> hyphen with shift",
-                "from": {
-                  "key_code": "m",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "hyphen",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: comma -> equal_sign with shift",
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "equal_sign",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: period -> backslash with shift",
-                "from": {
-                  "key_code": "period",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "backslash",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_layer: slash -> slash with shift",
-                "from": {
-                  "key_code": "slash",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "slash",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "left_layer",
-                    "value": true
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Layer keys (tap escape/tab, hold layer)",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "left_command: tap escape, hold left_layer",
-                "from": {
-                  "key_code": "left_command",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "left_layer",
-                      "value": true,
-                      "key_up_value": false
-                    }
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "escape"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_command: tap tab, hold right_layer",
-                "from": {
-                  "key_code": "right_command",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "right_layer",
-                      "value": true,
-                      "key_up_value": false
-                    }
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "tab"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "description": "Home row mods (kanata tap-hold)",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "a: tap a, hold left_command",
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "a",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_command",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "a"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "s: tap s, hold left_option",
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "s",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_option",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "s"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "d: tap d, hold left_shift",
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "d",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_shift",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "d"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "f: tap f, hold left_control",
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "f",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_control",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "f"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "j: tap j, hold right_control",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "j",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_control",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "j"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "k: tap k, hold right_shift",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "k",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_shift",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "k"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "l: tap l, hold right_option",
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "l",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_option",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "l"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "description": "Index command: r/u tap letter, hold command (not in kanata)",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "r: tap r, hold left_command",
-                "from": {
-                  "key_code": "r",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "r",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_command",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "r"
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "basic",
-                "description": "u: tap u, hold right_command",
-                "from": {
-                  "key_code": "u",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "key_code": "u",
-                    "halt": true
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_command",
-                    "halt": true
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_canceled": [
-                    {
-                      "key_code": "u"
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "description": "Base remaps",
-            "manipulators": [
-              {
-                "type": "basic",
-                "description": "semicolon -> return",
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "return_or_enter"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "slash -> backspace",
-                "from": {
-                  "key_code": "slash",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "delete_or_backspace"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "left_option -> left_command (command moves one key out)",
-                "from": {
-                  "key_code": "left_option",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_command"
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "description": "right_option -> right_command (command moves one key out)",
-                "from": {
-                  "key_code": "right_option",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_command"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "virtual_hid_keyboard": {
-        "keyboard_type_v2": "ansi"
-      },
-      "devices": []
-    },
-    {
-      "name": "Default",
-      "selected": false,
-      "simple_modifications": [],
-      "fn_function_keys": [],
-      "complex_modifications": {
-        "parameters": {},
-        "rules": []
-      },
-      "virtual_hid_keyboard": {
-        "keyboard_type_v2": "ansi"
-      },
-      "devices": []
-    }
-  ]
+        {
+            "name": "Default",
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
 }
