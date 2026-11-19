@@ -3,14 +3,14 @@ theme:
   dark: titanium
 setupVersion: 3
 modelRoles:
-  advisor: opencode-go/deepseek-v4.1-flash:auto
-  smol: opencode-go/deepseek-v4.1-flash:auto
+  advisor: anthropic/claude-opus-5-5:auto
+  smol: anthropic/claude-haiku-5-5:auto
   designer: anthropic/claude-opus-5:auto
-  slow: opencode-go/deepseek-v4.1-flash:auto
-  tiny: opencode-go/deepseek-v4.1-flash:auto
+  slow: anthropic/claude-opus-5-5:auto
+  tiny: anthropic/claude-haiku-5-5:auto
   plan: opencode-go/deepseek-v4.1-flash:auto
-  web: web/public
-  default: opencode-go/deepseek-v4.1-flash
+  web: anthropic/claude-haiku-5-5
+  default: anthropic/claude-sonnet-5-5
 defaultThinkingLevel: auto
 statusLine:
   preset: nerd
@@ -46,17 +46,6 @@ secrets:
   enabled: true
 retry:
   fallbackChains:
-    tiny:
-      - zai/glm-5.3-flash
-    smol:
-      - zai/glm-5.3-flash
-    slow:
-      - zai/glm-5.3-flash
-    default:
-      - zai/glm-5.3-flash
-    advisor:
-      - opencode-go/deepseek-v4.1-flash
-      - zai/glm-5.3-flash
     web:
       - web/perplexity
       - google-gemini-cli/gemini-2.5-flash
