@@ -3,7 +3,17 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  # The ditwrd GitHub account owns both the personal and shippit emails, so one
+  # key signs for both. It must be registered on GitHub as a *Signing Key*
+  # (separate from the auth key entry) for commits to show Verified.
+  ditwrdSigning = {
+    user.signingKey = config.sops.secrets."ssh/personal/gh".path;
+    gpg.format = "ssh";
+    commit.gpgSign = true;
+    tag.gpgSign = true;
+  };
+in {
   programs.home-manager.enable = true;
 
   # lazygit reads ~/Library/Application Support unless XDG_CONFIG_HOME is set;
@@ -23,8 +33,14 @@
     includes = [
       {
         condition = "gitdir:~/projects/personal/";
-        contents = {
+        contents = lib.recursiveUpdate ditwrdSigning {
           user.email = "aditya.wardianto11@gmail.com";
+        };
+      }
+      {
+        condition = "gitdir:~/projects/work-shippit/";
+        contents = lib.recursiveUpdate ditwrdSigning {
+          user.email = "aditya.wardianto@shippit.com";
         };
       }
       {
