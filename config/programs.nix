@@ -131,7 +131,7 @@ in {
        ssh-add ~/.config/sops-nix/secrets/ssh/work/cube/gh &>/dev/null
       fi
 
-      export PATH="$PATH:$HOME/.local/bin"
+      export PATH="$PATH:$HOME/.local/bin:/opt/zerobrew/bin"
       eval "$(mise activate zsh)"
 
       # Ruby — `gem env user_gemhome` boots a whole ruby interpreter (~180 ms)
