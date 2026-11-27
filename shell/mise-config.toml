@@ -20,7 +20,7 @@ erlang = "28.1.1"
 "github:storytold/filmcraft" = { version = "latest", filter_bins = "filmcraft-cli" }
 "github:szhekpisov/diffyml" = "v1.6.2"
 gleam = "1.13.0"
-go = "1.24.2"
+go = "1.26.11"
 "go:github.com/steveyegge/beads/cmd/bd" = "0.42.0"
 helm = "latest"
 herdr = "0.9.3"
@@ -73,6 +73,10 @@ python = "3.15.2"
 cookiecutter = "2.7.1"
 golangci-lint = "latest"
 lima = "2.3.0"
+shellcheck = "latest"
+"pipx:checkov" = "latest"
+tflint = "0.66.0"
+trivy = "0.76.2"
 
 # zerobrew ships bare binaries (zb-linux-x64, zb-darwin-arm64, plus zbx/zb-brew
 # siblings), so format/bin are required and each asset is named per platform to
@@ -93,3 +97,6 @@ experimental = true
 
 [settings.npm]
 bun = true
+
+[settings.aqua]
+github_attestations = false
